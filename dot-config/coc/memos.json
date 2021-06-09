@@ -1,0 +1,480 @@
+{
+  "coc-python|global": {
+    "INTERPRETERS_CACHE_v3_CondaEnvFileService": [],
+    "INTERPRETERS_CACHE_v3_CondaEnvService": [],
+    "INTERPRETERS_CACHE_v3_VirtualEnvService": [],
+    "/data/data/com.termux/files/usr/bin/python.v3": {
+      "data": {
+        "architecture": 3,
+        "path": "/data/data/com.termux/files/usr/bin/python",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.9.5-final",
+          "major": 3,
+          "minor": 9,
+          "patch": 5,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.9.5-final"
+        },
+        "sysPrefix": "/data/data/com.termux/files/usr",
+        "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2"
+      },
+      "expiry": 1622980881129
+    },
+    "/data/data/com.termux/files/usr/bin/python3.9.v3": {
+      "data": {
+        "architecture": 3,
+        "path": "/data/data/com.termux/files/usr/bin/python3.9",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.9.5-final",
+          "major": 3,
+          "minor": 9,
+          "patch": 5,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.9.5-final"
+        },
+        "sysPrefix": "/data/data/com.termux/files/usr",
+        "fileHash": "37b8b5b18c9e1cdb9240251de263ef7f8523aa3c3023109234d5af84dd11788b05dd7abb9d5d862c6ec8863335addd45bb6fc6fd72857971804819ddc94dc341"
+      },
+      "expiry": 1622980881057
+    },
+    "/data/data/com.termux/files/usr/bin/python3.v3": {
+      "data": {
+        "architecture": 3,
+        "path": "/data/data/com.termux/files/usr/bin/python3",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.9.5-final",
+          "major": 3,
+          "minor": 9,
+          "patch": 5,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.9.5-final"
+        },
+        "sysPrefix": "/data/data/com.termux/files/usr",
+        "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2"
+      },
+      "expiry": 1622980881133
+    },
+    "INTERPRETERS_CACHE_v3_KnownPathsService": [
+      {
+        "architecture": 3,
+        "path": "/data/data/com.termux/files/usr/bin/python",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.9.5-final",
+          "major": 3,
+          "minor": 9,
+          "patch": 5,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.9.5-final"
+        },
+        "sysPrefix": "/data/data/com.termux/files/usr",
+        "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+        "type": "Unknown"
+      },
+      {
+        "architecture": 3,
+        "path": "/data/data/com.termux/files/usr/bin/python3",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.9.5-final",
+          "major": 3,
+          "minor": 9,
+          "patch": 5,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.9.5-final"
+        },
+        "sysPrefix": "/data/data/com.termux/files/usr",
+        "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+        "type": "Unknown"
+      },
+      {
+        "architecture": 3,
+        "path": "/data/data/com.termux/files/usr/bin/python3.9",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.9.5-final",
+          "major": 3,
+          "minor": 9,
+          "patch": 5,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.9.5-final"
+        },
+        "sysPrefix": "/data/data/com.termux/files/usr",
+        "fileHash": "37b8b5b18c9e1cdb9240251de263ef7f8523aa3c3023109234d5af84dd11788b05dd7abb9d5d862c6ec8863335addd45bb6fc6fd72857971804819ddc94dc341",
+        "type": "Unknown"
+      }
+    ],
+    "INTERPRETERS_CACHE_v3_CurrentPathService": [
+      {
+        "architecture": 3,
+        "path": "/data/data/com.termux/files/usr/bin/python3",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.9.5-final",
+          "major": 3,
+          "minor": 9,
+          "patch": 5,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.9.5-final"
+        },
+        "sysPrefix": "/data/data/com.termux/files/usr",
+        "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+        "type": "Unknown"
+      },
+      {
+        "architecture": 3,
+        "path": "/data/data/com.termux/files/usr/bin/python",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.9.5-final",
+          "major": 3,
+          "minor": 9,
+          "patch": 5,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.9.5-final"
+        },
+        "sysPrefix": "/data/data/com.termux/files/usr",
+        "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+        "type": "Unknown"
+      },
+      {
+        "architecture": 3,
+        "path": "/data/data/com.termux/files/usr/bin/python",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.9.5-final",
+          "major": 3,
+          "minor": 9,
+          "patch": 5,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.9.5-final"
+        },
+        "sysPrefix": "/data/data/com.termux/files/usr",
+        "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+        "type": "Unknown"
+      }
+    ],
+    "InterpreterAutoSeletionRule-currentPath": {
+      "architecture": 3,
+      "path": "/data/data/com.termux/files/usr/bin/python",
+      "version": {
+        "options": {
+          "loose": false,
+          "includePrerelease": false
+        },
+        "loose": false,
+        "raw": "3.9.5-final",
+        "major": 3,
+        "minor": 9,
+        "patch": 5,
+        "prerelease": [
+          "final"
+        ],
+        "build": [],
+        "version": "3.9.5-final"
+      },
+      "sysPrefix": "/data/data/com.termux/files/usr",
+      "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+      "type": "Unknown"
+    },
+    "PipEnvInformation": [],
+    "preferredGlobalPyInterpreter": {
+      "architecture": 3,
+      "path": "/data/data/com.termux/files/usr/bin/python",
+      "version": {
+        "options": {
+          "loose": false,
+          "includePrerelease": false
+        },
+        "loose": false,
+        "raw": "3.9.5-final",
+        "major": 3,
+        "minor": 9,
+        "patch": 5,
+        "prerelease": [
+          "final"
+        ],
+        "build": [],
+        "version": "3.9.5-final"
+      },
+      "sysPrefix": "/data/data/com.termux/files/usr",
+      "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+      "type": "Unknown"
+    },
+    "/data/data/com.termux/files/usr/bin/python.interpreter.displayName.v7": {
+      "data": {
+        "displayName": "Python 3.9.5 64-bit",
+        "hash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2-1d1de088ca5660e681d6da0735b2e5ba"
+      },
+      "expiry": 1622980881774
+    },
+    "InterpreterAutoSeletionRule-system": {
+      "architecture": 3,
+      "path": "/data/data/com.termux/files/usr/bin/python",
+      "version": {
+        "options": {
+          "loose": false,
+          "includePrerelease": false
+        },
+        "loose": false,
+        "raw": "3.9.5-final",
+        "major": 3,
+        "minor": 9,
+        "patch": 5,
+        "prerelease": [
+          "final"
+        ],
+        "build": [],
+        "version": "3.9.5-final"
+      },
+      "sysPrefix": "/data/data/com.termux/files/usr",
+      "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+      "type": "Unknown",
+      "displayName": "Python 3.9.5 64-bit"
+    },
+    "/data/data/com.termux/files/usr/bin/python.interpreter.Details.v7": {
+      "data": {
+        "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+        "info": {
+          "architecture": 3,
+          "path": "/data/data/com.termux/files/usr/bin/python",
+          "version": {
+            "options": {
+              "loose": false,
+              "includePrerelease": false
+            },
+            "loose": false,
+            "raw": "3.9.5-final",
+            "major": 3,
+            "minor": 9,
+            "patch": 5,
+            "prerelease": [
+              "final"
+            ],
+            "build": [],
+            "version": "3.9.5-final"
+          },
+          "sysPrefix": "/data/data/com.termux/files/usr",
+          "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+          "type": "Unknown",
+          "displayName": "Python 3.9.5 64-bit"
+        }
+      },
+      "expiry": 1622980916035
+    },
+    "GLOBAL_DIAGNOSTICS_FILTER": [
+      "LSNotSupportedDiagnostic"
+    ],
+    "InterpreterAutoSeletionRule-cachedInterpreters": {
+      "architecture": 3,
+      "path": "/data/data/com.termux/files/usr/bin/python",
+      "version": {
+        "options": {
+          "loose": false,
+          "includePrerelease": false
+        },
+        "loose": false,
+        "raw": "3.9.5-final",
+        "major": 3,
+        "minor": 9,
+        "patch": 5,
+        "prerelease": [
+          "final"
+        ],
+        "build": [],
+        "version": "3.9.5-final"
+      },
+      "sysPrefix": "/data/data/com.termux/files/usr",
+      "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+      "type": "Unknown",
+      "displayName": "Python 3.9.5 64-bit"
+    },
+    "ProposeLSBanner": false
+  },
+  "coc-python|/data/data/com.termux/files/home/lab/py": {
+    "INTERPRETERS_CACHE_v3_PipEnvService:426e4bf56490333e7b02c8b5b7397746": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService:426e4bf56490333e7b02c8b5b7397746": [],
+    "autoSelectedWorkspacePythonInterpreter-/data/data/com.termux/files/home/lab/py": {
+      "architecture": 3,
+      "path": "/data/data/com.termux/files/usr/bin/python",
+      "version": {
+        "options": {
+          "loose": false,
+          "includePrerelease": false
+        },
+        "loose": false,
+        "raw": "3.9.5-final",
+        "major": 3,
+        "minor": 9,
+        "patch": 5,
+        "prerelease": [
+          "final"
+        ],
+        "build": [],
+        "version": "3.9.5-final"
+      },
+      "sysPrefix": "/data/data/com.termux/files/usr",
+      "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+      "type": "Unknown"
+    },
+    "INTERPRETERS_CACHE_v3_PipEnvService": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService": []
+  },
+  "coc-python|/data/data/com.termux/files/home/lab/discord": {
+    "INTERPRETERS_CACHE_v3_PipEnvService:fcf6577d032efdbf1a6e27195caa8e70": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService:fcf6577d032efdbf1a6e27195caa8e70": [],
+    "autoSelectedWorkspacePythonInterpreter-/data/data/com.termux/files/home/lab/discord": {
+      "architecture": 3,
+      "path": "/data/data/com.termux/files/usr/bin/python",
+      "version": {
+        "options": {
+          "loose": false,
+          "includePrerelease": false
+        },
+        "loose": false,
+        "raw": "3.9.5-final",
+        "major": 3,
+        "minor": 9,
+        "patch": 5,
+        "prerelease": [
+          "final"
+        ],
+        "build": [],
+        "version": "3.9.5-final"
+      },
+      "sysPrefix": "/data/data/com.termux/files/usr",
+      "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+      "type": "Unknown"
+    },
+    "INTERPRETERS_CACHE_v3_PipEnvService": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService": []
+  },
+  "coc-python|/data/data/com.termux/files/home": {
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService": [],
+    "INTERPRETERS_CACHE_v3_PipEnvService": []
+  },
+  "coc-python|/data/data/com.termux/files/home/coding/passman": {
+    "INTERPRETERS_CACHE_v3_PipEnvService:d18bde440f4170c6795a2c7f36e837a0": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService:d18bde440f4170c6795a2c7f36e837a0": [],
+    "autoSelectedWorkspacePythonInterpreter-/data/data/com.termux/files/home/coding/passman": {
+      "architecture": 3,
+      "path": "/data/data/com.termux/files/usr/bin/python",
+      "version": {
+        "options": {
+          "loose": false,
+          "includePrerelease": false
+        },
+        "loose": false,
+        "raw": "3.9.5-final",
+        "major": 3,
+        "minor": 9,
+        "patch": 5,
+        "prerelease": [
+          "final"
+        ],
+        "build": [],
+        "version": "3.9.5-final"
+      },
+      "sysPrefix": "/data/data/com.termux/files/usr",
+      "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+      "type": "Unknown"
+    },
+    "INTERPRETERS_CACHE_v3_PipEnvService": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService": []
+  },
+  "coc-python|/data/data/com.termux/files/home/coding/pj": {
+    "INTERPRETERS_CACHE_v3_PipEnvService:e8ac72d8914459d2029b80e225b2cbe6": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService:e8ac72d8914459d2029b80e225b2cbe6": [],
+    "autoSelectedWorkspacePythonInterpreter-/data/data/com.termux/files/home/coding/pj": {
+      "architecture": 3,
+      "path": "/data/data/com.termux/files/usr/bin/python",
+      "version": {
+        "options": {
+          "loose": false,
+          "includePrerelease": false
+        },
+        "loose": false,
+        "raw": "3.9.5-final",
+        "major": 3,
+        "minor": 9,
+        "patch": 5,
+        "prerelease": [
+          "final"
+        ],
+        "build": [],
+        "version": "3.9.5-final"
+      },
+      "sysPrefix": "/data/data/com.termux/files/usr",
+      "fileHash": "99f3b31c0c301a2f49d5abf9248289b93b1232db3e56645bae155eaae5b9aec2f23896459cb5eb0125867fd64a9716b6fda220eb69deea2240078ae47f07d1e2",
+      "type": "Unknown"
+    },
+    "INTERPRETERS_CACHE_v3_PipEnvService": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService": []
+  }
+}

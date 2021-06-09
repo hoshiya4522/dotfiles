@@ -1,7 +1,7 @@
 let mapleader =" "
 
 
-call plug#begin('~/.plugins/nvim')
+call plug#begin('~/.config/nvim/plugins')
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'arcticicestudio/nord-vim' 

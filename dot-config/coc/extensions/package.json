@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "coc-clangd": ">=0.9.0",
+    "coc-html": ">=1.4.1",
+    "coc-marketplace": ">=1.8.1",
+    "coc-python": ">=1.2.13",
+    "coc-tsserver": ">=1.7.0",
+    "coc-yank": ">=1.2.0"
+  }
+}
