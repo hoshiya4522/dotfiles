@@ -1,0 +1,207 @@
+more ignored words
+things occurred
+Crap. Tonight is raid night and I am already late.
+well crap.
+Friday 5pm
+See last commit
+One little whitespace gets its very own commit! Oh, life is so erratic!
+This is not the commit message you are looking for
+If it's hacky and you know it clap you hands (clap clap)!
+<<<<<<<<<<<<<<< HEAD
+fixed conflicts (LOL merge -s ours; push -f)
+Never gonna give, never gonna give
+See last commit
+Added missing file in previous commit
+Now it's all microservices, I hope the fad persists.
+Reticulating splines...
+Derp
+:q!
+Easteregg
+Updated build targets.
+I transformed a bug into a feature. Once you learn how, you'll never forget it
+NSA backdoor - ignore
+these guys are flipped
+and a comma
+Undoing last comming
+I __ a word
+Fucking submodule bull shit
+For great justice.
+SEXY RUSSIAN CODES WAITING FOR YOU TO CALL
+I don't get paid enough for this shit.
+Wubbalubbadubdub!
+wip
+Refactor factories, revisit visitors
+Pig
+For the statistics only
+giggle.
+$(rm -rvf .)
+Too tired to write descriptive message
+bara bra grejjor
+By works, I meant 'doesnt work'.  Works now..
+Insert Commit Message Here
+Insert Commit Message Here
+debugo
+Reset error count between rows. herpderp
+Shovelling coal into the server...
+restored deleted entities just to be sure
+Completed with no bugs...
+Made it to compile...
+work in progress
+better code
+I forgot to commit... So here you go.
+Don't Ask Me, I Have No Idea Why This Works Either
+Just committing so I can go home
+This is supposed to crash
+Well the book was obviously wrong.
+fix
+That's just how I roll
+fixes
+bugger
+Commit committed
+whatthecommit.com’s server IP address could not be found.
+Whee.
+Lock S-foils in attack position
+lots of changes after a lot of time
+Fixed errors
+hey, what's that over there?!
+hey, what's that over there?!
+It was the best of times, it was the worst of times
+whooooooooooooooooooooooooooo
+I think now it works
+This will definitely break in 2071 (TODO)
+third time's a charm
+Fuck it, YOLO!
+gave up and used tables.
+General commit (no IDs open) - Modifications for bad implementations
+GIT :/
+I made leetle mistake
+Just committing so I can go home
+$(init 0)
+sometimes you just herp the derp so hard it herpderps
+REALLY FUCKING FIXED
+John made me do it
+Trust me, it's not badly written. It's just way above your head.
+TDD: 1, Me: 0
+Working on tests (haha)
+Oh no
+final commit.
+Merging 'WIP: Do Not Merge This Branch' Into Master
+(\ /)<br/>(O.o)<br/>(&gt; &lt;) Bunny approves these changes.
+Corrected mistakes
+I really should've committed this when I finished it...
+if you're not using et, fuck off
+WTF is this.
+WIP, always
+No changes after this point.
+Oh no
+Bit Bucket is down. What should I do now?
+$(rm -rvf .)
+stopped caring 9 commits ago
+tagging release w.t.f.
+This branch is so dirty, even your mom can't clean it.
+I'll explain this when I'm sober .. or revert it
+Please no changes this time.
+Switched off unit test 5 because the build had to go out now and there was no time to fix it properly.
+For great justice.
+project lead is allergic to changes...
+fix
+Don’t mess with Voodoo
+Herping the derp derp (silly scoping error)
+PEBKAC
+gave up and used tables.
+oops - thought I got that one.
+typo
+stuff
+Testing the test
+forgot we're not using a smart language
+oops!
+I don't give a damn 'bout my reputation
+Whatever.
+Removed code.
+Last time I said it works? I was kidding.  Try this.
+pep8 - cause I fell like doing a barrel roll
+oops, forgot to add the file
+I don't believe it
+Herping the derp
+hey, what's that over there?!
+You know the rules and so do I
+derp, helper method rename
+Fixing Steve's bug.
+Hide those navs, boi!
+Here be Dragons
+LAST time, Lukas, /dev/urandom IS NOT a variable name generator...
+I am sorry
+We should delete this crap before shipping.
+Please no changes this time.
+Peopleware Chapter 8: "You Never Get Anything Done around Here between 9 and 5."
+Add Sandbox
+Removed code.
+fix some fucking errors
+[Insert your commit message here. Be sure to make it descriptive.]
+This was the most stupid bug in the world, fixed in the smartest way ever
+To be honest, I do not quite remember everything I changed here today. But it is all good, I tell ya.
+i dunno, maybe this works
+"Get that shit outta my master."
+Marcus sucks
+Never Run This Commit As Root
+Derp, asset redirection in dev mode
+more ignores
+Does anyone read this? I'll be at the coffee shop accross the street.
+pep8 fixer
+Improving the fix
+final commit.
+Shovelling coal into the server...
+I really should've committed this when I finished it...
+more stuff
+added super-widget 2.0.
+It's secret!
+Here be Dragons
+Fixing Jason's bugs.
+I know, I know, this is not how I’m supposed to do it, but I can't think of something better.
+Fixed the fuck out of #796!
+This will definitely break in 2029 (TODO)
+Another commit to keep my CAN streak going.
+lots of changes after a lot of time
+Undoing last comming
+Switched off unit test 7 because the build had to go out now and there was no time to fix it properly.
+betterer code
+Added a banner to the default admin page. Please have mercy on me =(
+Version control is awful
+harharhar
+I just evaluated random code in my console
+This is where it all begins...
+pgsql is being a pain
+I have no idea what I'm doing here.
+I don't know why. Just move on.
+Popping stash
+SOAP is a piece of shit
+At times like this I wish I was a Garbage Man.
+Trying to fake a conflict
+Revert "just testing, remember to revert"
+TODO: Replace stubs
+buenas those-things.
+Don't tell me you're too blind to see
+COMMIT ALL THE FILES!
+Make that it works in 90% of the cases.  3:30.
+IEize
+Replace all whitespaces with tabs.
+Alashov rebase plx?
+lolwhat?
+buenas those-things.
+things occurred
+pay no attention to the man behind the curtain
+Only Tom Cruise knows why.
+-m \'So I hear you like commits ...\'
+this is Spartaaaaaaaa
+bifurcation
+Never before had a small typo like this one caused so much damage.
+Reinventing the wheel. Again.
+Things went wrong...
+I can't believe it took so long to fix this.
+Fixed unnecessary bug.
+Inside we both know what's been going on
+unionfind is no longer being molested.
+QuickFix.
+more stuff
+Sarah rebase plx?
+Nothing to see here, move along

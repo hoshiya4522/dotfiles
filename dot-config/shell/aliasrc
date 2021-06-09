@@ -1,4 +1,4 @@
-alias clear="printf '\033c'; seq 1 $(tput cols) | sort -R | spark | lolcat"
+alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
 alias cls=clear
 alias v=nvim
 alias nvimrc='v ~/.config/nvim/init.vim'
@@ -7,5 +7,8 @@ alias aliasrc='v ~/.config/shell/aliasrc'
 alias py=python3
 alias ipy=ipython3
 alias jnb='jupyter notebook --ip 192.168.1.103 --port 8888'
+alias djb='python manage.py runserver 192.168.1.103:8080'
 alias gitcc='git config --global credential.helper cache && echo Git creds saved'
-
+alias rr='rm -rf'
+alias lfrc='v ~/.config/lf/lfrc'
+alias tmuxrc='v ~/.tmux.conf'

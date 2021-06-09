@@ -81,3 +81,4 @@ source ~/.plugins/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#696969"
 eval "$(starship init zsh)"
+export PATH="/usr/local/mysql/bin:$PATH"
