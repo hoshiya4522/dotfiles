@@ -5,6 +5,7 @@ DFD=~/git/mydotfiles
 echo copying ~/.config
 cp -r ~/.config/ $DFD/
 rm -rf $DFD/.config/coc
+rm -rf $DFD/.config/configstore
 echo copying ~/.tmux.conf
 cp ~/.tmux.conf $DFD/
 echo copying ~/.zshrc
