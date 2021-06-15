@@ -1,9 +1,13 @@
+#!/bin/zsh
+
 alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
 alias cls=clear
 alias v=nvim
 alias nvimrc='v ~/.config/nvim/init.vim'
 alias zshrc='v ~/.zshrc'
+alias profilerc='v ~/.config/shell/profile'
 alias aliasrc='v ~/.config/shell/aliasrc'
+alias profilerc='v ~/.config/shell/profile'
 alias py=python3
 alias ipy=ipython3
 alias jnb='jupyter notebook --ip 192.168.1.103 --port 8888'
@@ -11,4 +15,8 @@ alias djb='python manage.py runserver 192.168.1.103:8080'
 alias gitcc='git config --global credential.helper cache && echo Git creds saved'
 alias rr='rm -rf'
 alias lfrc='v ~/.config/lf/lfrc'
-alias tmuxrc='v ~/.tmux.conf'
+alias tmuxrc='v ~/.config/tmux/tmux.conf'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+
+alias reload='source ~/.config/zsh/.zshrc && clear && echo ZSH reloaded'
+alias tmuxa='tmux a -t'

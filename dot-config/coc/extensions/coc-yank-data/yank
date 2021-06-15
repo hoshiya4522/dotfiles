@@ -687,3 +687,53 @@ bf994a483366232fe34f6f29763b82b6|file:///data/data/com.termux/files/home/git/myd
 	cp ~/.zshrc $DFD/
 1d6da5eb724e4a35d17f87c528cc9261|file:///data/data/com.termux/files/home/git/mydotfiles/backup.sh|7|1|V|sh
 	rm -rf $DFD/.config/configstore
+bacf54c4c24db9323bbfd9c343272180|file:///data/data/com.termux/files/home/lab/api.txt|2|1|V|text
+	https://toph.co/api/external_contests/as_events?with=all&long=no&start=2021-05-30T00%3A00%3A00%2B05%3A00&end=2021-07-11T00%3A00%3A00%2B05%3A00
+aa9fbc141e6dc0c7ad49cd72b8b22214|file:///data/data/com.termux/files/home/lab/discord/main.py|4|10|v|python
+	bot token
+7770f29b8d6d3cdccc2118f44e518d32|file:///data/data/com.termux/files/home/lab/discord/main.py|8|37|v|python
+	user ID
+8fe1c6f004d32eebc0c15a6c3aadd5dd|file:///data/data/com.termux/files/home/lab/discord/main.py|4|10|v|python
+	ODM1MDgzOTg0MjkxNjI3MDE4.YIKSkA.d785ZFd-bY93BwI3w2SCJssj4KA
+ad59e995fb8e8553c08a4a861379268e|file:///data/data/com.termux/files/home/lab/discord/main.py|1|1|V|python
+	
+	
+	print(os.getenv('TOKEN'))
+24bf95841efdf0d8f02b5f811610f246|file:///data/data/com.termux/files/home/lab/discord/test.py|6|1|V|python
+	print(f['TOKEN'])
+4538dfabea3e39a98287fbf46d90784b|file:///data/data/com.termux/files/home/lab/discord/main.py|5|1|V|python
+	with open("creds.json", "r") as f:
+583392512aa9fbc78144c8424e2472ff|file:///data/data/com.termux/files/home/lab/discord/test.py|8|37|v|python
+	761566423616061460
+203884e5e4028eb439ca95ff2b64818a|file:///data/data/com.termux/files/home/lab/discord/test.py|8|37|v|python
+	758307258336542722
+a77b55332699835c035957df17630d28|file:///data/data/com.termux/files/home/lab/discord/test.py|9|33|v|python
+	Hello there!
+e0bdc6ffa7bce862c259d845ccd93ea1|file:///data/data/com.termux/files/home/lab/discord/test.py|8|37|v|python
+	665464706332622868
+ee536f5f726a7b77df3544486357c6e9|file:///data/data/com.termux/files/home/lab/discord/test.py|8|37|v|python
+	6654647063326i2868
+8f94826adab8ffebbeadb4f9e161b2dc|file:///data/data/com.termux/files/home/lab/discord/test.py|9|33|v|python
+	Never Gonna Give You Up
+dfabf550c0861162b3a487f6eb51a7e6|file:///data/data/com.termux/files/home/lab/discord/test.py|8|37|v|python
+	625794640439803954
+6066a41d222373eefd562eec6839517c|file:///data/data/com.termux/files/home/lab/cmds.txt|2|1|V|text
+	am start --user 0 -n com.android.chrome/com.google.android.apps.chrome.Main
+be51fcde1d1bb7d027bd75b19b6ea467|file:///data/data/com.termux/files/home/.config/tmux/tmux.conf|41|1|V|tmux
+	bind c new-window -c "#{pane_current_path}"
+8dd2202a689be6ed07516835a1f4031e|file:///data/data/com.termux/files/home/.config/tmux/tmux.conf|11|1|V|tmux
+	bind % split-window -h -c "#{pane_current_path}"
+dbeffd72736536e3b4f1fdcec4e7698b|file:///data/data/com.termux/files/home/.config/tmux/tmux.conf|10|1|V|tmux
+	bind '"' split-window -c "#{pane_current_path}"
+ac07463bddc825d81b33a78afe26abc0|file:///data/data/com.termux/files/home/git/mydotfiles/backup.sh|8|1|V|sh
+	cp ~/.tmux.conf $DFD/
+0038efb9dd394ec537d3958baf6bb589|file:///data/data/com.termux/files/home/git/mydotfiles/backup.sh|7|1|V|sh
+	echo copying ~/.tmux.conf
+1c8638a86086faef1694c2a8b2142f18|file:///data/data/com.termux/files/home/git/mydotfiles/backup.sh|18|1|V|sh
+	echo renaming .tmux.conf
+b40a92d876dfd8d802d343cfbb61cfee|file:///data/data/com.termux/files/home/git/mydotfiles/backup.sh|18|1|V|sh
+	mv $DFD/.tmux.conf $DFD/dot-tmux.conf
+e301f929529b8bec1d7780b53e46cb60|file:///data/data/com.termux/files/home/git/mydotfiles/backup.sh|9|1|V|sh
+	echo copying termux font
+62258940e21ce55eb9ee4aa3df3a7eda|file:///data/data/com.termux/files/home/git/mydotfiles/backup.sh|9|1|V|sh
+	cp ~/.termux/font.ttf $DFD/
