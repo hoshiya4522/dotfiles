@@ -13,6 +13,7 @@ rm -rf $DFD/dot-config
 
 echo renaming .config
 mv ~/git/mydotfiles/.config/ $DFD/dot-config
+rm -rf dot-config/coc/extensions/coc-yank-data/yank
 echo renaming .zprofile
 mv $DFD/.zprofile $DFD/dot-zprofile
 
