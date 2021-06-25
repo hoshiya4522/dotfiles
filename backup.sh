@@ -1,20 +1,21 @@
 #!/bin/sh
 
-DFD=~/git/mydotfiles
+DIR=~/coding/git/mydotfiles
 
-echo copying ~/.config
-cp -r ~/.config/ $DFD/
-echo copying ~/.zprofile
-cp ~/.zprofile $DFD/
+rm -rf $DIR/*/.config/*
+rm -rf $DIR/zprofile/.zprofile
 
-echo removing old backups
-rm -rf $DFD/dot-zprofile
-rm -rf $DFD/dot-config
+cp -r ~/.config/jupyter/ $DIR/jupyter/.config/jupyter
+cp -r ~/.config/lf/ $DIR/lf/.config/lf
+cp -r ~/.config/zsh/ $DIR/zsh/.config/zsh
+cp -r ~/.config/tmux/ $DIR/tmux/.config/tmux
+cp -r ~/.config/nvim/ $DIR/nvim/.config/nvim
+cp -r ~/.config/shell/ $DIR/shell/.config/shell
+cp -r ~/.config/ranger/ $DIR/ranger/.config/ranger
+cp ~/.zprofile $DIR/zprofile/
+cp ~/.config/starship.toml $DIR/starship/.config/
 
-echo renaming .config
-mv ~/git/mydotfiles/.config/ $DFD/dot-config
-rm -rf dot-config/coc/extensions/coc-yank-data/yank
-echo renaming .zprofile
-mv $DFD/.zprofile $DFD/dot-zprofile
-
+rm -rf $DIR/tmux/.config/tmux/plugins/
+rm -rf $DIR/zsh/.config/zsh/plugins/
+rm -rf $DIR/nvim/.config/nvim/plugins/
 echo Done
