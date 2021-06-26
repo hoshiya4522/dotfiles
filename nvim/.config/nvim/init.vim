@@ -28,13 +28,21 @@ set nofoldenable
 set timeoutlen=500
 
 colorscheme nord
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap s :w<CR>
+inoremap jj <ESC>
+
+nnoremap <leader>f :FZF<CR>
+nnoremap <leader>h :set hlsearch!<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>t :FloatermToggle<CR>
-nnoremap <leader>f :FZF<CR>
-nnoremap <leader>s :so ~/.config/nvim/init.vim<CR>
-inoremap jj <ESC>
+nnoremap <leader>r :so ~/.config/nvim/init.vim<CR>
+nnoremap <leader>w :set wrap!<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
+
+" find and replace <++> placeholders
+inoremap <C-j> <ESC>/<++><CR><ESC>cf>
+inoremap <C-k> <ESC>?<++><CR><ESC>cf>
 
 "Move code block with alt jk
 nnoremap <A-j> :m .+1<CR>==
@@ -55,4 +63,12 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
-
+let g:which_key_map={
+												\ 'f': 'FZF',
+												\ 'h': 'Toggle hlsearch',
+												\ 'n': 'NerdTree',
+												\ 't': 'FloatTerm',
+												\ 'r' : 'Reload Nvim',
+												\ 'w' : 'Toggle wrap',
+												\ }
+call g:which_key#register('<Space>', "g:which_key_map")

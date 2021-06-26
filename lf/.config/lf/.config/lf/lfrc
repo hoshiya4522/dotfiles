@@ -68,7 +68,7 @@ cmd copyto ${{
 	for x in $fx; do
 		eval cp -ivr \"$x\" \"$dest\"
 	done &&
-	notify-send "📋 File(s) copied." "File(s)copies to $dest."
+	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
 cmd setbg "$1"
@@ -106,4 +106,4 @@ map V push :!nvim<space>
 
 # Source Bookmarks
 source "~/.config/lf/shortcutrc"
- 
+
