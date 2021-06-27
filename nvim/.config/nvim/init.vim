@@ -16,6 +16,7 @@ Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
 call plug#end()
 
+
 set tabstop=8
 set expandtab
 set shiftwidth=4
@@ -31,9 +32,13 @@ set foldlevel=2
 set nofoldenable
 set timeoutlen=500
 
+
 colorscheme nord
+" kinda sacreligious but saves some keystrokes
 nnoremap s :w<CR>
+" this makes escaping much eaier because j is in the home row
 inoremap jj <ESC>
+
 
 " Navigate through splits with Ctrl + hjkl because default split movements are shit
 nnoremap <C-h> <C-w>h
@@ -41,6 +46,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+
+" My leader keybindings witb WhichKey plugin added support
 nnoremap <leader>f :FZF<CR>
 nnoremap <leader>h :set hlsearch!<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
@@ -65,9 +72,9 @@ vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
 
-" Special localkey binding for competitive programming with C++
+" Special localleader key binding for competitive programming with C++
 autocmd filetype cpp nnoremap <LocalLeader>c :w <CR> :!g++ --std=c++11 -Wall %; if [ -f a.out ]; then echo \\n;time ./a.out; rm a.out; fi <CR>
-autocmd filetype cpp let g:which_key_map_cpp={ 'c': 'Compile and Run' }
+autocmd filetype cpp let g:which_key_map_cpp={ 'c': 'Save, Compile and Run' }
 autocmd filetype cpp call g:which_key#register(',', "g:which_key_map_cpp")
 
 
