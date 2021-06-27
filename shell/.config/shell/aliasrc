@@ -8,7 +8,14 @@ alias zshrc='v ~/.config/zsh/.zshrc'
 alias profilerc='v ~/.config/shell/profile'
 alias aliasrc='v ~/.config/shell/aliasrc'
 alias profilerc='v ~/.config/shell/profile'
+alias mydot='cd ~/coding/git/mydotfiles'
+alias mylab='cd ~/coding/lab'
+# My compititive programming folder
+alias cmpr='cd ~/coding/cp/'
 alias py=python3
+alias '..'='cd ../'
+alias '...'='cd ../../'
+alias '....'='cd ../../../'
 alias ipy=ipython3
 alias jnb='jupyter notebook --ip 192.168.1.103 --port 8888'
 alias djb='python manage.py runserver 192.168.1.103:8080'
