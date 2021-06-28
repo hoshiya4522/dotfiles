@@ -1,5 +1,5 @@
 let g:mapleader = "\<Space>"
-let g:maplocalleader = ','
+let g:maplocalleader = "\<BS>"
 
 
 call plug#begin('~/.config/nvim/plugins')
@@ -54,7 +54,7 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>t :FloatermToggle<CR>
 nnoremap <leader>r :so ~/.config/nvim/init.vim<CR>:echo 'Reloaded nvim'<CR>
 nnoremap <leader>w :set wrap!<CR>
-nnoremap <silent> <localleader> :WhichKey ','<CR>
+nnoremap <silent> <localleader> :WhichKey "\<BS\>"<CR>
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 
@@ -75,7 +75,7 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 " Special localleader key binding for competitive programming with C++
 autocmd filetype cpp nnoremap <LocalLeader>c :w <CR> :!g++ --std=c++11 -Wall %; if [ -f a.out ]; then echo \\n;time ./a.out; rm a.out; fi <CR>
 autocmd filetype cpp let g:which_key_map_cpp={ 'c': 'Save, Compile and Run' }
-autocmd filetype cpp call g:which_key#register(',', "g:which_key_map_cpp")
+autocmd filetype cpp call g:which_key#register("\<BS\>", "g:which_key_map_cpp")
 
 
 " lightline settings
