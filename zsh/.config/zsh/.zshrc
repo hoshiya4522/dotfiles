@@ -75,6 +75,9 @@ bindkey '^[[P' delete-char
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+# case insesetive match
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
 # Load syntax highlighting; should be last.
 source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

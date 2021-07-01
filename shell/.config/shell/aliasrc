@@ -27,3 +27,5 @@ alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
 alias reload='source ~/.config/zsh/.zshrc && clear && echo ZSH reloaded'
 alias tmuxa='tmux a -t'
+alias tb="nc termbin.com 9999"
+alias termbin="nc termbin.com 9999"
