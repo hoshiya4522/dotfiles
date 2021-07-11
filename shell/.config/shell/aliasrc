@@ -8,7 +8,7 @@ alias zshrc='v ~/.config/zsh/.zshrc'
 alias profilerc='v ~/.config/shell/profile'
 alias aliasrc='v ~/.config/shell/aliasrc'
 alias profilerc='v ~/.config/shell/profile'
-alias mydot='cd ~/coding/git/mydotfiles'
+alias mydot='cd ~/Git/mydotfiles'
 alias mylab='cd ~/coding/lab'
 # My compititive programming folder
 alias cmpr='cd ~/coding/cp/'
