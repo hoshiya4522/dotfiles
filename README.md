@@ -11,4 +11,5 @@ I got configs for
 - zsh (mostly stolen from [Luke Smith's repo](https://github.com/LukeSmithxyz/voidrice))
 
 
-Stow support is available i think.. idk.. let me know if it works
+Stow support is available
+use `bash installdots`
