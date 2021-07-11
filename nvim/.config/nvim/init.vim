@@ -3,12 +3,15 @@ let g:maplocalleader = "\<BS>"
 
 
 call plug#begin('~/.config/nvim/plugins')
+Plug 'mhinz/vim-startify'
 Plug 'liuchengxu/vim-which-key'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'arcticicestudio/nord-vim' 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-snippets'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'chrisbra/colorizer'
 Plug 'voldikss/vim-floaterm'
 Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -33,29 +36,32 @@ set rnu
 set foldmethod=indent
 set foldnestmax=10
 set foldlevel=2
+set fillchars=fold: 
+hi Folded ctermfg=grey ctermbg=black cterm=italic gui=italic guibg=none guifg=#696969
 set nofoldenable
-set timeoutlen=500
+set timeoutlen=300
 
 colorscheme nord
 
-" kinda sacreligious but saves some keystrokes
-nnoremap s :w<CR>
 " this makes escaping much eaier because j is in the home row
 inoremap jj <ESC>
 
 
 " Navigate through splits with Ctrl + hjkl because default split movements are shit
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap sh <C-w>h
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
 
+nnoremap s :w<CR>
 
 " My leader keybindings witb WhichKey plugin added support
 nnoremap <leader>f :FZF<CR>
 nnoremap <leader>h :set hlsearch!<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFocus<CR>
+nnoremap <leader>c1 :colorscheme nord<CR>
+nnoremap <leader>c2 :colorscheme gruvbox<CR>
 nnoremap <leader>t :FloatermToggle<CR>
 nnoremap <leader>r :so ~/.config/nvim/init.vim<CR>:echo 'Reloaded nvim'<CR>
 nnoremap <leader>w :set wrap!<CR>
@@ -66,25 +72,27 @@ nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
 nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
 
-
 " find and replace <++> placeholders
 inoremap <C-j> <ESC>/<++><CR><ESC>cf>
 inoremap <C-k> <ESC>?<++><CR><ESC>cf>
 
 
 "Move code block with alt jk
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> :m .+1<CR>==gi
-inoremap <A-k> :m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+nnoremap <A-j> :m .+1<CR>==zz
+nnoremap <A-k> :m .-2<CR>==zz
+inoremap <A-j> <ESC>:m .+1<CR>zz==gi
+inoremap <A-k> <ESC>:m .-2<CR>zz==gi
+vnoremap <A-j> :m '>+1<CR>gv=gvzz
+vnoremap <A-k> :m '<-2<CR>gv=gvzz
 
 
 " Special localleader key binding for competitive programming with C++
 autocmd filetype cpp nnoremap <LocalLeader>c :w <CR> :!g++ --std=c++11 -Wall %; if [ -f a.out ]; then echo \\n;time ./a.out; rm a.out; fi <CR>
 autocmd filetype cpp let g:which_key_map_cpp={ 'c': 'Save, Compile and Run' }
 autocmd filetype cpp call g:which_key#register("\<BS\>", "g:which_key_map_cpp")
+
+autocmd filetype cpp set foldmethod=marker
+autocmd filetype cpp set foldmarker={,}
 
 
 " Exit Vim if NERDTree is the only window left.
@@ -122,3 +130,45 @@ let g:which_key_map={
     \ 'pw' : 'Paste Split'
     \ }
 call g:which_key#register('<Space>', "g:which_key_map")
+
+
+" Functions
+function! MyFoldText()
+    let nl = v:foldend - v:foldstart + 1
+
+    let txt =  '└ ' . nl . ' Lines folded '
+
+    return txt
+endfunction
+set foldtext=MyFoldText()
+
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+let g:coc_snippet_next = '<tab>'
+
+
+let g:startify_lists = [
+          \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
+          \ { 'type': 'files',     'header': ['   Files']            },
+          \ { 'type': 'sessions',  'header': ['   Sessions']       },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \ ]
+
+
+
+let g:startify_custom_header = [
+        \ ' _   ___     _____ __  __ ',
+        \ '| \ | \ \   / /_ _|  \/  |',
+        \ '|  \| |\ \ / / | || |\/| |',
+        \ '| |\  | \ V /  | || |  | |',
+        \ '|_| \_|  \_/  |___|_|  |_|',
+        \]
