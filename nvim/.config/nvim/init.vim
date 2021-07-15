@@ -9,7 +9,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'arcticicestudio/nord-vim' 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-snippets'
+Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'chrisbra/colorizer'
 Plug 'voldikss/vim-floaterm'
@@ -18,21 +18,30 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
 Plug 'wesQ3/vim-windowswap'
+Plug 'mbbill/undotree'
 call plug#end()
 
 
-set tabstop=8
-set expandtab
-set shiftwidth=4
+set exrc
+set tabstop=4 softtabstop=0 noexpandtab
+"set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set autoindent
 set smartindent
-set cindent       
+set cindent
 set nu
-set linebreak
 set rnu
+set wrap
+set linebreak
+set nohlsearch
+set incsearch
+set smartcase
+set ignorecase
+set showtabline=2
+set noswapfile
 set foldmethod=indent
 set foldnestmax=10
 set foldlevel=2
@@ -40,11 +49,16 @@ set fillchars=fold: 
 hi Folded ctermfg=grey ctermbg=black cterm=italic gui=italic guibg=none guifg=#696969
 set nofoldenable
 set timeoutlen=300
+set signcolumn=yes
+
+set nobackup
+set undodir=~/.config/nvim/undodir
+set undofile
 
 colorscheme nord
 
 " this makes escaping much eaier because j is in the home row
-inoremap jj <ESC>
+inoremap jk <ESC>
 
 
 " Navigate through splits with Ctrl + hjkl because default split movements are shit
@@ -73,8 +87,7 @@ nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
 nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
 
 " find and replace <++> placeholders
-inoremap <C-j> <ESC>/<++><CR><ESC>cf>
-inoremap <C-k> <ESC>?<++><CR><ESC>cf>
+inoremap <BS><Space> <ESC>/<++><CR><ESC>cf>
 
 
 "Move code block with alt jk
@@ -105,16 +118,23 @@ let g:NERDTreeWinSize=20
 
 " lightline settings
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
+    \ 'colorscheme': 'nord',
+    \ 'active': {
+    \   'right': [ [ 'lineinfo' ],
+    \              [ 'percent' ],
+    \              [ 'fileencoding', 'filetype' ] ]
+    \ },
+    \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+    \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+	\ }
 
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#unnamed      = '[Empty Buffer]'
+let g:lightline#bufferline#filename_modifier = ':t'
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 " WhichKey notation for leader
 let g:which_key_map={
@@ -143,32 +163,23 @@ endfunction
 set foldtext=MyFoldText()
 
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-let g:coc_snippet_next = '<tab>'
-
-
 let g:startify_lists = [
-          \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
-          \ { 'type': 'files',     'header': ['   Files']            },
-          \ { 'type': 'sessions',  'header': ['   Sessions']       },
-          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-          \ ]
+    \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
+    \ { 'type': 'files',     'header': ['   Files']            },
+    \ { 'type': 'sessions',  'header': ['   Sessions']       },
+    \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+    \ ]
 
 
 
 let g:startify_custom_header = [
-        \ ' _   ___     _____ __  __ ',
-        \ '| \ | \ \   / /_ _|  \/  |',
-        \ '|  \| |\ \ / / | || |\/| |',
-        \ '| |\  | \ V /  | || |  | |',
-        \ '|_| \_|  \_/  |___|_|  |_|',
-        \]
+    \ ' _   ___     _____ __  __ ',
+    \ '| \ | \ \   / /_ _|  \/  |',
+    \ '|  \| |\ \ / / | || |\/| |',
+    \ '| |\  | \ V /  | || |  | |',
+    \ '|_| \_|  \_/  |___|_|  |_|',
+    \]
+
+
+
+so ~/.config/nvim/plug-conf/vcoc.vim
