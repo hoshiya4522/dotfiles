@@ -50,6 +50,7 @@ hi Folded ctermfg=grey ctermbg=black cterm=italic gui=italic guibg=none guifg=#6
 set nofoldenable
 set timeoutlen=300
 set signcolumn=yes
+set cmdheight=1	
 
 set nobackup
 set undodir=~/.config/nvim/undodir
@@ -87,7 +88,7 @@ nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
 nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
 
 " find and replace <++> placeholders
-inoremap <BS><Space> <ESC>/<++><CR><ESC>cf>
+nnoremap <BS><Space> <ESC>/<++><CR><ESC>cf>
 
 
 "Move code block with alt jk
@@ -182,4 +183,4 @@ let g:startify_custom_header = [
 
 
 
-so ~/.config/nvim/plug-conf/vcoc.vim
+"so ~/.config/nvim/plug-conf/vcoc.vim

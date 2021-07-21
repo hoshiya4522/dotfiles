@@ -32,3 +32,9 @@ alias termbin="nc termbin.com 9999"
 alias mux=tmuxinator 
 
 alias tcr='termux-chroot'
+
+
+alias ls="exa --icons"
+alias la="exa -a --icons"
+alias ll="exa -lh --icons"
+alias lla="exa -lah --icons"
