@@ -40,9 +40,9 @@ source ~/.config/zsh/cursor.zsh
 ################
 
 # syntax highlightung for zsh
-source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.config/plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # syntax autosuggestions for zsh
-source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.config/plugins/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#696969"
 # Starship
 eval "$(starship init zsh)"

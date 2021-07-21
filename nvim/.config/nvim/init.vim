@@ -2,7 +2,7 @@ let g:mapleader = "\<Space>"
 let g:maplocalleader = "\<BS>"
 
 
-call plug#begin('~/.config/nvim/plugins')
+call plug#begin('~/.config/plugins/nvim/')
 Plug 'mhinz/vim-startify'
 Plug 'liuchengxu/vim-which-key'
 Plug 'jiangmiao/auto-pairs'

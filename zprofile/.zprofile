@@ -51,7 +51,7 @@ export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
-export TMUX_PLUGIN_MANAGER_PATH="$HOME/.config/tmux/plugins"
+export TMUX_PLUGIN_MANAGER_PATH="$HOME/.config/plugins/tmux"
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 
 
