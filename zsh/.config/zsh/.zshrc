@@ -8,8 +8,11 @@ setopt interactive_comments
 
 # History in cache directory:
 HISTSIZE=10000000
-SAVEHIST=10000000
+SAVEHIST=9999999
 HISTFILE=~/.cache/zsh/history
+setopt histignorealldups
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
 
 # Basic auto/tab complete:
 autoload -U compinit
