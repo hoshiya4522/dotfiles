@@ -46,7 +46,6 @@ inoremap jk <ESC>
 
 
 " Buffer navigation
-"
 nnoremap ZB :bdelete<CR>
 nnoremap <TAB> :w<CR>:bn<CR>
 nnoremap <S-TAB> :w<CR>:bp<CR>
@@ -58,7 +57,9 @@ nnoremap sk <C-w>k
 nnoremap sl <C-w>l
 
 nnoremap s :w<CR>
-nnoremap C S
+nnoremap S :w<CR>
+
+nnoremap Y y$
 
 nnoremap <leader>f :FZF<CR>
 nnoremap <leader>h :set hlsearch!<CR>
