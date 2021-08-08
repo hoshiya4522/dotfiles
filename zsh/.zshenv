@@ -7,6 +7,10 @@ unsetopt PROMPT_SP
 export EDITOR="nvim"
 
 
+export MANPAGER='nvim +Man!'
+export MANWIDTH=99999
+
+
 # ~/ Clean-up:
 ZDOTDIR=$HOME/.config/zsh
 export XDG_CONFIG_HOME="$HOME/.config"

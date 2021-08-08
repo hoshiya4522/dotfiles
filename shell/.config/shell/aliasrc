@@ -32,3 +32,6 @@ alias ls="exa --icons"
 alias la="exa -a --icons"
 alias ll="exa -lh --icons"
 alias lla="exa -lah --icons"
+
+
+alias gitall="git add . && git commit && git push"
