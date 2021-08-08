@@ -1,0 +1,28 @@
+#!/bin/bash
+
+echo "Installing DotFiles..."
+
+declare -a backup 
+backup=( 
+    jupyter
+    lf
+    nvim
+    scripts
+    shell
+    starship
+    tmux
+    zsh
+)
+
+
+for p in "${backup[@]}"
+do
+    echo "Installing $p"
+
+    # Deleting previous symlinks 
+    stow -v -D -t ~ "$p" 
+    # Stowing new symlinks
+    stow -v -R -t ~ "$p"
+
+    echo -e "\n\n"
+done
