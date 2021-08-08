@@ -1,0 +1,36 @@
+#!/bin/bash
+
+mkdir ~/.config
+mkdir ~/.config/plugins
+mkdir ~/.config/plugins/nvim
+mkdir ~/.config/plugins/tmux
+mkdir ~/.config/plugins/zsh
+
+
+git --help >> /dev/null || ( echo "Need Git" && exit )
+pip3 -h >> /dev/null || ( echo "Need pip" && exit )
+curl -h >> /dev/null || ( echo "Need cURL" && exit )
+
+echo "Installing Spark.bash"
+sudo sh -c "curl https://raw.githubusercontent.com/holman/spark/master/spark -o /usr/local/bin/spark && chmod +x /usr/local/bin/spark"
+pip install lolcat
+
+
+( nvim -h >> /dev/null && 
+echo "Installing vim-plug for neovim"
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' ) ||
+( echo "Need NVIM" && exit )
+
+
+( tmux -V >> /dev/null && 
+echo "Installing TPM"
+git clone https://github.com/tmux-plugins/tpm ~/.config/plugins/tmux/tpm ) ||
+( echo "Need NVIM" && exit )
+
+
+( zsh --help >> /dev/null && 
+echo "Installing Zsh Plugins" &&
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/plugins/zsh/zsh-autosuggestions &&
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.config/plugins/zsh/zsh-syntax-highlighting )
+( echo "Need zsh" && exit )
