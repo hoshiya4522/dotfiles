@@ -1,4 +1,1 @@
- nvim/.config/nvim/plugins/
- tmux/.config/tmux/plugins/
- zsh/.config/zsh/plugins/
- zsh/.config/zsh/pluh/
+nvim/.config/nvim/undodir/
