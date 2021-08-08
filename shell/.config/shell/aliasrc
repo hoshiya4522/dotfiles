@@ -1,24 +1,21 @@
 #!/bin/zsh
 
+alias tmux="tmux -f ~/tmux.conf"
 alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
 alias cls=clear
 alias v=nvim
 alias nvimrc='v ~/.config/nvim/init.vim'
 alias zshrc='v ~/.config/zsh/.zshrc'
-alias profilerc='v ~/.config/shell/profile'
 alias aliasrc='v ~/.config/shell/aliasrc'
-alias profilerc='v ~/.config/shell/profile'
 alias mydot='cd ~/Git/mydotfiles'
-alias mylab='cd ~/coding/lab'
 # My compititive programming folder
-alias cmpr='cd ~/coding/cp/'
 alias py=python3
+alias ipy=ipython3
 alias '..'='cd ../'
 alias '...'='cd ../../'
 alias '....'='cd ../../../'
-alias ipy=ipython3
-alias jnb='jupyter notebook --ip 192.168.1.103 --port 8888'
-alias djb='python manage.py runserver 192.168.1.103:8080'
+alias jn='jupyter notebook'
+alias djb='python manage.py runserver'
 alias gitcc='git config --global credential.helper cache && echo Git creds saved'
 alias rr='rm -rf'
 alias lfrc='v ~/.config/lf/lfrc'
@@ -30,9 +27,6 @@ alias tmuxa='tmux a -t'
 alias tb="nc termbin.com 9999"
 alias termbin="nc termbin.com 9999"
 alias mux=tmuxinator 
-
-alias tcr='termux-chroot'
-
 
 alias ls="exa --icons"
 alias la="exa -a --icons"

@@ -34,18 +34,6 @@ source ~/.config/zsh/lficons.zsh
 # keybindings for zsh
 source ~/.config/zsh/keybinds.zsh
 source ~/.config/zsh/cursor.zsh
+source ~/.config/zsh/plugins.zsh
 
 
-################
-#              #
-#   Plugins    #
-#              #
-################
-
-# syntax highlightung for zsh
-source ~/.config/plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# syntax autosuggestions for zsh
-source ~/.config/plugins/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#696969"
-# Starship
-eval "$(starship init zsh)"
