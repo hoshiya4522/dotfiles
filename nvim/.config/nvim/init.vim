@@ -34,7 +34,6 @@ set nofoldenable
 set timeoutlen=300
 set signcolumn=yes
 set cmdheight=1	
-
 set nobackup
 set undodir=~/.config/nvim/undodir
 set undofile
@@ -91,7 +90,8 @@ vnoremap <A-k> :m '<-2<CR>gv=gvzz
 " Special localleader key binding for competitive programming with C++
 autocmd filetype cpp nnoremap <LocalLeader>c :w <CR> :!g++ --std=c++11 -Wall %; if [ -f a.out ]; then echo \\n;time ./a.out; rm a.out; fi <CR>
 autocmd filetype cpp nnoremap <LocalLeader>t :wa <CR> :![ -e a.out ] && rm a.out; echo "\nCompiling..."; g++ --std=c++11 -Wall main.cxx && echo "Compiled ✓\n" && time ( timeout 8 ./a.out<input )
-
+" autocmd filetype cpp set autoread                                                                                                                                                                       
+" autocmd filetype cpp au CursorHold * checktime
 autocmd filetype cpp set foldmethod=marker
 autocmd filetype cpp set foldmarker={,}
 
