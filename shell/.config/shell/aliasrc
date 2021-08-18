@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-alias tmux="tmux -f ~/tmux.conf"
+alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
 alias cls=clear
 alias v=nvim

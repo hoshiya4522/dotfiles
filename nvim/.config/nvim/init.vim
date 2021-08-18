@@ -13,6 +13,7 @@ set autoindent
 set copyindent      " copy indent from the previous line
 "set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set autoindent
+set autoread
 set smartindent
 set cindent
 set nu
@@ -55,6 +56,11 @@ nnoremap sj <C-w>j
 nnoremap sk <C-w>k
 nnoremap sl <C-w>l
 
+nnoremap <C-h> <C-w><
+nnoremap <C-j> <C-w>-
+nnoremap <C-k> <C-w>+
+nnoremap <C-l> <C-w>>
+
 nnoremap s :w<CR>
 nnoremap S :w<CR>
 
@@ -89,10 +95,12 @@ vnoremap <A-k> :m '<-2<CR>gv=gvzz
 
 " Special localleader key binding for competitive programming with C++
 autocmd filetype cpp nnoremap <LocalLeader>c :w <CR> :!g++ --std=c++11 -Wall %; if [ -f a.out ]; then echo \\n;time ./a.out; rm a.out; fi <CR>
-autocmd filetype cpp nnoremap <LocalLeader>t :wa <CR> :![ -e a.out ] && rm a.out; echo "\nCompiling..."; g++ --std=c++11 -Wall main.cxx && echo "Compiled ✓\n" && time ( timeout 8 ./a.out<input )
+autocmd filetype cpp nnoremap <LocalLeader>t :wa <CR> :![ -e a.out ] && rm a.out; echo "\nCompiling..."; g++ --std=c++11 -Wall main.cxx && echo "Compiled ✓\n" && time ( timeout 8 ./a.out<input ) <CR>
+
+nnoremap <LocalLeader>d :wa <CR> :silent ![ -e a.out ] && rm a.out; echo "\nCompiling..."; g++ --std=c++11 -Wall main.cxx && echo "Compiled ✓\n" && time ( timeout 8 ./a.out<input>output ) <CR>
 
 " Here in stands for input eg. input.in 
-" autocmd filetype in set autoread                                                                                                                                                                       
+" autocmd filetype in set autoread
 " autocmd filetype in au CursorHold * checktime
 
 " Here op stands for output eg. output.op

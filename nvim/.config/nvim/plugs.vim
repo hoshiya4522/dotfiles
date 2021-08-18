@@ -23,7 +23,7 @@ Plug 'PhilRunninger/nerdtree-visual-selection'
 
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-
+Plug 'wesQ3/vim-windowswap'
 call plug#end()
 
 
