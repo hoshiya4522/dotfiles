@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+export PATH="$PATH:${$(find ~/.scripts -type d -printf %p:)%%:}"
 
 unsetopt PROMPT_SP
 
