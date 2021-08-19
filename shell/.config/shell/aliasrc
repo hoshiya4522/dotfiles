@@ -7,7 +7,7 @@ alias v=nvim
 alias nvimrc='v ~/.config/nvim/init.vim'
 alias zshrc='v ~/.config/zsh/.zshrc'
 alias aliasrc='v ~/.config/shell/aliasrc'
-alias mydot='cd ~/Git/mydotfiles'
+alias dot='~/Git/mydotfiles'
 # My compititive programming folder
 alias py=python3
 alias ipy=ipython3
