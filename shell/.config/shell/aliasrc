@@ -35,3 +35,4 @@ alias lla="exa -lah --icons"
 
 
 alias gitall="git add . && git commit && git push"
+alias pac="sudo pacman"
