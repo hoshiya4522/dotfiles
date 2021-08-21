@@ -1,6 +1,3 @@
-export PATH="/usr/local/mysql/bin:$PATH"
-
-
 autoload -U colors && colors	# Load colors
 setopt autocd		# Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
