@@ -1,3 +1,13 @@
+window:
+  dimensions:
+    columns: 0
+    lines: 0
+
+  padding:
+    x: 2
+    y: 2
+
+
 # NORD Theme
 colors:
   primary:
@@ -48,27 +58,18 @@ colors:
     cyan: '#6d96a5'
     white: '#aeb3bb'
 
-#font:
-#  normal:
-#    family: JetBrains Mono
-#    style: Regular
-#
-#  bold:
-#    family: JetBrains Mono
-#    style: Bold
-#
-#  italic:
-#    family: JetBrains Mono
-#    style: Italic
-#
-#  size: 12.0
-#
-#  offset:
-#    x: 0
-#    y: 0
-#
-#  glyph_offset:
-#    x: 0
-#    y: 0
+font:
+  normal:
+    family: JetBrainsMono Nerd Font
+    style: Regular
 
+  size: 12.0
+
+  offset:
+    x: 0
+    y: 0
+
+  glyph_offset:
+    x: 0
+    y: 0
 

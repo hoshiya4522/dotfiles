@@ -64,12 +64,6 @@ bindsym $mod+l focus right
 #bindsym $mod+l focus up
 #bindsym $mod+semicolon focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
@@ -194,6 +188,13 @@ bindsym $mod+Shift+minus exec pamixer -d 10  # decrase volume by 5
 bindsym $mod+s exec ~/.scripts/scrsht
 bindsym $mod+Shift+s exec ~/.scripts/select-scrsht
 bindsym $mod+Delete exec [[ $(echo -e "Yes\nNo" | dmenu -i -p "Shutdown Now?") == "Yes" ]] && shutdown now
+
+bindsym $mod+comma exec cmus-remote -r
+bindsym $mod+period exec cmus-remote -u
+bindsym $mod+slash exec cmus-remote -n
+bindsym $mod+Left exec cmus-remote --seek +5
+bindsym $mod+Right exec cmus-remote --seek -5
+
 
 gaps inner 10
 for_window [class="^.*"] border pixel 1
