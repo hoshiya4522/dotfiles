@@ -192,9 +192,9 @@ bindsym $mod+Delete exec [[ $(echo -e "Yes\nNo" | dmenu -i -p "Shutdown Now?") =
 bindsym $mod+comma exec cmus-remote -r
 bindsym $mod+period exec cmus-remote -n
 bindsym $mod+slash exec cmus-remote -u
-bindsym $mod+Left exec cmus-remote --seek +5
-bindsym $mod+Right exec cmus-remote --seek -5
-bindsym $mod+ssemicolon exec cmus-remote -R
+bindsym $mod+Right exec cmus-remote --seek +5
+bindsym $mod+Left exec cmus-remote --seek -5
+bindsym $mod+semicolon exec cmus-remote -R
 bindsym $mod+apostrophe exec cmus-remote -S
 
 
