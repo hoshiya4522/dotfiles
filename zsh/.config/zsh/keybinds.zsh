@@ -29,6 +29,8 @@ bindkey -s '^a' 'bc -lq\n'
 
 bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 
+bindkey -s '^g' 'lazygit\n'
+
 bindkey '^[[P' delete-char
 
 # Edit line in vim with ctrl-e:
