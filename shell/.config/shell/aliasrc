@@ -33,10 +33,12 @@ alias la="exa -a --icons"
 alias ll="exa -lh --icons"
 alias lla="exa -lah --icons"
 
+alias grep="grep --color"
 
 alias gitall="git add . && git commit && git push"
 alias pac="sudo pacman"
 
-
 alias yta="youtube-dl -f 251"
 alias yt="youtube-dl"
+alias i3rc="v ~/.config/i3/config"
+alias polybarrc="v ~/.config/polybar/config"
