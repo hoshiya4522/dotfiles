@@ -97,7 +97,7 @@ vnoremap <A-k> :m '<-2<CR>gv=gvzz
 autocmd filetype cpp nnoremap <LocalLeader>c :w <CR> :!g++ --std=c++11 -Wall %; if [ -f a.out ]; then echo \\n;time ./a.out; rm a.out; fi <CR>
 autocmd filetype cpp nnoremap <LocalLeader>t :wa <CR> :![ -e a.out ] && rm a.out; echo "\nCompiling..."; g++ --std=c++11 -Wall main.cxx && echo "Compiled ✓\n" && time ( timeout 8 ./a.out<input ) <CR>
 
-nnoremap <LocalLeader>d :wa <CR> :silent ![ -e a.out ] && rm a.out; echo "\nCompiling..."; g++ --std=c++11 -Wall main.cxx && echo "Compiled ✓\n" && time ( timeout 8 ./a.out<input>output ) <CR>
+nnoremap <LocalLeader>d :wa <CR> :silent ![ -e a.out ] && rm a.out; echo "\nCompiling..."; g++ --std=c++14 -Wall main.cxx && echo "Compiled ✓\n" && time ( timeout 8 ./a.out<input>output ) <CR>
 
 " Here in stands for input eg. input.in 
 " autocmd filetype in set autoread
