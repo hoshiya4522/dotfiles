@@ -1,4 +1,3 @@
-
 call plug#begin('~/.config/plugins/nvim/')
 Plug 'mhinz/vim-startify'
 Plug 'jiangmiao/auto-pairs'
@@ -20,6 +19,7 @@ Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'PhilRunninger/nerdtree-visual-selection'
+Plug 'scrooloose/nerdtree-project-plugin'
 
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
