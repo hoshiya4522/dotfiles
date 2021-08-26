@@ -103,40 +103,40 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:力"
+set $ws6 "6:"
+set $ws7 "7:"
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws10 "0:"
 
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -185,22 +185,22 @@ bindsym $mod+Shift+minus exec pamixer -d 10  # decrase volume by 5
 #bar {
 #        status_command i3status
 #}
-bindsym $mod+s exec ~/.scripts/scrsht
-bindsym $mod+Shift+s exec ~/.scripts/select-scrsht
+bindsym $mod+s exec p-scrsht
+bindsym $mod+Shift+s exec p-select-scrsht
 bindsym $mod+Delete exec [[ $(echo -e "Yes\nNo" | dmenu -i -p "Shutdown Now?") == "Yes" ]] && shutdown now
 
-bindsym $mod+comma exec cmus-remote -r
-bindsym $mod+period exec cmus-remote -n
-bindsym $mod+slash exec cmus-remote -u
-bindsym $mod+Right exec cmus-remote --seek +5
-bindsym $mod+Left exec cmus-remote --seek -5
+bindsym $mod+comma exec cmus-notify back
+bindsym $mod+period exec cmus-notify next
+bindsym $mod+slash exec cmus-notify toggle_pause
+bindsym $mod+Right exec cmus-notify seekf
+bindsym $mod+Left exec cmus-notify seekb
 bindsym $mod+semicolon exec cmus-remote -R
 bindsym $mod+apostrophe exec cmus-remote -S
 
 
 gaps inner 10
+
 for_window [class="^.*"] border pixel 1
 exec_always --no-startup-id "xwallpaper --center $HOME/.config/selfConfig/wallpaper.jpg"
 exec_always --no-startup-id "pkill polybar; polybar example -q"
-
-
+exec ~/.scripts/vboxres
