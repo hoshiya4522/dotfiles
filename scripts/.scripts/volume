@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function get_volume {
+    pamixer --get-volume
+}
+
+function is_mute {
+    [ "$(pamixer --get-volume)" == "0" ] && echo true
+}
+
+function vol_up {}
+
+function vol_down {}
+
+function mute {}
