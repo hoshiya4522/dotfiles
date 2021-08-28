@@ -35,6 +35,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # open terminal
 bindsym $mod+Return exec alacritty
 
+bindsym $mod+b exec firefox
+
 bindsym $mod+q kill
 
 bindsym $mod+d exec --no-startup-id dmenu_run
@@ -61,8 +63,14 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+t layout tabbed
-bindsym $mod+v layout toggle split
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# split in horizontal orientation
+bindsym $mod+x split h
+
+# split in vertical orientation
+bindsym $mod+v split v
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -208,8 +216,8 @@ exec_always --no-startup-id "pkill polybar; polybar example -q"
 ##                        ##
 ############################
 
-gaps inner 10
-for_window [class="^.*"] border pixel 3
+gaps inner 15
+for_window [class="^.*"] border pixel 2
 
 
 
