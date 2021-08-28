@@ -99,7 +99,7 @@ bindsym $mod+p exec p-scrsht
 bindsym $mod+Shift+p exec p-select-scrsht
 
 # Shutdown
-bindsym $mod+s exec [[ $(echo -e "Yes\nNo" | dmenu -i -p "Shutdown Now?") == "Yes" ]] && shutdown now
+bindsym $mod+s exec [[ $(echo -e "No\nYes" | dmenu -i -p "Shutdown Now?") == "Yes" ]] && shutdown now
 
 # Cmus control
 bindsym $mod+comma exec cmus-notify back
