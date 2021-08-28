@@ -94,12 +94,12 @@ bindsym $mod+equal exec pamixer -i 5  # increase volume by 5
 bindsym $mod+Shift+equal exec pamixer -i 10  # increase volume by 10
 
 # Screenshot
-bindsym $mod+s exec p-scrsht
+bindsym $mod+p exec p-scrsht
 # Selective Screenshot
-bindsym $mod+Shift+s exec p-select-scrsht
+bindsym $mod+Shift+p exec p-select-scrsht
 
 # Shutdown
-bindsym $mod+Delete exec [[ $(echo -e "Yes\nNo" | dmenu -i -p "Shutdown Now?") == "Yes" ]] && shutdown now
+bindsym $mod+s exec [[ $(echo -e "Yes\nNo" | dmenu -i -p "Shutdown Now?") == "Yes" ]] && shutdown now
 
 # Cmus control
 bindsym $mod+comma exec cmus-notify back
