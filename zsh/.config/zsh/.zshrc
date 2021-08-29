@@ -26,11 +26,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
     
 # Load aliases and shortcuts if existent.
 source ~/.config/shell/aliasrc
-# nerd icons config for lf
-source ~/.config/zsh/lficons.zsh
 # keybindings for zsh
 source ~/.config/zsh/keybinds.zsh
 source ~/.config/zsh/cursor.zsh
 source ~/.config/zsh/plugins.zsh
-
-
