@@ -18,7 +18,7 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #222222
+background = #aa000000
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -60,9 +60,8 @@ modules-left = i3
 modules-right = pulseaudio xkeyboard memory cpu date battery powermenu
 
 tray-position = right
-tray-padding = 2
-;tray-background = #0063ff
-
+tray-transparent = false
+tray-background = #b2000000
 ;wm-restack = bspwm
 ;wm-restack = i3
 

@@ -1,5 +1,8 @@
 map . set hidden!
 
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner
+=
 
 # Basic vars
 set shell bash

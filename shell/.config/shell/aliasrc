@@ -14,7 +14,7 @@ alias ipy=ipython3
 alias '..'='cd ../'
 alias '...'='cd ../../'
 alias '....'='cd ../../../'
-alias jn='jupyter notebook'
+alias jb='clear; jupyter notebook'
 alias djb='python manage.py runserver'
 alias gitcc='git config --global credential.helper cache && echo Git creds saved'
 alias rr='rm -rf'
@@ -44,3 +44,4 @@ alias yta="youtube-dl -f 251"
 alias yt="youtube-dl"
 alias i3rc="v ~/.config/i3/config"
 alias polybarc="v ~/.config/polybar/config"
+

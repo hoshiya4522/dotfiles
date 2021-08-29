@@ -91,7 +91,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # Volume Control
 bindsym $mod+equal exec pamixer -i 5  # increase volume by 5
-bindsym $mod+Shift+equal exec pamixer -i 10  # increase volume by 10
+bindsym $mod+minus exec pamixer -d 5  # decrease volume by 5
 
 # Screenshot
 bindsym $mod+p exec p-scrsht
@@ -99,7 +99,7 @@ bindsym $mod+p exec p-scrsht
 bindsym $mod+Shift+p exec p-select-scrsht
 
 # Shutdown
-bindsym $mod+s exec [[ $(echo -e "No\nYes" | dmenu -i -p "Shutdown Now?") == "Yes" ]] && shutdown now
+bindsym $mod+s exec [[ $(echo -e "No\nYes" | dmenu -i -p "Shutdown Now?") == "Yes" ]] && paplay "$HOME/Music/system/shutdown.ogg" && shutdown now
 
 # Cmus control
 bindsym $mod+comma exec cmus-notify back
@@ -228,6 +228,7 @@ for_window [class="^.*"] border pixel 2
 ##                ##
 ####################
 
-exec_always --no-startup-id "xwallpaper --center $HOME/.config/selfConfig/wallpaper.jpg"
+exec_always --no-startup-id "feh --randomize --bg-fill $HOME/Pictures/Wallpapers/"
 exec ~/.scripts/vboxres
 exec --no-startup-id nm-applet
+exec --no-startup-id "paplay $HOME/Music/system/startup.ogg"
