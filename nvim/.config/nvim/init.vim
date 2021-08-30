@@ -28,8 +28,10 @@ Plug 'scrooloose/nerdtree-project-plugin'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'wesQ3/vim-windowswap'
-call plug#end()
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+call plug#end()
 
 so ~/.config/nvim/plug-conf/vlightline.vim
 so ~/.config/nvim/plug-conf/v_startify.vim
@@ -100,11 +102,15 @@ nnoremap S :w<CR>
 
 nnoremap Y y$
 
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
 nnoremap <leader>h :set hlsearch!<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFocus<CR>
 nnoremap <leader>c1 :colorscheme nord<CR>
-nnoremap <leader>c2 :colorscheme gruvbox<CR>
 nnoremap <leader>t :FloatermToggle<CR>
 nnoremap <leader>r :so ~/.config/nvim/init.vim<CR>:echo 'Reloaded nvim'<CR>
 nnoremap <leader>w :set wrap!<CR>
