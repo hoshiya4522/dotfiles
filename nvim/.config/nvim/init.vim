@@ -1,7 +1,41 @@
 let g:mapleader = "\<Space>"
 let g:maplocalleader = "\<BS>"
+
 " Plugins
-so ~/.config/nvim/plugs.vim
+call plug#begin('~/.config/plugins/nvim/')
+Plug 'mhinz/vim-startify'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vimwiki/vimwiki'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'honza/vim-snippets'
+Plug 'mattn/emmet-vim'
+Plug 'arcticicestudio/nord-vim' 
+Plug 'morhetz/gruvbox'
+Plug 'mbbill/undotree'
+Plug 'honza/vim-snippets'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'chrisbra/colorizer'
+Plug 'voldikss/vim-floaterm'
+
+Plug 'preservim/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'PhilRunninger/nerdtree-visual-selection'
+Plug 'scrooloose/nerdtree-project-plugin'
+
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
+Plug 'wesQ3/vim-windowswap'
+call plug#end()
+
+
+so ~/.config/nvim/plug-conf/vlightline.vim
+so ~/.config/nvim/plug-conf/v_startify.vim
+so ~/.config/nvim/plug-conf/vcoc.vim
+so ~/.config/nvim/plug-conf/vcommentary.vim
+so ~/.config/nvim/plug-conf/vsnippets.vim
 
 set exrc
 "set tabstop=4 softtabstop=0 noexpandtab
@@ -66,7 +100,6 @@ nnoremap S :w<CR>
 
 nnoremap Y y$
 
-nnoremap <leader>f :FZF<CR>
 nnoremap <leader>h :set hlsearch!<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFocus<CR>
