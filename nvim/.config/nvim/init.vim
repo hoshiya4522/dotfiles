@@ -15,9 +15,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
 Plug 'mbbill/undotree'
 Plug 'honza/vim-snippets'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'chrisbra/colorizer'
-Plug 'voldikss/vim-floaterm'
 
 Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -39,6 +37,8 @@ so ~/.config/nvim/plug-conf/vcoc.vim
 so ~/.config/nvim/plug-conf/vcommentary.vim
 so ~/.config/nvim/plug-conf/vsnippets.vim
 
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
 set exrc
 "set tabstop=4 softtabstop=0 noexpandtab
 set tabstop=4       " number of visual spaces per TAB
@@ -108,10 +108,11 @@ nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 
 nnoremap <leader>h :set hlsearch!<CR>
+nnoremap <leader>t :Telescope git_files <CR>
+nnoremap <leader>f :Telescope find_files<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFocus<CR>
 nnoremap <leader>c1 :colorscheme nord<CR>
-nnoremap <leader>t :FloatermToggle<CR>
 nnoremap <leader>r :so ~/.config/nvim/init.vim<CR>:echo 'Reloaded nvim'<CR>
 nnoremap <leader>w :set wrap!<CR>
 let g:windowswap_map_keys = 0 " split swapper
@@ -156,7 +157,7 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 
 
 " NerdTree size..
-let g:NERDTreeWinSize=20
+let g:NERDTreeWinSize=26
 
 
 " Functions
