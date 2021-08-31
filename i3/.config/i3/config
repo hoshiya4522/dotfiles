@@ -16,6 +16,7 @@
 ##                       ##
 ###########################
 set $mod Mod4
+set $alt Mod1
 floating_modifier $mod
 
 
@@ -32,10 +33,12 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# open terminal
+# Starting Keybindings
 bindsym $mod+Return exec alacritty
-
-bindsym $mod+b exec firefox
+bindsym $alt+Return exec alacritty
+bindsym $alt+f exec firefox
+bindsym $alt+h exec --no-startup-id alacritty -e htop
+bindsym $alt+r exec --no-startup-id alacritty -e ranger
 
 bindsym $mod+q kill
 
@@ -126,7 +129,7 @@ set $ws3 "3:"
 set $ws4 "4:"
 set $ws5 "5:力"
 set $ws6 "6:"
-set $ws7 "7:"
+set $ws7 "7:"
 set $ws8 "8:"
 set $ws9 "9:"
 set $ws10 "0:"
