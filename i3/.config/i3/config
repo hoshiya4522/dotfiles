@@ -18,7 +18,7 @@
 set $mod Mod4
 set $alt Mod1
 floating_modifier $mod
-
+for_window [instance="scratchpad"] floating enable
 
 
 ####################
@@ -26,6 +26,15 @@ floating_modifier $mod
 ##  Key Bindings  ##
 ##                ##
 ####################
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $alt+shift+s scratchpad show
+
+# scratchpad
+bindsym $alt+s exec scratchpad
 
 # fn keybindings
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status

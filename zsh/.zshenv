@@ -1,8 +1,9 @@
 #!/bin/zsh
 
 export PATH="$PATH:${$(find ~/.scripts -type d -printf %p:)%%:}"
-export PATH="$PATH:$HOME/.scripts/"
+export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 
 unsetopt PROMPT_SP
 

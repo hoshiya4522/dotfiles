@@ -1,0 +1,3 @@
+#!/bin/bash
+
+alacritty --class="scratchpad" -e tmuxinator start scratch
