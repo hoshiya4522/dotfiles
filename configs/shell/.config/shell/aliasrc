@@ -1,0 +1,47 @@
+#!/bin/zsh
+
+alias tmux="tmux -f ~/.config/tmux/tmux.conf"
+alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
+alias cls=clear
+alias v=nvim
+alias nvimrc='v ~/.config/nvim/init.vim'
+alias zshrc='v ~/.config/zsh/.zshrc'
+alias aliasrc='v ~/.config/shell/aliasrc'
+alias dot='~/Git/mydotfiles'
+# My compititive programming folder
+alias py=python3
+alias ipy=ipython3
+alias '..'='cd ../'
+alias '...'='cd ../../'
+alias '....'='cd ../../../'
+alias jb='clear; jupyter notebook'
+alias djb='python manage.py runserver'
+alias gitcc='git config --global credential.helper cache && echo Git creds saved'
+alias rr='rm -rf'
+alias lfrc='v ~/.config/lf/lfrc'
+alias tmuxrc='v ~/.config/tmux/tmux.conf'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+
+alias reload='source ~/.config/zsh/.zshrc && clear && echo ZSH reloaded'
+alias tmuxa='tmux a -t'
+alias tb="nc termbin.com 9999"
+alias termbin="nc termbin.com 9999"
+alias mux=tmuxinator 
+
+alias l="exa --icons"
+alias ls="exa --icons"
+alias la="exa -a --icons"
+alias ll="exa -lh --icons"
+alias lla="exa -lah --icons"
+
+alias grep="grep --color"
+
+alias gs="git status"
+alias gitall="git add . && git commit && git push"
+alias pac="sudo pacman"
+
+alias yta="youtube-dl -f 251"
+alias yt="youtube-dl"
+alias i3rc="v ~/.config/i3/config"
+alias polybarc="v ~/.config/polybar/config"
+alias awesomerc="v ~/.config/awesome/rc.lua"
