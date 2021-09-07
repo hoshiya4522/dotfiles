@@ -2,7 +2,7 @@
 
 echo "Installing Spark.bash"
 sudo sh -c "curl https://raw.githubusercontent.com/holman/spark/master/spark -o /usr/local/bin/spark && chmod +x /usr/local/bin/spark"
-pip install lolcat
+sudo pacman -S lolcat
 
 
 echo "Installing vim-plug for neovim"
