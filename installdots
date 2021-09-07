@@ -1,28 +1,14 @@
 #!/bin/bash
 
+curr=$(pwd)
 echo "Installing DotFiles..."
 
-declare -a backup 
-backup=( 
-    jupyter
-    lf
-    nvim
-    scripts
-    shell
-    starship
-    tmux
-    zsh
-)
+cd configs/
 
+# Deleting previous symlinks 
+stow -v -D -t ~ *
 
-for p in "${backup[@]}"
-do
-    echo "Installing $p"
+# Stowing new symlinks
+stow -v -R -t ~ *
 
-    # Deleting previous symlinks 
-    stow -v -D -t ~ "$p" 
-    # Stowing new symlinks
-    stow -v -R -t ~ "$p"
-
-    echo -e "\n\n"
-done
+cd $pwd
