@@ -45,9 +45,9 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Starting Keybindings
 bindsym $mod+Return exec alacritty
 bindsym $alt+Return exec alacritty
-bindsym $alt+f exec firefox
+bindsym $alt+b exec firefox
 bindsym $alt+h exec --no-startup-id alacritty -e htop
-bindsym $alt+r exec --no-startup-id alacritty -e ranger
+bindsym $alt+f exec --no-startup-id alacritty -e ranger
 
 bindsym $mod+q kill
 
@@ -217,7 +217,8 @@ bindsym $mod+r mode "resize"
 #bar {
 #        status_command i3status
 #}
-exec_always --no-startup-id "pkill polybar; polybar example -q"
+exec_always --no-startup-id launch_polybar
+bindsym $alt+r exec launch_polybar
 
 
 
