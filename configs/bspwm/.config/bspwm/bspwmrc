@@ -1,10 +1,19 @@
 #! /bin/sh
 
 pgrep -x sxhkd > /dev/null || sxhkd &
+launch_polybar &
+vboxres &
+feh --randomize --bg-fill $HOME/Pictures/Wallpapers/ &
+dunst &
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+# bspc monitor Virtual1 -d I II III IV V VI VII VIII IX X
 
-bspc config border_width         2
+
+bspc monitor Virtual1 -d     力    
+
+
+
+bspc config border_width         0
 bspc config window_gap          12
 
 bspc config split_ratio          0.52

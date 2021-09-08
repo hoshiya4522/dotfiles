@@ -111,7 +111,7 @@ bindsym $mod+p exec scrsht
 bindsym $mod+Shift+p exec select-scrsht
 
 # Shutdown
-bindsym $mod+s exec [[ $(echo -e "No\nYes" | dmenu -i -p "Shutdown Now?") == "Yes" ]] && paplay "$HOME/Music/system/shutdown.ogg" && shutdown now
+bindsym $mod+s exec [[ $(echo -e "No\nYes" | dmenu -i -p "Shutdown Now?") == "Yes" ]] shutdown now
 
 # Cmus control
 bindsym $mod+comma exec cmus-notify back

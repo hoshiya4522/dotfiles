@@ -42,6 +42,13 @@ alias pac="sudo pacman"
 
 alias yta="youtube-dl -f 251"
 alias yt="youtube-dl"
+
+
 alias i3rc="v ~/.config/i3/config"
 alias polybarc="v ~/.config/polybar/config"
-alias awesomerc="v ~/.config/awesome/rc.lua"
+alias bspwmrc="v ~/.config/bspwm/bspwmrc"
+alias sxhkdrc="v ~/.config/sxhkd/sxhkdrc"
+
+alias barc="v ~/.config/polybar/config"
+alias wmrc="v ~/.config/bspwm/bspwmrc"
+alias bindrc="v ~/.config/sxhkd/sxhkdrc"

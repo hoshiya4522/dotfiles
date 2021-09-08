@@ -1,0 +1,7 @@
+#!/bin/bash
+
+choices="alacritty\nbspwm\nfortune\ni3\njupyter\nmpd\nnvim\npolybar\nscripts\nselfConfig\nshell\nstarship\nsxhkd\ntmux\nzsh"
+
+choice=$(echo -e $choices | dmenu -p "Edit Config")
+
+alacritty -e "nvim ~/.config/$choice"
