@@ -1,5 +1,5 @@
 nvim/.config/nvim/undodir/*
 configs/zsh/.config/zsh/.zcompdump
-configs/nvim/.config/nvim/undodir/*
+configs/nvim/.config/nvim/undodir
 
 configs/zsh/.config/zsh/.zcompdump
