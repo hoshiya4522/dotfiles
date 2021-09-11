@@ -32,18 +32,22 @@ setopt autocd		# Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
 
-precmd() { print "" }
-symbol="❯"
-PROMPT="%B%F{cyan}%1~%f %F{#bbff33}❯%f%b "
+precmd() { echo "" }
 
 # Git Right Side Prompt:
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
-RPROMPT=\$vcs_info_msg_0_
-zstyle ':vcs_info:git:*' formats ' %B%F{magenta} %F{yellow}%b%f'
+zstyle ':vcs_info:git:*' formats '%B%F{magenta} %b%f'
 zstyle ':vcs_info:*' enable git
+
+# Prompt Setup
+PROMPT="%B%F{cyan}%1~%f "
+PROMPT+=\$vcs_info_msg_0_
+RPROMPT="%D{%L:%M:%S}"
+PROMPT+="
+%F{#bbff33}❯%f%b "
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select () {
@@ -150,11 +154,11 @@ bindkey '^H' backward-kill-dir
 
 
 
-################
-#              #
-#   Plugins    #
-#              #
-################
+##################
+##              ##
+##   Plugins    ##
+##              ##
+##################
 # syntax highlightung for zsh
 source ~/.config/plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # syntax autosuggestions for zsh
@@ -164,3 +168,12 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#696969"
 source ~/.config/plugins/zsh/zsh-fzf-history-search/zsh-fzf-history-search.zsh
 
 
+
+
+
+###################
+##               ##
+##   Start Up    ##
+##               ##
+###################
+neofetch

@@ -18,3 +18,15 @@ echo "Installing Zsh Plugins" &&
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/plugins/zsh/zsh-autosuggestions 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.config/plugins/zsh/zsh-syntax-highlighting
 git clone https://github.com/joshskidmore/zsh-fzf-history-search ~/.config/plugins/zsh/zsh-fzf-history-search
+
+if [ -d ~/.local ]; then
+    if [ -d ~/.local/bin ]; then
+        curl -q https://raw.githubusercontent.com/JopStro/bspswallow/master/bspswallow >> ~/.local/bin/bspswallow
+        chmod +x ~/.local/bin/bspswallow
+    else
+        mkdir ~/.local/bin
+    fi
+else
+    mkdir ~/.local
+fi
+

@@ -5,7 +5,7 @@ alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
 alias cls=clear
 alias v=nvim
 alias nvimrc='v ~/.config/nvim/init.vim'
-alias zshrc='v ~/.config/zsh/.zshrc'
+alias zshrc='v ~/.config/zsh/zshrc'
 alias aliasrc='v ~/.config/shell/aliasrc'
 alias dot='~/Git/mydotfiles'
 # My compititive programming folder

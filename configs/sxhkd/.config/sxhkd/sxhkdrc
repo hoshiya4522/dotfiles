@@ -130,9 +130,8 @@ super + equal
 super + minus
     bspc config window_gap $(($(bspc config -d focused window_gap) - 2))
 
-super + 0
-    bspc config window_gap 12
-
+super + p
+    sh ( pgrep picom >> /dev/null && pkill picom && notify-send "Turning Off Picom" ) || picom && notify-send "Turning On Picom"
 
 super + d
     if [ -z "$(bspc query -N -n focused.floating)" ]; then \
@@ -140,3 +139,4 @@ super + d
     else \
         bspc node focused -t tiled; \
     fi
+
