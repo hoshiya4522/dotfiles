@@ -49,9 +49,9 @@ module-margin-right = 2
 font-0 = "Roboto:style=italic:pixelsize=12;1"
 font-1 = FiraCode Nerd Font Mono:style=Regular:size=16;1
 
-modules-left = i3 bspwm xwindow
+modules-left = powermenu i3 bspwm xwindow
 modules-center = network
-modules-right = pulseaudio xkeyboard memory cpu date battery powermenu
+modules-right = pulseaudio xkeyboard memory cpu date battery 
 
 tray-position = right
 tray-transparent = false
@@ -248,19 +248,23 @@ format-disconnected =
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 30
 
-date =
-date-alt = " %Y-%m-%d"
+; date =
+; date-alt = " %Y-%m-%d"
 
-time = %H:%M
-time-alt = %H:%M:%S
+time = %I:%M %p
+time-alt = ${self.time}
+
+date = 
+date-alt = %d/%m/%Y 
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #0a6cf5
 
-label = %date% %time%
+; label = %date% %time%
+label = %{F#99}%date%%{F-} %{F#fff}%time%%{F-}
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -335,8 +339,6 @@ expand-right = true
 
 format-spacing = 1
 
-label-open = 
-label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
