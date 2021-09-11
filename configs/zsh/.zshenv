@@ -9,6 +9,7 @@ unsetopt PROMPT_SP
 
 export EDITOR="nvim"
 
+export FZF_DEFAULT_OPTS="--layout=reverse --height=40%"
 
 export MANPAGER='nvim +Man!'
 export MANWIDTH=99999
