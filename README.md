@@ -18,7 +18,7 @@ at configs/ (the weird file tree is for stow support)
 - TMUX
 - zsh (mostly stolen from [Luke Smith's repo](https://github.com/LukeSmithxyz/voidrice))
 
-Some of my scripts are also loaded in...
+My aliases, shell profile, my profile and my scripts are also loaded in...
 also, **I use Arch btw!**
 
 
