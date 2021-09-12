@@ -22,7 +22,7 @@ Some of my scripts are also loaded in...
 also, **I use Arch btw!**
 
 
-## Install Instructions
+## Installation
 
 ```
 # Install Plugins and Plugin Managers like Vim-Plug and TPM
