@@ -39,6 +39,8 @@ so ~/.config/nvim/plug-conf/vsnippets.vim
 
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
+
+set cmdheight=2
 set exrc
 "set tabstop=4 softtabstop=0 noexpandtab
 set tabstop=4       " number of visual spaces per TAB
