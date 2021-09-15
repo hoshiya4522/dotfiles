@@ -52,3 +52,5 @@ alias sxhkdrc="v ~/.config/sxhkd/sxhkdrc"
 alias barc="v ~/.config/polybar/config"
 alias wmrc="v ~/.config/bspwm/bspwmrc"
 alias bindrc="v ~/.config/sxhkd/sxhkdrc"
+
+alias sn="shutdown now"
