@@ -1,14 +1,13 @@
 #!/bin/bash
 
-curr=$(pwd)
-echo "Installing DotFiles..."
+# export $DOTFILES in your shell profile
+pushd $DOTFILES
 
-cd configs/
+
+echo "Installing DotFiles..."
 
 # Deleting previous symlinks 
 stow -v -D -t ~ *
 
 # Stowing new symlinks
 stow -v -R -t ~ *
-
-cd $pwd

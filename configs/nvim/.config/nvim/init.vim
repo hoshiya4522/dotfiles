@@ -11,6 +11,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
+
 Plug 'arcticicestudio/nord-vim' 
 Plug 'morhetz/gruvbox'
 Plug 'mbbill/undotree'
@@ -22,7 +23,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'scrooloose/nerdtree-project-plugin'
-
+Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'wesQ3/vim-windowswap'
@@ -39,6 +40,8 @@ so ~/.config/nvim/plug-conf/vsnippets.vim
 
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
+
+set cmdheight=2
 set exrc
 "set tabstop=4 softtabstop=0 noexpandtab
 set tabstop=4       " number of visual spaces per TAB
@@ -66,7 +69,7 @@ set foldmethod=indent
 set foldnestmax=10
 set foldlevel=2
 set fillchars=fold: 
-hi Folded ctermfg=grey ctermbg=black cterm=italic gui=italic guibg=none guifg=#696969
+" hi Folded ctermfg=grey ctermbg=black cterm=italic gui=italic guibg=none guifg=#696969
 set nofoldenable
 set timeoutlen=300
 set signcolumn=yes
@@ -76,7 +79,9 @@ set undodir=~/.config/nvim/undodir
 set undofile
 set scrolloff=4
 
-colorscheme nord
+" colorscheme nord
+colorscheme onedark
+" colorscheme gruvbox
 
 " this makes escaping much eaier because j is in the home row
 inoremap jk <ESC>

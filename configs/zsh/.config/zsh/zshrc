@@ -32,20 +32,35 @@ setopt autocd		# Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
 
-precmd() { echo "" }
+function preexec() {
+  timer=$(($(date +%s%0N)/1000000))
+}
+
+function precmd() {
+  if [ $timer ]; then
+    now=$(($(date +%s%0N)/1000000))
+    elapsed=$(($now-$timer))
+
+    export RPROMPT="%F{cyan}${elapsed}ms %{$reset_color%}"
+    unset timer
+  fi
+
+  echo ""
+}
 
 # Git Right Side Prompt:
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
-zstyle ':vcs_info:git:*' formats '%B%F{magenta} %b%f'
+
 zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats '%B%F{magenta} %b%f %F{red}%m%u%c%f'
+
 
 # Prompt Setup
 PROMPT="%B%F{cyan}%1~%f "
 PROMPT+=\$vcs_info_msg_0_
-RPROMPT="%D{%L:%M:%S}"
 PROMPT+="
 %F{#bbff33}❯%f%b "
 
