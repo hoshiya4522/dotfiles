@@ -1,6 +1,10 @@
 let g:mapleader = "\<Space>"
 let g:maplocalleader = "\<BS>"
 
+if (has("termguicolors"))
+ set termguicolors
+endif
+
 " Plugins
 call plug#begin('~/.config/plugins/nvim/')
 Plug 'mhinz/vim-startify'
@@ -14,7 +18,10 @@ Plug 'mattn/emmet-vim'
 
 Plug 'arcticicestudio/nord-vim' 
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim'
 Plug 'tomasiser/vim-code-dark'
+Plug 'Rigellute/shades-of-purple.vim'
+
 Plug 'mbbill/undotree'
 Plug 'honza/vim-snippets'
 Plug 'chrisbra/colorizer'
@@ -83,7 +90,7 @@ set undofile
 set scrolloff=4
 
 " colorscheme nord
-colorscheme codedark
+colorscheme shades_of_purple
 " colorscheme gruvbox
 
 " this makes escaping much eaier because j is in the home row
