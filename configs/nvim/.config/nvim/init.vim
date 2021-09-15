@@ -14,6 +14,7 @@ Plug 'mattn/emmet-vim'
 
 Plug 'arcticicestudio/nord-vim' 
 Plug 'morhetz/gruvbox'
+Plug 'tomasiser/vim-code-dark'
 Plug 'mbbill/undotree'
 Plug 'honza/vim-snippets'
 Plug 'chrisbra/colorizer'
@@ -42,6 +43,8 @@ so ~/.config/nvim/plug-conf/vsnippets.vim
 autocmd VimEnter * NERDTree | wincmd p
 
 set cmdheight=2
+set cursorline
+set cursorcolumn
 set exrc
 "set tabstop=4 softtabstop=0 noexpandtab
 set tabstop=4       " number of visual spaces per TAB
@@ -80,7 +83,7 @@ set undofile
 set scrolloff=4
 
 " colorscheme nord
-colorscheme onedark
+colorscheme codedark
 " colorscheme gruvbox
 
 " this makes escaping much eaier because j is in the home row

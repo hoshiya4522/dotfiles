@@ -1,6 +1,6 @@
 " lightline settings
 let g:lightline = {
-    \ 'colorscheme': 'onedark',
+    \ 'colorscheme': 'codedark',
     \ 'active': {
     \   'right': [ [ 'lineinfo' ],
     \              [ 'percent' ],
