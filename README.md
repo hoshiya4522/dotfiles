@@ -36,5 +36,5 @@ also, **I use Arch btw!**
 
 You'll need to install GNU Stow to install the dotfiles.
 Do `sudo pacman -S stow` (stow will be installed with `installplugs` scripts anyway).
-The installation scripts aren't polished. So, if you find any bugs please open an issue. Also, feel free to contribute I'll be happy to review anderge your PR!
+The installation scripts aren't polished. So, if you find any bugs please open an issue. Also, feel free to contribute I'll be happy to review and merge your PR!
 
