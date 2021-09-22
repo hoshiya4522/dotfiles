@@ -39,7 +39,7 @@ alias grep="grep --color"
 
 alias gs="git status"
 alias gitall="git add . && git commit && git push"
-alias pac="sudo pacman"
+
 
 alias yta="youtube-dl -f 251"
 alias yt="youtube-dl"
@@ -55,3 +55,7 @@ alias wmrc="v ~/.config/awesome/rc.lua"
 alias bindrc="v ~/.config/sxhkd/sxhkdrc"
 
 alias sn="shutdown now"
+alias pac="sudo pacman"
+
+alias z="zathura"
+alias s="sxiv"
