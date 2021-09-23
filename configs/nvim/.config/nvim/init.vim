@@ -1,12 +1,14 @@
 let g:mapleader = "\<Space>"
 let g:maplocalleader = "\<BS>"
 
-if (has("termguicolors"))
- set termguicolors
-endif
+set termguicolors
 
 " Plugins
 call plug#begin('~/.config/plugins/nvim/')
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 Plug 'mhinz/vim-startify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
@@ -15,11 +17,9 @@ Plug 'vimwiki/vimwiki'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
+Plug 'elkowar/yuck.vim'
 
 Plug 'arcticicestudio/nord-vim' 
-Plug 'morhetz/gruvbox'
-Plug 'dracula/vim'
-Plug 'tomasiser/vim-code-dark'
 Plug 'Rigellute/shades-of-purple.vim'
 
 Plug 'mbbill/undotree'
@@ -31,16 +31,16 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'scrooloose/nerdtree-project-plugin'
-Plug 'joshdick/onedark.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
+
 Plug 'wesQ3/vim-windowswap'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
-so ~/.config/nvim/plug-conf/vlightline.vim
+
+" set showtabline=2
+so ~/.config/nvim/plug-conf/vairline.vim
 so ~/.config/nvim/plug-conf/v_startify.vim
 so ~/.config/nvim/plug-conf/vcoc.vim
 so ~/.config/nvim/plug-conf/vcommentary.vim
@@ -73,7 +73,6 @@ set nohlsearch
 set incsearch
 set smartcase
 set ignorecase
-set showtabline=2
 set noswapfile
 set foldmethod=indent
 set foldnestmax=10
@@ -81,7 +80,7 @@ set foldlevel=2
 set fillchars=fold: 
 " hi Folded ctermfg=grey ctermbg=black cterm=italic gui=italic guibg=none guifg=#696969
 set nofoldenable
-set timeoutlen=300
+" set timeoutlen=300
 set signcolumn=yes
 set cmdheight=1	
 set nobackup
@@ -122,6 +121,8 @@ nnoremap <leader>p "+p
 vnoremap <leader>p "+p
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
+
+nnoremap <leader>e :call emmet#expandAbbr(3,"")<CR>
 
 nnoremap <leader>h :set hlsearch!<CR>
 nnoremap <leader>t :Telescope git_files <CR>
@@ -185,4 +186,5 @@ function! MyFoldText()
     return txt
 endfunction
 set foldtext=MyFoldText()
+
 

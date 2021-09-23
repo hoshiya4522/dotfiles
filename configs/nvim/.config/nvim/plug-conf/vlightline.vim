@@ -1,3 +1,4 @@
+set showtabline=2
 " lightline settings
 let g:lightline = {
     \ 'colorscheme': 'shades_of_purple',
