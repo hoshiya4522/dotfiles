@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+
 alias bmgo='cd $(printf %s "$(cat ~/.config/bm/bmdirs | fzf | cut -d" " -f2)")'
 alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
@@ -67,3 +68,5 @@ alias s="sxiv"
 alias ardo="arduino-cli compile -b arduino:avr:uno && sudo arduino-cli upload -b arduino:avr:uno -p /dev/ttyACM0"
 
 alias cf="cd ~/Coding/my-codes-and-notes"
+
+alias justincase='dots add ~/.config/alacritty ~/.config/bm ~/.config/dunst ~/.config/fortune ~/.config/gtk-2.0 ~/.config/gtk-3.0 ~/.config/jupyter ~/.config/neofetch ~/.config/nvim ~/.config/picom ~/.config/ranger ~/.config/selfConfig ~/.config/shell ~/.config/tmux ~/.config/zsh ~/.config/wget ~/.scripts ~/.zshenv ~/.xinitrc'
