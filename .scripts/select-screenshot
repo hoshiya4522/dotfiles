@@ -1,0 +1,5 @@
+#!/bin/bash
+
+shotPath="$HOME/Pictures/Screenshots"
+maim -s "$shotPath/"$(date +%d-%m-%y_%H-%M-%S)".png"
+notify-send "Screenshot Taken!" "$shotPath/"$(date +%d-%m-%y_%H-%M-%S)".png"

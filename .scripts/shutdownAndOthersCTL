@@ -1,0 +1,17 @@
+#!/bin/bash
+
+options="Cancel\nShutdown\nReboot\nLog Out"
+choice=$(echo -e $options | dmenu -i -p "What do you want to do?")
+
+confirm_it() {
+    options2="Nope\nYeah"
+    confirm=$(echo -e $options2 | dmenu -i -p "You sure, mate?")
+    [[ $confirm == "Yeah" ]] && return 0
+}
+
+case $choice in
+    "Cancel") exit;;
+    "Shutdown") confirm_it && sudo shutdown now;;
+    "Reboot") confirm_it && sudo reboot;;
+    "Log Out") confirm_it && pkill autostart.sh;;
+esac

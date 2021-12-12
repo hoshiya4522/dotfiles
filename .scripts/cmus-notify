@@ -1,0 +1,38 @@
+#!/bin/sh
+
+if [ $1 == "song_name" ]; then
+    stuff=$(cmus-remote -Q | head -2 | tail -1 | cut -d\/ -f6)
+    notify-send -u normal  "Playing From Cmus" "$stuff"
+fi
+
+if [ $1 == "back" ]; then
+    cmus-remote -r
+    stuff=$(cmus-remote -Q | head -2 | tail -1 | cut -d\/ -f6)
+    notify-send -u normal  "Playing From Cmus" "$stuff"
+fi
+
+
+if [ $1 == "next" ]; then
+    cmus-remote -n
+    stuff=$(cmus-remote -Q | head -2 | tail -1 | cut -d\/ -f6)
+    notify-send -u normal  "Playing From Cmus" "$stuff"
+fi
+
+
+if [ $1 == "toggle_pause" ]; then
+    cmus-remote -u
+    notify-send -u normal  "Pause Toggled"
+fi
+
+
+if [ $1 == "seekf" ]; then
+    cmus-remote --seek +5
+    notify-send -u normal  "5 sec Forwarded"
+fi
+
+
+if [ $1 == "seekb" ]; then
+    cmus-remote --seek -5
+    notify-send -u normal  "5 sec unForwarded" "My english is bad.."
+fi
+

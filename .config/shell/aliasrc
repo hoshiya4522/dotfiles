@@ -1,0 +1,69 @@
+#!/bin/zsh
+
+alias bmgo='cd $(printf %s "$(cat ~/.config/bm/bmdirs | fzf | cut -d" " -f2)")'
+alias tmux="tmux -f ~/.config/tmux/tmux.conf"
+alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
+alias cls=clear
+alias c=/bin/clear
+alias v=nvim
+alias nvimrc='v ~/.config/nvim/init.lua'
+alias vimrc='v ~/.config/nvim/idkLua.vim'
+alias zshrc='v ~/.config/zsh/zshrc'
+alias aliasrc='v ~/.config/shell/aliasrc'
+
+alias py=python3
+alias ipy=ipython3
+alias '..'='cd ../'
+alias '...'='cd ../../'
+alias '....'='cd ../../../'
+alias jb='clear; jupyter notebook'
+alias djb='python manage.py runserver'
+alias gitcc='git config --global credential.helper cache && echo Git creds saved'
+alias rm='trash'
+alias rr='rm -rf'
+alias lfrc='v ~/.config/lf/lfrc'
+alias tmuxrc='v ~/.config/tmux/tmux.conf'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+
+alias reload='source ~/.config/zsh/.zshrc && clear && echo ZSH reloaded'
+alias tmuxa='tmux a -t'
+alias tb="nc termbin.com 9999"
+alias termbin="nc termbin.com 9999"
+alias mux=tmuxinator 
+
+alias l="exa --icons"
+alias ls="exa --icons"
+alias la="exa -a --icons"
+alias ll="exa -lh --icons"
+alias lla="exa -lah --icons"
+
+alias grep="grep --color"
+
+alias gs="git status"
+alias gitall="git add . && git commit && git push"
+
+
+alias yta="youtube-dl -f bestaudio -x --audio-format mp3"
+alias yt="youtube-dl"
+
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dg='lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
+alias i3rc="v ~/.config/i3/config"
+alias polybarc="v ~/.config/polybar/config"
+alias bspwmrc="v ~/.config/bspwm/bspwmrc"
+alias sxhkdrc="v ~/.config/sxhkd/sxhkdrc"
+
+alias barc="v ~/.config/polybar/config"
+alias wmrc="v ~/.config/awesome/rc.lua"
+alias bindrc="v ~/.config/sxhkd/sxhkdrc"
+
+alias sn="sudo shutdown now"
+alias pac="sudo pacman"
+
+alias z="zathura"
+alias s="sxiv"
+
+alias ardo="arduino-cli compile -b arduino:avr:uno && sudo arduino-cli upload -b arduino:avr:uno -p /dev/ttyACM0"
+
+alias cf="cd ~/Coding/my-codes-and-notes"

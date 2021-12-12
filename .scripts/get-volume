@@ -1,0 +1,19 @@
+#!/bin/bash
+
+mute="婢 "
+ico="墳 "
+
+vol=$(pactl list sinks | grep '^[[:space:]]Volume:' | \
+    head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
+
+m=$(pactl list sinks | grep '^[[:space:]]Mute:' | \
+	head -n $(( $SINK + 1 )) | tail -n 1 | cut -d":" -f2)
+
+
+if [[ $m == " no" ]]; then 
+	icon=$ico
+else 
+	icon=$mute
+fi
+
+echo "$icon$vol%"

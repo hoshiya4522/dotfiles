@@ -1,0 +1,115 @@
+#!/bin/bash
+
+bmfile=~/.config/bm/bmdirs
+[[ -d  ~/.config/bm ]] || mkdir -p ~/.config/bm
+[[ -e $bmfile ]] || touch $bmfile
+
+
+bmgo () {
+cat <<EOF
+Add this to navigate your bms (i cant find a proper way to cd from inside a script)
+
+	add this alias to your alias file
+	 alias bgo="cd \$(printf '%s' \"\$(cat ~/.config/bm/bmdirs | fzf | cut -d\" \" -f2)\")"
+
+	or if you are using zsh add this to your zshrc
+	 bindkey -s '^b' 'cd \$(printf '%s' "\$(cat ~/.config/bm/bmdirs | fzf | cut -d" " -f2)")\n'
+EOF
+}
+
+bmsort(){
+	tmp=$(mktemp)
+	sort $bmfile > $tmp
+	cat $tmp > $bmfile
+	rm $tmp
+}
+
+
+bmls(){
+	echo "Alias Location"
+	echo "------------------------"
+	cat $bmfile
+}
+
+bmdelete(){
+	raw=$(grep -n "$(cat $bmfile | fzf)" bm)
+	num=$(echo $raw |cut -d":" -f1)
+	tmp=$(mktemp)
+	sort $bmfile > $tmp
+	sed "$num d" $tmp > $bmfile
+	rm $tmp
+	bmsort
+}
+
+bmmark () {
+
+	[[ -z $1 ]] && echo "Give Your Bookmark an alias" && exit
+
+	if [[ ! -z $2 ]]; then
+		pushd $2 &> /dev/null
+	fi
+
+	if ( grep --color " $PWD\$" $bmfile ); then
+		echo "This directory has already been added to Bookmarks"; exit
+
+	elif (grep --color "^$1 " $bmfile); then
+		echo "This alias is already in use"; exit
+
+	else
+		echo -e "$1 $PWD" >> $bmfile
+		echo -e "Bookmark added.\nAlias: $1\nLocation: $PWD"
+
+		if [[ ! -z $2 ]]; then
+			popd &> /dev/null
+		fi
+
+		bmsort
+	fi
+}
+
+help(){
+cat <<EOF
+You're probably looking for the command \`bm go\`
+Usage: bm [OPTION] [ALIAS] [PATH]
+Note:Path here is optional.
+
+Options:
+	go    		Access available bookmarks and navigate to them.
+	   			(eg. \`bm go\`) 
+
+	mark		Bookmark the current directiory or pass a path afterwards.
+	add			(eg. \`bm mark dl\` or \`bm mark dl ~/Downloads\`) 
+	m			Note: (mark, add, m, a)  are the same
+	a
+
+	delete		Delete bookmarks from the bmdir.
+	del			(eg. \`bm delete\`) 
+	d			Note: (delete, del, d)  are the same
+
+	list		List all available bookmarks.
+	ls			(eg. \`bm list\`) 
+	l			Note: (list, ls, l)  are the same
+
+
+NOTE:
+	bmdirs file is located at ~/.config/bm/bmdirs
+EOF
+}
+
+case $1 in
+	"a") bmmark $2 $3 ;;
+	"add") bmmark $2 $3 ;;
+	"m") bmmark $2 $3 ;;
+	"mark") bmmark $2 $3 ;;
+	"go") bmgo;;
+	"l") bmls;;
+	"ls") bmls ;;
+	"list") bmls ;;
+	"r") bmdelete ;;
+	"rm") bmdelete ;;
+	"remove") bmdelete ;;
+	"d") bmdelete ;;
+	"del") bmdelete  ;;
+	"delete") bmdelete ;;
+	*) help ;;
+esac

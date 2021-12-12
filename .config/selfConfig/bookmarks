@@ -1,0 +1,7 @@
+gdot ~/Git/mydotfiles/
+gcf ~/.config/ 
+gs ~/.scripts/
+gcp ~/Coding/cpp/Workspace/
+gc ~/Coding/
+gd ~/Downloads/
+gsc ~/Pictures/Screenshots

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+configs="alias\nalacritty\nnvim\ndunst\ndmenu\ndwm\ndwmblocks\nprofile\nranger\nzsh"
+
+edit=$(echo -e $configs | dmenu -p "Edit Config: ")
+
+[[ $edit == "alias" ]] && alacritty -e nvim ~/.config/shell/aliasrc
+[[ $edit == "profile" ]] && alacritty -e nvim ~/.config/shell/profile
+[[ $edit == "alacritty" ]] && alacritty -e nvim ~/.config/alacritty/alacritty.yml
+[[ $edit == "nvim" ]] && alacritty -e nvim ~/.config/nvim
+[[ $edit == "dunst" ]] && alacritty -e nvim ~/.config/dunst/dunstrc
+[[ $edit == "dwm" ]] && alacritty -e nvim ~/Git/dwm/config.h
+[[ $edit == "dmenu" ]] && alacritty -e nvim ~/Git/dmenu/config.h
+[[ $edit == "dwmblocks" ]] && alacritty -e nvim ~/Git/dwm/dwmblocks/config.h
+[[ $edit == "ranger" ]] && alacritty -e nvim ~/.config/ranger/rc.conf
+[[ $edit == "zsh" ]] && alacritty -e nvim ~/.config/zsh/zshrc
