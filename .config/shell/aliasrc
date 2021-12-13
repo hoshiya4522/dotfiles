@@ -8,6 +8,7 @@ alias cls=clear
 alias c=/bin/clear
 alias v=nvim
 alias nvimrc='v ~/.config/nvim/init.lua'
+alias alacrittyrc='v ~/.config/alacritty/alacritty.yml'
 alias vimrc='v ~/.config/nvim/idkLua.vim'
 alias zshrc='v ~/.config/zsh/zshrc'
 alias aliasrc='v ~/.config/shell/aliasrc'
