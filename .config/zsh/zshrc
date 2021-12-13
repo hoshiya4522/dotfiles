@@ -215,4 +215,4 @@ source ~/.config/plugins/zsh/zsh-fzf-history-search/zsh-fzf-history-search.zsh
 ##   Start Up    ##
 ##               ##
 ###################
-neofetch
+pfetch
