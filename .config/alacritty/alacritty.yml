@@ -151,4 +151,4 @@ schemes:
     background: CellForeground
 
 
-colors: *tokyo-night-storm
+colors: *tokyo-night
