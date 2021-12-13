@@ -54,3 +54,9 @@ set autoread
 nnoremap <LocalLeader>c :w <CR> :!g++ --std=c++11 -Wall main.cpp; if [ -f a.out ]; then echo \\n;time ./a.out; rm a.out; fi <CR>
 nnoremap <LocalLeader>t :wa <CR> :![ -e a.out ] && rm a.out; echo "\nCompiling..."; g++ --std=c++11 -Wall main.cxx && echo "Compiled ✓\n" && time ( timeout 8 ./a.out<input ) <CR>
 nnoremap <LocalLeader>d :wa <CR> :silent ![ -e a.out ] && rm a.out; echo "\nCompiling..."; g++ --std=c++14 -Wall main.cxx && echo "Compiled ✓\n" && time ( timeout 8 ./a.out<input>output ) <CR>
+
+
+
+autocmd BufWritePost ~/Git/dwm/config.h !cd ~/Git/dwm/ ; sudo make install 
+autocmd BufWritePost ~/Git/dmenu/config.h !cd ~/Git/dmenu ; sudo make install 
+autocmd BufWritePost ~/Git/dwm/dwmblocks/config.h !cd ~/Git/dwm/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
