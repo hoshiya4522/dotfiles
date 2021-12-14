@@ -30,8 +30,8 @@ autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
 
 
 " Bufferline Setup
-nnoremap <silent><TAB> :BufferLineCycleNext<CR>
-nnoremap <silent><S-TAB> :BufferLineCyclePrev<CR>
+nnoremap <silent><TAB> :BufferLineCycleNext<CR>:w<CR>
+nnoremap <silent><S-TAB> :BufferLineCyclePrev<CR>:w<CR>
 nnoremap <silent><Leader>` :BufferLineMoveNext<CR>
 nnoremap <silent><Leader>~ :BufferLineMovePrev<CR>
 nnoremap <silent><Leader>b :bd<CR>
