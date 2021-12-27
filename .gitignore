@@ -1,2 +1,4 @@
 .dotfiles
 .config/plugins
+
+.config/zsh/.zcompdump
