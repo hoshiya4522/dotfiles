@@ -39,15 +39,6 @@ nnoremap <silent><Leader>b :bd<CR>
 highlight Visual cterm=reverse gui=reverse ctermbg=NONE guibg=NONE
 
 
-"compe
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-
-
-
 " Competitive Programming cpp stuff
 let g:maplocalleader = "\<BS>"
 set autoread

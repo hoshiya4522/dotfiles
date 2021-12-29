@@ -1,8 +1,11 @@
 c /home/hoshiya/Coding
+cn /home/hoshiya/.config
 dwm /home/hoshiya/Git/dwm
 h /home/hoshiya/Git/HADBADS
 l /home/hoshiya/Coding/Lab
 n /home/hoshiya/Coding/my-codes-and-notes
+nv /home/hoshiya/.config/nvim
 p /home/hoshiya/Coding/Projects
 sc /home/hoshiya/.scripts
 t /home/hoshiya/Templates
+usr /home/hoshiya/.config/nvim/lua/user
