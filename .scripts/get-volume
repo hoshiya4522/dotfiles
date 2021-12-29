@@ -16,4 +16,5 @@ else
 	icon=$mute
 fi
 
+
 echo "$icon$vol%"
