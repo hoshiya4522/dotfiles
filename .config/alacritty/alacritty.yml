@@ -4,6 +4,7 @@
 ##                ##
 ####################
 
+background_opacity: 0.9
 window:
   dimensions:
     columns: 0
@@ -151,4 +152,5 @@ schemes:
     background: CellForeground
 
 
+# colors: *nord
 colors: *tokyo-night

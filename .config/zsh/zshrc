@@ -57,7 +57,7 @@ then
     {
 		print -Pn "\e]0;$(id --user --name)@$(echo $HOST):%~ - Alacritty\a"
 
-		echo ""
+		# print ""
     }
 
     preexec()
@@ -79,7 +79,8 @@ zstyle ':vcs_info:git:*' formats '%B%F{magenta} %b%f %F{red}%m%u%c%f'
 
 
 # Prompt Setup
-PROMPT="%B%F{cyan}%~%f "
+PROMPT="
+%B%F{cyan}%~%f "
 PROMPT+=\$vcs_info_msg_0_
 PROMPT+="
 %F{#bbff33}❯%f%b "
