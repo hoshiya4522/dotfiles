@@ -6,12 +6,21 @@ alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
 alias cls=clear
 alias c=/bin/clear
+alias em="emacsclient -c -a 'vim' "
 alias v=nvim
 alias nvimrc='v ~/.config/nvim/init.lua'
 alias alacrittyrc='v ~/.config/alacritty/alacritty.yml'
 alias vimrc='v ~/.config/nvim/idkLua.vim'
 alias zshrc='v ~/.config/zsh/zshrc'
 alias aliasrc='v ~/.config/shell/aliasrc'
+
+alias rm='rm -iv'
+alias mkdir='mkdir -pv'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias untar='tar -zxvf'
+
+alias cd='z'
 
 alias py=python3
 alias ipy=ipython3
@@ -21,7 +30,6 @@ alias '....'='cd ../../../'
 alias jb='clear; jupyter notebook'
 alias djb='python manage.py runserver'
 alias gitcc='git config --global credential.helper cache && echo Git creds saved'
-alias rm='trash'
 alias rr='rm -rf'
 alias lfrc='v ~/.config/lf/lfrc'
 alias tmuxrc='v ~/.config/tmux/tmux.conf'
@@ -73,3 +81,9 @@ alias cf="cd ~/Coding/my-codes-and-notes"
 alias justincase='dots add ~/.config/alacritty ~/.config/bm ~/.config/dunst ~/.config/fortune ~/.config/gtk-2.0 ~/.config/gtk-3.0 ~/.config/jupyter ~/.config/neofetch ~/.config/nvim ~/.config/picom ~/.config/ranger ~/.config/selfConfig ~/.config/shell ~/.config/tmux ~/.config/zsh ~/.config/wget ~/.scripts ~/.zshenv ~/.xinitrc ~/README.md'
 
 alias yeet='yay -Rcs'
+
+
+
+function e(){
+	emacsclient -c -a 'vim' $1 & disown > /dev/null
+}

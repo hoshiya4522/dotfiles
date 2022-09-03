@@ -145,6 +145,8 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # Ranger does cd when exit
 function rcd {
@@ -206,6 +208,9 @@ source ~/.config/plugins/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#696969"
 # Fzf History
 source ~/.config/plugins/zsh/zsh-fzf-history-search/zsh-fzf-history-search.zsh
+source ~/.config/plugins/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+# Zoxide init
+source ~/.config/zsh/zoxide_init.zsh
 
 
 

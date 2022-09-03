@@ -4,7 +4,7 @@
 ##                ##
 ####################
 
-background_opacity: 0.9
+#background_opacity: 0.9
 window:
   dimensions:
     columns: 0
@@ -31,7 +31,6 @@ font:
     x: 0
     y: 0
 
-background_opacity: 0.9
 
 
 
