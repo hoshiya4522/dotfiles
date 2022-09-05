@@ -8,16 +8,16 @@ alias cls=clear
 alias c=/bin/clear
 alias em="emacsclient -c -a 'vim' "
 alias v=nvim
-alias nvimrc='v ~/.config/nvim/init.lua'
-alias alacrittyrc='v ~/.config/alacritty/alacritty.yml'
-alias vimrc='v ~/.config/nvim/idkLua.vim'
-alias zshrc='v ~/.config/zsh/zshrc'
-alias aliasrc='v ~/.config/shell/aliasrc'
+alias nvimrc='$EDITOR ~/.config/nvim/init.lua'
+alias alacrittyrc='$EDITOR ~/.config/alacritty/alacritty.yml'
+alias vimrc='$EDITOR ~/.config/nvim/idkLua.vim'
+alias zshrc='$EDITOR ~/.config/zsh/zshrc'
+alias aliasrc='$EDITOR ~/.config/shell/aliasrc'
 
 alias rm='rm -iv'
 alias mkdir='mkdir -pv'
 alias cp='cp -iv'
-alias mv='mv -iv'
+alias mv='m$EDITOR -iv'
 alias untar='tar -zxvf'
 
 alias cd='z'
@@ -31,11 +31,11 @@ alias jb='clear; jupyter notebook'
 alias djb='python manage.py runserver'
 alias gitcc='git config --global credential.helper cache && echo Git creds saved'
 alias rr='rm -rf'
-alias lfrc='v ~/.config/lf/lfrc'
-alias tmuxrc='v ~/.config/tmux/tmux.conf'
+alias lfrc='$EDITOR ~/.config/lf/lfrc'
+alias tmuxrc='$EDITOR ~/.config/tmux/tmux.conf'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
-alias reload='source ~/.config/zsh/.zshrc && clear && echo ZSH reloaded'
+alias reload='source ~/.config/zsh/.zshrc && source ~/.zshenv && clear && echo ZSH reloaded'
 alias tmuxa='tmux a -t'
 alias tb="nc termbin.com 9999"
 alias termbin="nc termbin.com 9999"
@@ -59,14 +59,14 @@ alias yt="youtube-dl"
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dg='lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
-alias i3rc="v ~/.config/i3/config"
-alias polybarc="v ~/.config/polybar/config"
-alias bspwmrc="v ~/.config/bspwm/bspwmrc"
-alias sxhkdrc="v ~/.config/sxhkd/sxhkdrc"
+alias i3rc="$EDITOR ~/.config/i3/config"
+alias polybarc="$EDITOR ~/.config/polybar/config"
+alias bspwmrc="$EDITOR ~/.config/bspwm/bspwmrc"
+alias sxhkdrc="$EDITOR ~/.config/sxhkd/sxhkdrc"
 
-alias barc="v ~/.config/polybar/config"
-alias wmrc="v ~/.config/awesome/rc.lua"
-alias bindrc="v ~/.config/sxhkd/sxhkdrc"
+alias barc="$EDITOR ~/.config/polybar/config"
+alias wmrc="$EDITOR ~/.config/awesome/rc.lua"
+alias bindrc="$EDITOR ~/.config/sxhkd/sxhkdrc"
 
 alias sn="sudo shutdown now"
 alias pac="sudo pacman"
@@ -84,6 +84,6 @@ alias yeet='yay -Rcs'
 
 
 
-function e(){
-	emacsclient -c -a 'vim' $1 & disown > /dev/null
-}
+# function e(){
+# 	emacsclient -c -a 'vim' $1 & disown > /dev/null
+# }

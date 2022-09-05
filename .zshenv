@@ -8,7 +8,8 @@ export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 
 unsetopt PROMPT_SP
 
-export EDITOR="nvim"
+export EDITOR="e"
+# export EDITOR="nvim"
 
 export DOTFILES="$HOME/.dotfiles"
 export FZF_DEFAULT_OPTS="--layout=reverse --height=40%"
