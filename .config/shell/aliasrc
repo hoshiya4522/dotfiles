@@ -17,7 +17,7 @@ alias aliasrc='$EDITOR ~/.config/shell/aliasrc'
 alias rm='rm -iv'
 alias mkdir='mkdir -pv'
 alias cp='cp -iv'
-alias mv='m$EDITOR -iv'
+alias mv='mv -iv'
 alias untar='tar -zxvf'
 
 alias cd='z'
@@ -71,7 +71,7 @@ alias bindrc="$EDITOR ~/.config/sxhkd/sxhkdrc"
 alias sn="sudo shutdown now"
 alias pac="sudo pacman"
 
-alias z="zathura"
+alias zth="zathura"
 alias s="sxiv"
 
 alias ardo="arduino-cli compile -b arduino:avr:uno && sudo arduino-cli upload -b arduino:avr:uno -p /dev/ttyACM0"
