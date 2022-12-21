@@ -34,8 +34,16 @@ return require('packer').startup(function(use)
     use('jiangmiao/auto-pairs')
     use('mattn/emmet-vim')
 
+    -- StatusLine
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
+    require('lualine').setup{
+        options = { theme = 'tokyonight' }
+    }
 
-    -- LSP and stuff
+    -- LSP and stuf
     use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
@@ -59,3 +67,4 @@ return require('packer').startup(function(use)
     }
 
 end)
+
