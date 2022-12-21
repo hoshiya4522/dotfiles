@@ -3,9 +3,9 @@ hoshiya's shitty dotfiles.
 
 ### Installation
 ```bash
-echo ".dotfiles" >> .gitignore
+echo ".dotfiles" > .gitignore
 
-git clone --bare https://github.com/hoshiya4522/dotfiles/tree/master $HOME/.dotfiles
+git clone --bare https://github.com/hoshiya4522/dotfiles $HOME/.dotfiles
 
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -27,4 +27,5 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/plugins/tmux
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/plugins/zsh/zsh-autosuggestions
 git clone https://github.com/joshskidmore/zsh-fzf-history-search ~/.config/plugins/zsh/zsh-fzf-history-search
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.config/plugins/zsh/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-history-substring-search ~/.config/plugins/zsh/zsh-history-substring-search
 ```
