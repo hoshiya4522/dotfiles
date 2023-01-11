@@ -34,6 +34,9 @@ return require('packer').startup(function(use)
     use('jiangmiao/auto-pairs')
     use('mattn/emmet-vim')
 
+    -- multi-cursors
+    use 'mg979/vim-visual-multi'
+
     -- StatusLine
     use {
         'nvim-lualine/lualine.nvim',

@@ -32,7 +32,7 @@ source ~/.config/zsh/zoxide_init.zsh
 # Minor Settings #
 ##################
 bindkey -v
-export KEYTIMEOUT=1
+export KEYTIMEOUT=10
 export EDITOR="nvim"
 # Load aliases and shortcuts if exists.
 source ~/.config/shell/aliasrc
@@ -165,28 +165,31 @@ bindkey -v '^?' backward-delete-char
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-# Ranger does cd when exit
-function rcd {
-    local IFS=$'\t\n'
-    local tempfile="$(mktemp -t tmp.XXXXXX)"
-    local ranger_cmd=(
-        command
-        ranger
-        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
-    )
-    ${ranger_cmd[@]} "$@"
-    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
-        cd -- "$(cat "$tempfile")" || return
-    fi
-    command rm -f -- "$tempfile" 2>/dev/null
-}
+# Ranger does cd when exit (commented because I don't use ranger anymore)
+# function rcd {
+#     local IFS=$'\t\n'
+#     local tempfile="$(mktemp -t tmp.XXXXXX)"
+#     local ranger_cmd=(
+#         command
+#         ranger
+#         --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+#     )
+#     ${ranger_cmd[@]} "$@"
+#     if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+#         cd -- "$(cat "$tempfile")" || return
+#     fi
+#     command rm -f -- "$tempfile" 2>/dev/null
+# }
 
 # Opens Ranger with rcd
-bindkey -s '^o' 'rcd\n'
+# bindkey -s '^o' 'rcd\n'
 
+# bookmark script shortcut
 bindkey -s '^b' 'bmgo\n'
+
 # Opens bc
-bindkey -s '^a' 'bc -lq\n'
+#bindkey -s '^a' 'bc -lq\n'
+
 # Opens fzf with cd capability
 bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 bindkey -s '^g' 'lazygit\n'
@@ -201,16 +204,15 @@ bindkey '^e' edit-command-line
 bindkey '^[[1;5D' backward-word 
 bindkey '^[[1;5C' forward-word
 
-# Ctrl + Backspace
-backward-kill-dir () {
-    local WORDCHARS=${WORDCHARS/\/}
-    zle backward-kill-word
-    zle -f kill
-}
-zle -N backward-kill-dir
 
-bindkey '^H' backward-kill-dir
+# jk is ESCape to vim normal mode
+bindkey -M viins 'jk' vi-cmd-mode
 
+# Ctrl + Backspace and Ctrl + Delete 
+bindkey -M viins '^[[3^' backward-kill-word
+bindkey -M viins '^[[3;5~' kill-word
+bindkey '^H' backward-kill-word
+#bindkey '^H' backward-kill-dir
 
 
 
