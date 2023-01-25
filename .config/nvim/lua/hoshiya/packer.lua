@@ -16,13 +16,6 @@ return require('packer').startup(function(use)
 
     -- colorschemes
     use('folke/tokyonight.nvim')
-    use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-        -- config = function()
-        --     vim.cmd('colorscheme rose-pine')
-        -- end
-    })
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
     use('nvim-treesitter/playground')
 
@@ -46,7 +39,10 @@ return require('packer').startup(function(use)
         options = { theme = 'tokyonight' }
     }
 
-    -- LSP and stuf
+    -- something?
+    use 'ThePrimeagen/vim-be-good'
+
+    -- LSP and stuff
     use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {

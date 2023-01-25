@@ -46,6 +46,9 @@ alias ls="exa --icons --group-directories-first"
 alias la="exa -a --icons --group-directories-first"
 alias ll="exa -lh --icons --group-directories-first"
 alias lla="exa -lah --icons --group-directories-first"
+alias tree="exa --tree --icons --group-directories-first"
+
+alias here="explorer.exe ." # for wsl
 
 alias grep="grep --color"
 
@@ -53,8 +56,12 @@ alias gs="git status"
 alias gitall="git add . && git commit && git push"
 
 
-alias yta="youtube-dl -f bestaudio -x --audio-format mp3"
-alias yt="youtube-dl"
+alias yta="yt-dlp -f bestaudio -x --audio-format mp3"
+alias yt="yt-dlp"
+alias adl="yt-dlp --external-downloader=axel --external-downloader-args '-n 10' -f worst"
+alias adla="yt-dlp --external-downloader=axel --external-downloader-args '-n 10' -f bestaudio -x --audio-format mp3"
+# alias yta="youtube-dl -f bestaudio -x --audio-format mp3"
+# alias yt="youtube-dl"
 
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dg='lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME'

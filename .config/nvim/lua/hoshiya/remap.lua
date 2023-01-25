@@ -3,6 +3,11 @@ vim.g.mapleader = " "
 -- netrw shortcut
 vim.keymap.set("n", "<leader>jk", vim.cmd.Ex)
 
+-- copy and paste from system clipboard
+vim.keymap.set("n", "<A-c>", '"+y')
+vim.keymap.set("v", "<A-c>", '"+y')
+vim.keymap.set("n", "<A-v>", '"+p')
+
 -- Escape key is too far
 vim.keymap.set("i", "jk", "<ESC>")
 vim.keymap.set("v", "jk", "<ESC>")
