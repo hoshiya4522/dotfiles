@@ -1,6 +1,8 @@
 #!/bin/zsh
 
 
+EDITOR=nvim
+
 alias bmgo='cd $(printf %s "$(cat ~/.config/bm/bmdirs | fzf | cut -d" " -f2)")'
 alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 #alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
@@ -41,12 +43,19 @@ alias tb="nc termbin.com 9999"
 alias termbin="nc termbin.com 9999"
 alias mux=tmuxinator 
 
-alias l="exa --icons --group-directories-first"
-alias ls="exa --icons --group-directories-first"
-alias la="exa -a --icons --group-directories-first"
-alias ll="exa -lh --icons --group-directories-first"
-alias lla="exa -lah --icons --group-directories-first"
-alias tree="exa --tree --icons --group-directories-first"
+alias l="ls --color --group-directories-first"
+alias ls="ls --color --group-directories-first"
+alias la="ls --color -a --group-directories-first"
+alias ll="ls --color -lh --group-directories-first"
+alias lla="ls --color -lah --group-directories-first"
+alias tree="ls --color --tree --group-directories-first"
+
+# alias l="exa --icons --group-directories-first"
+# alias ls="exa --icons --group-directories-first"
+# alias la="exa -a --icons --group-directories-first"
+# alias ll="exa -lh --icons --group-directories-first"
+# alias lla="exa -lah --icons --group-directories-first"
+# alias tree="exa --tree --icons --group-directories-first"
 
 alias here="explorer.exe ." # for wsl
 
@@ -65,7 +74,7 @@ alias adla="yt-dlp --external-downloader=axel --external-downloader-args '-n 10'
 
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dg='lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-
+alias dl='yt-dlp --external-downloader=axel --external-downloader-args '\''-n 10'\'' '
 alias i3rc="$EDITOR ~/.config/i3/config"
 alias polybarc="$EDITOR ~/.config/polybar/config"
 alias bspwmrc="$EDITOR ~/.config/bspwm/bspwmrc"
