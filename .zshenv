@@ -8,8 +8,8 @@ export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 
 unsetopt PROMPT_SP
 
-export EDITOR="e"
-# export EDITOR="nvim"
+# export EDITOR="e"
+export EDITOR="nvim"
 
 export DOTFILES="$HOME/.dotfiles"
 export FZF_DEFAULT_OPTS="--layout=reverse --height=40%"
@@ -46,3 +46,6 @@ export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export TMUX_PLUGIN_MANAGER_PATH="$HOME/.config/plugins/tmux"
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export SSB_HOME="$XDG_DATA_HOME/zoom"
+
+if [ -e /home/hoshiya4522/.nix-profile/etc/profile.d/nix.sh ]; then . /home/hoshiya4522/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+. "/home/hoshiya4522/.local/share/cargo/env"
