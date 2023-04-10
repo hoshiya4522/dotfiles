@@ -7,6 +7,10 @@ export EDITOR="nvim"
 # Load aliases and shortcuts if exists.
 source ~/.config/shell/aliasrc
 
+# ctrl+backspace stops at /
+autoload -U select-word-style
+select-word-style bash
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 
 #################
