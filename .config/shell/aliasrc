@@ -1,19 +1,15 @@
 #!/bin/zsh
 
 
-EDITOR=nvim
-
 alias bmgo='cd $(printf %s "$(cat ~/.config/bm/bmdirs | fzf | cut -d" " -f2)")'
 alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 #alias clear="/bin/clear; seq 1 $(tput cols) | sort -R | spark | lolcat"
 alias cls=clear
 alias c=/bin/clear
-alias em="emacsclient -c -a 'vim' "
 alias v=nvim
-alias nvimrc='$EDITOR ~/.config/nvim/init.lua'
+alias nvimrc='$EDITOR ~/.config/nvim/'
 alias alacrittyrc='$EDITOR ~/.config/alacritty/alacritty.yml'
-alias vimrc='$EDITOR ~/.config/nvim/idkLua.vim'
-alias zshrc='$EDITOR ~/.config/zsh/zshrc'
+alias zshrc='$EDITOR ~/.config/zsh/'
 alias aliasrc='$EDITOR ~/.config/shell/aliasrc'
 
 alias rm='rm -iv'

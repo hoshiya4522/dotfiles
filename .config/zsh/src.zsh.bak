@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 ##########################################
 ##░█░█░█▀█░█▀▀░█░█░▀█▀░█░█░█▀█░▀░█▀▀░░░░##
 ##░█▀█░█░█░▀▀█░█▀█░░█░░░█░░█▀█░░░▀▀█░░░░##
@@ -7,5 +9,9 @@
 ##░▀▀▀░▀▀▀░▀░▀░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀##
 ##########################################
 
-source ~/.config/zsh/src.zsh
-
+source ~/.config/zsh/plugins.zsh
+source ~/.config/zsh/settings.zsh
+source ~/.config/zsh/completion.zsh
+source ~/.config/zsh/binds.zsh
+source ~/.config/zsh/Prompt.zsh
+# source ~/.config/zsh/zoxide_init.zsh
