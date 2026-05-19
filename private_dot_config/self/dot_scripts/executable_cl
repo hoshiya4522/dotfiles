@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DIR="$HOME/.config/self"
+EXT="txt"
+
+FILE="$DIR/calendar-$(date +%Y).$EXT"
+TODAY=$(date +%F)
+
+nvim +"silent /$TODAY" "$FILE"

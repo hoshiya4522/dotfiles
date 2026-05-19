@@ -1,0 +1,28 @@
+{
+	"Print int": {
+		"prefix": "pi",
+		"body": ["printf(\"%d\\n\", $1);"],
+		"description": "print an integer"
+	},
+	"new file": {
+		"prefix": "!", 
+		"body": [
+			"#include <stdio.h>",
+			"",
+			"int main(){",
+			"\t$1",
+			"\t",
+			"\treturn 0;",
+			"}"
+		],
+		"description": "New File In C"
+	},
+	"Tcc header shebang": {
+	  "prefix": "tcc",
+	  "body": [
+	    "#!/bin/tcc -run"
+	  ],
+	  "description": "TCC Initializer"
+	}
+
+}

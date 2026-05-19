@@ -1,0 +1,17 @@
+{
+  "Date": {
+    "prefix": "date",
+    "body": ["${CURRENT_DATE}"],
+    "description": "Insert today's date"
+  },
+  "Time": {
+    "prefix": "time",
+    "body": ["${CURRENT_TIME}"],
+    "description": "Insert current time"
+  },
+  "Weekday": {
+    "prefix": "weekday",
+    "body": ["${CURRENT_WEEKDAY}"],
+    "description": "Insert current weekday"
+  }
+}

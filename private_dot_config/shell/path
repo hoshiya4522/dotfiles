@@ -1,0 +1,4 @@
+export PATH="$PATH:/home/hoshiya4522/.config/shell/scripts"
+export PATH="$PATH:/home/hoshiya4522/.local/bin"
+export PATH="$PATH:/home/hoshiya4522/.config/self/.scripts"
+export PATH="$PATH:/usr/bin/obsidian"

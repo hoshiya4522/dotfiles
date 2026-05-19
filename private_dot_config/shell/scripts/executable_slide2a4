@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+# slide2a4 — place 2 slides per A4 page (top/bottom), preserving aspect ratio
+# Usage: slide2a4 input.pdf
+
+import sys
+import os
+from pypdf import PdfReader, PdfWriter
+from pypdf.generic import ArrayObject, FloatObject
+try:
+    from pypdf import Transformation
+except ImportError:
+    from pypdf.transformation import Transformation
+
+def make_2up(input_path: str) -> None:
+    base = input_path[:-4] if input_path.lower().endswith(".pdf") else input_path
+    output_path = f"{base}_concatenated.pdf"
+
+    reader = PdfReader(input_path)
+    writer = PdfWriter()
+
+    # A4 in points (1 pt = 1/72 inch)
+    A4_W = 595.28
+    A4_H = 841.89
+
+    # Margin between the two slides and from edges (points)
+    MARGIN = 10
+
+    # Each slide slot: full A4 width, half A4 height, minus margins
+    slot_w = A4_W - 2 * MARGIN
+    slot_h = (A4_H - 3 * MARGIN) / 2   # 3 margins: top, middle, bottom
+
+    pages = reader.pages
+    n = len(pages)
+
+    # Pair up pages: (0,1), (2,3), ...
+    for i in range(0, n, 2):
+        # Create a blank A4 output page
+        out_page = writer.add_blank_page(width=A4_W, height=A4_H)
+
+        for slot, page_idx in enumerate([i, i + 1] if i + 1 < n else [i]):
+            src = pages[page_idx]
+
+            src_w = float(src.mediabox.width)
+            src_h = float(src.mediabox.height)
+
+            # Scale to fit the slot while keeping aspect ratio
+            scale = min(slot_w / src_w, slot_h / src_h)
+            scaled_w = src_w * scale
+            scaled_h = src_h * scale
+
+            # Centre the scaled slide within the slot horizontally
+            x_offset = MARGIN + (slot_w - scaled_w) / 2
+
+            # slot 0 → top half, slot 1 → bottom half
+            if slot == 0:
+                y_offset = MARGIN + slot_h + MARGIN + (slot_h - scaled_h) / 2
+            else:
+                y_offset = MARGIN + (slot_h - scaled_h) / 2
+
+            tx = Transformation().scale(scale, scale).translate(x_offset, y_offset)
+            out_page.merge_transformed_page(src, tx)
+
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+    print(f"Done: {output_path}")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: slide2a4 <input.pdf>", file=sys.stderr)
+        sys.exit(1)
+
+    path = sys.argv[1]
+    if not os.path.isfile(path):
+        print(f"Error: file not found: {path}", file=sys.stderr)
+        sys.exit(1)
+
+    make_2up(path)

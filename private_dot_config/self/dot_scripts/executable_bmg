@@ -1,0 +1,18 @@
+#!/bin/bash
+
+FILE="$HOME/.config/self/bookmarks.txt"
+SEARCH_TERM="$1"
+
+if [ -z "$SEARCH_TERM" ]; then
+    echo "Error: What are we looking for?"
+    echo "Usage: bms <search_word>"
+    exit 1
+fi
+
+if [ ! -f "$FILE" ]; then
+    echo "No bookmarks file found yet!"
+    exit 1
+fi
+
+# Search the file, ignoring uppercase/lowercase, and color the matching word
+grep -i --color=auto "$SEARCH_TERM" "$FILE"

@@ -1,0 +1,35 @@
+{
+	"name": "Hoshiya's Snippets",
+	"description": "reeeeeeeeeeeeeeeeee",
+	"version": "1.0.0",
+	"publisher": "hoshiya4522",
+	"contributes": {
+		"snippets": [
+			{
+				"language": "all",
+				"path": "./global.json"
+			},
+			{
+				"language": "json",
+				"path": "./json.json"
+			},
+			{
+				"language": "c",
+				"path": "./c.json"
+			},
+			{
+				"language": "cpp",
+				"path": "./cpp.json"
+			},
+			{
+				"language": "hdl",
+				"path": "./nand2tetris.json"
+			},
+			{
+				"language": "tex",
+				"path": "./latex.json"
+			}
+		]
+	}
+}
+

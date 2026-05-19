@@ -1,0 +1,37 @@
+{
+	"new file": {
+		"prefix": "!", 
+		"body": [
+			"#include <iostream>",
+			"using namespace std;",
+			"",
+			"int main(){",
+			"\t$1",
+			"\t",
+			"\treturn 0;",
+			"}"
+		],
+		"description": "New File In C++"
+	},
+
+	"cout stuff": {
+		"prefix": "co",
+		"body": [
+			"cout << $1;"
+		]
+	},
+	"cout stuff with endl": {
+		"prefix": "col",
+		"body": [
+			"cout << $1 << endl;"
+		]
+	},
+	"cin stuff": {
+		"prefix": "ci",
+		"body": [
+			"cin >> $1;"
+		]
+	}
+
+
+}

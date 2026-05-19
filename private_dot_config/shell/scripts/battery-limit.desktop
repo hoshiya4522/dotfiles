@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Battery Charge Limit
+Comment=Set maximum battery charging percentage
+Exec=/home/hoshiya4522/.config/shell/scripts/battery-limit-gui.sh
+Icon=battery
+Terminal=false
+Type=Application
+Categories=Utility;Settings;

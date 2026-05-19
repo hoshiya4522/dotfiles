@@ -1,0 +1,192 @@
+#!/usr/bin/env python3
+"""
+mkbooklet — Convert a PDF into two printable booklet files.
+
+Usage:
+    python mkbooklet input.pdf
+
+Output:
+    input_booklet_fronts.pdf   ← Print this first
+    input_booklet_backs.pdf    ← Flip the stack, then print this
+
+Each output page is A4 landscape with two source pages side-by-side.
+After printing both files, fold the stack in half to get your booklet.
+
+Printing instructions (printed on screen after running):
+  1. Print FRONTS normally (portrait feed, landscape output).
+  2. Take the printed stack OUT of the tray WITHOUT flipping or rotating it.
+  3. Put it back into the INPUT tray the same way (face and orientation unchanged).
+     — Your printer model determines the exact re-feed direction; do a test with
+       one sheet first.
+  4. Print BACKS.
+  5. Fold the whole stack in half, then staple along the spine.
+"""
+
+import sys
+import math
+from pathlib import Path
+from pypdf import PdfReader, PdfWriter, Transformation
+from pypdf.generic import RectangleObject
+
+
+def pad_to_multiple_of_four(reader: PdfReader) -> list:
+    """Return page list padded with blank pages to a multiple of 4."""
+    pages = list(reader.pages)
+    remainder = len(pages) % 4
+    if remainder:
+        blank_count = 4 - remainder
+        pages.extend([None] * blank_count)
+        print(f"  Padding with {blank_count} blank page(s) to reach {len(pages)} total pages.")
+    return pages
+
+
+def get_media_box(page):
+    """Return (width, height) of a page in points."""
+    mb = page.mediabox
+    return float(mb.width), float(mb.height)
+
+
+def impose_two_up(
+    pages: list,
+    order: list[tuple[int | None, int | None]],
+    src_w: float,
+    src_h: float,
+) -> PdfWriter:
+    """
+    Create a new PDF where each sheet holds two source pages side-by-side.
+
+    order: list of (left_page_index, right_page_index) tuples.
+           None means a blank half.
+    src_w, src_h: dimensions of source pages (points).
+    Output page size: (2*src_w) x src_h  — landscape if source is portrait.
+    """
+    writer = PdfWriter()
+    sheet_w = src_w * 2
+    sheet_h = src_h
+
+    for left_idx, right_idx in order:
+        # Add a blank output page at 2-up size
+        out_page = writer.add_blank_page(width=sheet_w, height=sheet_h)
+
+        for idx, x_offset in [(left_idx, 0), (right_idx, src_w)]:
+            if idx is None:
+                continue  # leave that half blank
+            src_page = pages[idx]
+            if src_page is None:
+                continue  # padded blank
+            # Merge source page onto the output page with a translation
+            transform = Transformation().translate(tx=x_offset, ty=0)
+            out_page.merge_transformed_page(src_page, transform, expand=False)
+
+    return writer
+
+
+def booklet_order(n_pages: int):
+    """
+    Return (fronts_order, backs_order) for a booklet with n_pages total
+    (n_pages must be a multiple of 4).
+
+    Each element is a list of (left_idx, right_idx) tuples for one sheet side.
+
+    Booklet imposition (0-indexed):
+      Sheet 1  front: [n-1,  0]
+      Sheet 1  back:  [1,    n-2]
+      Sheet 2  front: [n-3,  2]
+      Sheet 2  back:  [3,    n-4]
+      ...
+    """
+    n_sheets = n_pages // 4
+    fronts = []
+    backs = []
+    for s in range(n_sheets):
+        outer_right = n_pages - 1 - s * 2   # e.g. n-1, n-3, n-5 ...
+        outer_left  = s * 2                  # e.g. 0,   2,   4  ...
+        inner_left  = s * 2 + 1             # e.g. 1,   3,   5  ...
+        inner_right = n_pages - 2 - s * 2   # e.g. n-2, n-4, n-6 ...
+
+        fronts.append((outer_right, outer_left))   # right-then-left on front
+        backs.append((inner_left, inner_right))    # left-then-right on back
+
+    # NOTE on left/right convention for backs:
+    # When the sheet is flipped along the long edge (left-right flip),
+    # what was the right half becomes the left half visually.
+    # We keep the logical order here; the re-feed handles the physical flip.
+
+    return fronts, backs
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python mkbooklet input.pdf")
+        sys.exit(1)
+
+    input_path = Path(sys.argv[1])
+    if not input_path.exists():
+        print(f"Error: file not found: {input_path}")
+        sys.exit(1)
+
+    print(f"\n📖  Booklet converter")
+    print(f"    Input : {input_path}")
+
+    reader = PdfReader(str(input_path))
+    raw_count = len(reader.pages)
+    print(f"    Pages : {raw_count}")
+
+    pages = pad_to_multiple_of_four(reader)
+    n = len(pages)
+    n_sheets = n // 4
+    print(f"    Sheets: {n_sheets}  ({n} pages total after padding)")
+
+    # Determine source page dimensions from first real page
+    src_w, src_h = get_media_box(reader.pages[0])
+    print(f"    Page size: {src_w:.1f} x {src_h:.1f} pt  "
+          f"({src_w/72:.2f} x {src_h/72:.2f} in)")
+
+    fronts_order, backs_order = booklet_order(n)
+
+    stem = input_path.stem
+    fronts_path = input_path.with_name(f"{stem}_booklet_fronts.pdf")
+    backs_path  = input_path.with_name(f"{stem}_booklet_backs.pdf")
+
+    print("\n  Building fronts …", end=" ", flush=True)
+    fronts_writer = impose_two_up(pages, fronts_order, src_w, src_h)
+    with open(fronts_path, "wb") as f:
+        fronts_writer.write(f)
+    print(f"done  →  {fronts_path}")
+
+    print("  Building backs  …", end=" ", flush=True)
+    backs_writer = impose_two_up(pages, backs_order, src_w, src_h)
+    with open(backs_path, "wb") as f:
+        backs_writer.write(f)
+    print(f"done  →  {backs_path}")
+
+    print(f"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅  Done!  Two files created:
+
+    1. {fronts_path.name}
+    2. {backs_path.name}
+
+  HOW TO PRINT (non-duplex):
+  ─────────────────────────
+  Step 1 │ Print  {fronts_path.name}
+         │   • Paper orientation: landscape (or let the PDF viewer decide)
+         │   • Scale: fit to page / actual size (your preference)
+
+  Step 2 │ Take the printed stack out of the output tray.
+         │ Place it back into the INPUT tray WITHOUT turning
+         │ or flipping it — same face, same direction.
+         │ (Do a single-sheet test first to confirm the
+         │  re-feed direction for your specific printer.)
+
+  Step 3 │ Print  {backs_path.name}
+
+  Step 4 │ Fold the whole stack in half.
+         │ Staple along the spine (centre fold).
+         │ Trim if needed.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+""")
+
+
+if __name__ == "__main__":
+    main()

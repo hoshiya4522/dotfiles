@@ -1,0 +1,12 @@
+#!/bin/bash
+
+alias jn='nvim "$HOME/.config/self/journal/$(date +%F).txt"'
+alias cl='nvim +"silent /$(date +%F)" "$HOME/.config/self/calendar-$(date +%Y).txt"'
+
+alias t='nvim "$HOME/.config/self/todo.md"'
+alias td='nvim "$HOME/.config/self/todo.md"'
+alias todo='nvim "$HOME/.config/self/todo.md"'
+
+alias s='nvim "$HOME/.config/self/scratch.md"'
+alias sc='nvim "$HOME/.config/self/scratch.md"'
+alias scratch='nvim "$HOME/.config/self/scratch.md"'

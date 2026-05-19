@@ -1,0 +1,38 @@
+general.import = [
+  # "~/.config/alacritty/tokyo-night-storm.toml"
+  # "~/.config/alacritty/tokyo-night.toml"
+  # "~/.config/alacritty/gruvbox_dark.toml"
+  "~/.config/alacritty/gruvbox_material.toml"
+]
+
+[font]
+size = 14.0
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font Propo"
+
+[font.offset]
+x = 0
+y = 0
+
+[window]
+dynamic_padding = true
+dynamic_title = true
+opacity = 0.8
+blur = true
+
+[window.dimensions]
+columns = 0
+lines = 0
+
+[window.padding]
+x = 17
+y = 15
+
+[terminal.shell]
+program = "/usr/bin/zsh"
+args = ["--login"]

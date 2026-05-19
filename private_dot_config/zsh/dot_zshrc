@@ -1,0 +1,124 @@
+export EDITOR="nvim"
+
+# --- Vi Mode & Basic Keybindings ---
+bindkey -v
+export KEYTIMEOUT=1
+bindkey -M viins 'jk' vi-cmd-mode
+
+# Home, End, and Delete keys
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[3~' delete-char
+
+# Ctrl+A and Ctrl+E (Emacs style line jumping in insert mode)
+bindkey -M viins '^a' beginning-of-line
+bindkey -M viins '^e' end-of-line
+
+# Ctrl+Left and Ctrl+Right (Word jumping)
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+# Ctrl+Backspace and Ctrl+Delete (Delete words)
+bindkey '^H' backward-kill-word
+bindkey '^W' backward-kill-word
+bindkey '^[[3;5~' kill-word
+
+# Make Ctrl+Backspace stop at slashes (like in paths)
+autoload -U select-word-style
+select-word-style bash
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+# --- History ---
+HISTSIZE=5000
+HISTFILE=~/.config/zsh/.zsh_history
+SAVEHIST=$HISTSIZE
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# --- Antidote Package Manager ---
+# Must load BEFORE compinit
+zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
+if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+  (
+    source '/usr/share/zsh-antidote/antidote.zsh'
+    antidote bundle <${zsh_plugins}.txt >${zsh_plugins}.zsh
+  )
+fi
+source ${zsh_plugins}.zsh
+
+# --- Autocompletion ---
+# Must load AFTER plugins
+autoload -U compinit && compinit
+
+# --- Plugin Keybinds ---
+# History Substring Search (Up and Down arrows)
+bindkey '^p' history-substring-search-up
+bindkey '^n' history-substring-search-down
+
+# Ctrl+Y to accept Zsh Autosuggestions
+bindkey '^y' autosuggest-accept
+
+# --- Zstyle & Completions ---
+# Case insensetive tab
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' menu no
+
+# FZF tab preview (tries to use 'eza' if installed, falls back to 'ls')
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath 2>/dev/null || ls --color $realpath'
+
+# --- FZF Configuration ---
+# Make FZF take up 40% of the screen, add a border, and use Ctrl+Y to accept
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --bind 'ctrl-y:accept'"
+
+# --- Tools ---
+eval "$(zoxide init zsh)"
+eval "$(fzf --zsh)"
+eval "$(starship init zsh)"
+
+# --- Aliases ---
+source $HOME/.config/shell/aliases
+
+# --- PATH ---
+source ~/.config/shell/path
+
+
+
+
+# --- Conditional History Saving ---
+
+# 1. This hook runs BEFORE the command executes
+function zshaddhistory() {
+  LAST_CMD="${1%%$'\n'}"
+  
+  # return 1 completely deletes it instantly. 
+  # (Note: You will lose the ability to press Up to fix typos on failed commands)
+  return 1 
+}
+
+# 2. This hook runs AFTER the command finishes
+function precmd() {
+	# Instantly capture the exit status of the last command
+	local exit_status=$?
+
+	# Check if we have a command waiting to be saved
+	if [[ -n "$LAST_CMD" ]]; then
+
+	# 0 = Success
+	# 130 = Keyboard Interrupt (Ctrl+C)
+	# 127 = Command not found (like typing 'sl' instead of 'ls')
+	# 1 or 2 = Standard errors
+
+	# Only save it if it was successful OR if you used Ctrl+C
+	if [[ $exit_status == 0 || $exit_status == 130 ]]; then
+		print -sr -- "$LAST_CMD"
+	fi
+
+	# Clear the variable so it doesn't accidentally get saved twice
+	LAST_CMD=""
+	fi
+}

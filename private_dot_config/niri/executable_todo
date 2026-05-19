@@ -1,0 +1,8 @@
+swaync
+add bind to swaync-client -t
+https://github.com/ErikReider/SwayNotificationCenter
+
+1. swayosd-libinput-backend
+2. swayosd-server
+then normal stuff
+https://github.com/ErikReider/SwayOSD

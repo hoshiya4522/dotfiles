@@ -1,0 +1,29 @@
+#!/bin/bash
+
+CALENDAR="$HOME/.config/self/calendar-$(date +%Y).txt"
+
+OFFSET=${1:-0}
+TODAY=$(date +%F)
+
+# Get current week from calendar
+CURRENT_WEEK=$(grep "^$TODAY" "$CALENDAR" | awk '{print $2}')
+
+# Extract number (w13 → 13)
+WEEK_NUM=${CURRENT_WEEK#w}
+
+# Apply offset
+TARGET_WEEK_NUM=$((10#$WEEK_NUM + OFFSET))
+
+# Format back to wXX
+WEEK=$(printf "w%02d" "$TARGET_WEEK_NUM")
+
+# Highlight today
+awk -v week="$WEEK" -v today="$TODAY" '
+$2 == week {
+    if ($1 == today) {
+        print "\033[33m" $0 "\033[0m"
+    } else {
+        print $0
+    }
+}
+' "$CALENDAR"

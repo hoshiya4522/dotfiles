@@ -1,0 +1,39 @@
+#!/bin/bash
+
+DIR="$HOME/.config/self"
+FILE="$DIR/bookmarks.txt"
+URL="$1"
+
+shift 
+TAGS="$@"
+
+if [ -z "$URL" ]; then
+	nvim $FILE
+    # echo "Error: Please drop a link!"
+    # echo "Usage: bm <link> [@tags...]"
+    exit 1
+fi
+
+echo "Fetching title..."
+# Added -A to fake a real web browser and avoid 403 blocks
+TITLE=$(curl -sL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" "$URL" | grep -ioP '(?<=<title>)[^<]+' | head -n 1 | awk '{$1=$1;print}')
+
+if [ -z "$TITLE" ]; then
+    TITLE="Unknown Title"
+fi
+
+# Ask you to confirm or edit the title
+read -e -p "Confirm/Edit Title: " -i "$TITLE" FINAL_TITLE
+
+mkdir -p "$DIR"
+DATE=$(date +%Y-%m-%d)
+
+TAG_STRING=""
+if [ -n "$TAGS" ]; then
+    TAG_STRING=" | Tags: $TAGS"
+fi
+
+# Removed the leading "- "
+echo "[$DATE] $FINAL_TITLE - $URL$TAG_STRING" >> "$FILE"
+
+echo "✅ Saved to $FILE"

@@ -1,0 +1,46 @@
+{
+	"Initializer": {
+		"prefix": ["!"],
+		"body": [
+			"\\documentclass{$1}",
+			"\\title{$2}",
+			"\\author{Gourob Dev}",
+			"",
+			"\\begin{document}",
+			"%\\maketitle",
+			"$3",
+			"\\end{document}"
+		],
+		"description": "template to create a blank tex file"
+	},
+
+	"Unordered List": {
+		"prefix": ["ite", "itemize", "ul"],
+		"body": [
+			"\\begin{itemize}",
+			"\t\\item $1",
+			"\\end{itemize}"
+		],
+		"description": "Itemize Snipper"
+	},
+
+	"Ordered List": {
+		"prefix": ["enu", "enumerate", "ol"],
+		"body": [
+			"\\begin{enumerate}",
+			"\t\\item $1",
+			"\\end{enumerate}"
+		],
+		"description": "Itemize Snipper"
+	},
+
+	"Tabular": {
+		"prefix": ["tabu", "tabular"],
+		"body": [
+			"\\begin{tabular}{$1}",
+			"\t$0",
+			"\\end{tabular}"
+		],
+		"description": "Tabular Snipper"
+	}
+}

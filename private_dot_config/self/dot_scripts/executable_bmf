@@ -1,0 +1,14 @@
+#!/bin/bash
+
+FILE="$HOME/.config/self/bookmarks.txt"
+
+# Grab all words you typed as a single search phrase
+SEARCH_TERM="$*"
+
+if [ ! -f "$FILE" ]; then
+    echo "No bookmarks file found yet!"
+    exit 1
+fi
+
+# Open fzf, feeding it your file, and pre-filling the search if you provided one
+fzf --query="$SEARCH_TERM" < "$FILE"

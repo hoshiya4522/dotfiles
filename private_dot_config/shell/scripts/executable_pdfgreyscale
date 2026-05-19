@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# pdfgreyscale — convert a PDF to greyscale
+# Usage: pdfgreyscale input.pdf
+
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: pdfgreyscale <input.pdf>" >&2
+    exit 1
+fi
+
+input="$1"
+
+if [[ ! -f "$input" ]]; then
+    echo "Error: file not found: $input" >&2
+    exit 1
+fi
+
+# Build output filename: strip .pdf, append _greyscale.pdf
+base="${input%.pdf}"
+output="${base}_greyscale.pdf"
+
+echo "Converting to greyscale: $input → $output"
+
+gs \
+    -sOutputFile="$output" \
+    -sDEVICE=pdfwrite \
+    -sColorConversionStrategy=Gray \
+    -dProcessColorModel=/DeviceGray \
+    -dCompatibilityLevel=1.4 \
+    -dNOPAUSE \
+    -dBATCH \
+    -dQUIET \
+    "$input"
+
+echo "Done: $output"

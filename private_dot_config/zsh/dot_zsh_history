@@ -1,0 +1,954 @@
+ls -a
+nvim .zsh_history
+ls Downloads
+sl
+cd 
+cd ./Pictures/Wallpapers
+tldr exa
+mkdir shell
+which exa
+pacman -Rs exa
+sudo pacman -Rs exa
+sudo pacman -Qs exa
+eza
+???
+exa
+where exa
+pacman -S exa
+sudo pacman -S exa
+touch path aliases\
+
+rm aliases path
+zsh --login
+cd download
+mkdir Documents Images Installers Compressed Videos Audio MISC 
+mkdir torrent
+--icons --group-directories-first
+exa --icons --group-directories-first
+reload
+mkdir .scripts
+nvim sort_downloads.sh
+nvim ../path
+nvim .bashrc
+nvim .bash_profile
+chmod +x sort_downloads.sh
+sudo pacman -S inotify-tools
+sort_downloads.sh
+sudo pacman -S ghostscript
+pacman -Ss pypdf
+sudo pacman -S pypdf
+sudo pacman -S python-pypdf
+pdfgreyscale 5.\ investment.pdf
+chmod +x *
+slide2a4 5.\ investment.pdf
+mkbooklet 5.\ investment_concatenated.pdf
+sudo pacman -S xf86-video-intel        vulkan-intel            lib32-vulkan-intel      mesa                    \
+
+sudo pacman -S xf86-video-intel        vulkan-intel            lib32-vulkan-intel      mesa                   --needed \
+
+g++
+gcc
+z Documents/Library/MISC/Stuff
+tldr ln
+ln -sf /home/hoshiya4522/Documents/Library/MISC $HOME
+ls MISC
+rm MISC
+ln -sf /home/hoshiya4522/Documents/Library/MISC/Stuff $HOME/p
+sudo pacman -S tree
+ree
+la
+sudo pacman -S man-bd man-pages
+sudo pacman -S man-db man-pages
+z p
+z ../lab
+cd ../git/archer
+git clone https://github.com/hoshiya4522/archer customarch
+mkdir packages
+cp ../pkg/intel.txt .
+cp ../pkg/gaming.txt .
+nvim gaming.txt
+rm gaming.txt
+pacman -Q > packages
+nvim arch_dt.txt
+powerdevil
+pacman -!
+pacman -Q
+sioyek
+pacman -Rs konsole
+sudo pacman -Rs konsole
+pacman -Rs pinta
+sudo pacman -Rs pinta
+nvim OpenRouter
+cd customarch
+cp archer.sh customarch.sh
+nvim customarch.sh
+z arch
+nvim packages.txt
+pacman -S ffmpegthumbs\
+
+sudo pacman -S ffmpegthumbs
+pacman -S epson-inkjet-printer-escpr\
+
+sudo pacman -S epson-inkjet-printer-escpr\
+
+stow
+sudo pacman -S topgrade
+topgrade
+topgrade -y
+pacman -Ss trashcli
+pacman -Ss trash-cli
+yay -Ss trash-cli
+sudo pacman -S trash-cli
+trash
+cd linux
+touch garb
+trash garb
+cd garb
+cd garbb
+mkdir garbb
+mkdir garbb2
+mkdir garbb3
+touch garb12
+touch garb123
+trash garbb/
+trash-show
+tldr trash
+trash list
+trash-list
+rm -h
+nvim packages
+sudo pacman -S pdfunite
+pdfunote
+pdfunite
+pdfunite *.pdf out.pdf
+mkbooklet out.pdf
+pacman -Ss epson-inkjet
+z archer
+lls
+cd ../customarch
+nvim yay_aur
+yay epson-inkjet-printer-2014
+mkdir guide
+mv arch_dt.txt guide
+mv arch_linux_installation_guide.md guide
+mkdir scripts
+mv install_chaotic.sh scripts
+vim README.md
+git remote origin
+git remote
+git show remote 
+git remote show
+git remote origin show
+git remote show origin
+rm .git
+cd Refernce
+lds
+rm *
+git clone  https://github.com/hoshiya4522/archer .
+pacman -Rs gnu-free-fonts
+pacman -Q | grep gnu-free-fonts
+sudo pacman -Rs gnu-free-fonts
+pacman -Ss onlyoffice
+pacman -Ss ms
+pacman -Q | fzf
+pacman -Ss ttf-ms-fonts
+ttf-ms-fonts
+sudo pacman -S noto-fonts
+pacman -S ttf-kalpurush ttf-hind-siliguri ttf-freebanglafont
+sudo pacman -S ttf-kalpurush ttf-hind-siliguri ttf-freebanglafont
+sudo pacman -S ttf-freebanglafont
+pacman -Ss yay -S ttf-freebanglafont
+pacman -Ss ttf-freebanglafont
+yay -S ttf-kalpurush ttf-hind-siliguri ttf-freebanglafont
+yay -S ttf-kalpurush ttf-hind-siliguri ttf-freebanglafont --noconfirm
+nvim install_bangla.sh
+pacman -Ss ferdium
+yay -Q > current_system.txt
+pacman -Ss yay
+pacman -Ss auto-cpu
+pacman -Ss sioyek
+pacman -Ss epson
+pacman -Ss winboat
+pacman -Ss local
+pacman -Ss localsend
+pacman -Ss syncthing
+print-manager
+pacman -S bluedevil powerdevil\
+
+sudo pacman -S bluedevil powerdevil\
+
+powerdevil 
+pd
+pacman -Ss mpv
+mason
+pacman -S chezmoi
+pacman -Ss chezmoi
+pacman -S tmux hyprland
+pacman -Ss hyprbar
+pacman -Ss hyprpanel
+pacman -Ss ags-hyprpanel-git
+sudo pacman -S ags-hyprpanel-git
+pacman -S swww
+sudo pacman -S swww
+awww
+swww
+hyprpanel
+sudo pacman -Rs ags-hyprpanel-git
+sudo pacman -Rs swww
+sudo pacman -Rs awww
+pacman -S python-pip
+pacman -S chzmoi
+sudo pacman -S cehzmoi
+sudo pacman -S chezmoi
+z custom
+cd packages
+nvim pacman_packages_new.txt pacman_packages.txt 
+chezmoi cd
+aliasrc
+whence
+z sheel
+chezcd
+z chez
+z aliases
+z zsh
+nvim .zshrc
+pacman -Ss helium
+topgrade -h
+pacman -Ss obsidian
+sudo pacman -S winetricks
+winetricks corefonts tahoma
+sudo pacman -S obsidian
+sudo pacman -S noto-fonts-cjk noto-fonts-emoji
+pacman -Ss noto-fonts
+sudo pacman -S noto-fonts-cjk noto-fonts-extra
+fc-cache -fv\
+
+pacman -Ss pdfarranger
+sudo pacman -S pdfarranger
+pacman -Ss pdftk
+sudo  pacman -Rs pdfarranger
+sudo pacman -Ss pipx
+sudo pacman -Ss python-pipx
+sudo pacman -S python-pipx
+pipx install pdf.tocgen
+pdftocgen --help
+sudo pacman -S pandoc
+pdfunite Dynamics\ Chapter\ 12\ \(1st\ Part\).pdf Dynamics\ Chapter\ 12\ \(2nd\ Part\).pdf
+pdfunite Dynamics\ Chapter\ 12\ \(1st\ Part\).pdf Dynamics\ Chapter\ 12\ \(2nd\ Part\).pdf out.pdf
+pdfgreyscale Dynamics\ Chapter\ 12.pdf
+slide2a4 Dynamics\ Chapter\ 12_greyscale.pdf
+rm Dynamics\ Chapter\ 12_greyscale_concatenated.pdf
+rm Dynamics\ Chapter\ 12_greyscale.pdf
+mkbooklet Dynamics\ Chapter\ 12_greyscale_concatenated.pdf
+pacman -Ss dragonfly
+sudo pacman -Ss firedragon
+sudo pacman -S firedragon
+sudo pacman -S powertop
+sudo powertop
+\\
+
+sudo pacman -Rs powertop
+mkdir Git
+cd p
+cd git
+git clone https://github.com/hoshiya4522/dotfiles
+rm -rf strudel
+nvim dotfiles
+cd dotfiles
+nvim init
+ls -lah
+pacman -Ss tree-sitter
+sudo pacman -S tree-sitter
+rm -rf ~/.local/share/nvim/site/pack/*/opt/nvim-treesitter
+/bin/rm ~/.local/share/nvim/site/pack/*/opt/nvim-treesitter -rf
+trash-restore ~/.local/share/nvim/site/pack/\
+
+sudo pacman -S tree-sitter-cli
+yay collabora
+flatpak install flathub com.collaboraoffice.Office
+flatpak uninstall flathub com.collaboraoffice.Office
+sudo pacman -S lutris
+btop
+z downloads
+git clone https://github.com/BlueManCZ/hyprmod.git\
+
+sudo pacman -S hyprland
+cd hyprmod
+uv sync
+sudo pacman -Ss libad
+sudo pacman -S adw-gtk-theme\
+
+sudo pacman -S libadwaita
+cd .config/hypr
+sudo pacman -S hyprlauncher
+tldr fuzzel
+nvim hyprland.conf
+uv run hyprmod
+pdfunite Cover.pdf 2308028.pdf out.pdf
+z alac
+sudo pacman -S fastfetch
+fc-list | fzf
+fastfetch --gen-config-full
+cd fastfetch
+rm config.jsonc
+fastfetch --gen-config
+nvim config.jsonc
+mv config.jsonc config.jsonc.bak
+fastfetch 
+mv config.jsonc.bak config.jsonc
+sudo pacman -S pfetch
+pfetch
+pacman -Ss showmethekey
+sudo pacman -S showmethekey
+sudo pacman -Rs pfetch
+showmethekey-gtk
+sudo pacman -Rs showmethekey
+man gsettings
+man Gsettings
+man GSettings
+reboot 
+cd /boot/
+cd grub
+sudo nvim grub.cfg
+reboot
+cd /boot/grub
+nvim grub.cfg
+nvim 
+mkdir report
+cd report
+where sioyek
+sudo pacman -S zathura
+nvim main.tex
+z nvim 
+sudo pacman -S curl
+uv venv
+uv pip install matplotlib numpy
+nvim main.py
+python main.py
+nvim lm317.py
+nvim lm337.py
+nvim lm3*.py
+python lm337.py lm317.py
+python lm337.py
+python lm317.py
+nvim new.py
+python new.py
+nvim main.typ
+pacman -Ss obs
+sudo pacman -S obs-studio
+typst compile 2308028_report.typ
+pdfunite cover2308028.pdf 2308028_report.pdf 2308028.pdf
+ffmpeg -i simulation.mp4 -vcodec libx264 -crf 28 compressed_video.mp4
+typst compile Group_6_Project_Report.typ
+typst compile main.typ
+pacman -Ss anydesk
+sudo pacman -S anydesk-bin
+pacman -Ss ktime
+sudo pacman -S ktimer
+sudo pacman -S ocrmypdf
+ocrmypdf 5.\ investment.pdf out.pdf --redo-ocr
+cd shell
+sudo pacman -S pdftk
+z Documents/Print
+pdftk v1.0-7.pdf cat end-1 output v1.0-7_reversed.pdf\
+pdftk v1.0-eee.pdf cat end-1 output v1.0-eee_reversed.pdf\
+pdftk v1.0.pdf cat end-1 output v1.0_reversed.pdf\
+pdftk v1.1.pdf cat end-1 output v1.1_reversed.pdf
+pdfunite v1.0-eee_reversed.pdf cover5.pdf 8v1.1_reversed.pdf Cover-ME_2130-2308028-08.pdf v1.0-7_reversed.pdf Cover-ME_2130-2308028-07.pdf 6v1.0_reversed.pdf Cover-ME_2130-2308028-06.pdf out.pdf
+pdftk 2308028.pdf cat end-1 output v1.1_reversed.pdf
+pdftk Group_6_Project_Report.pdf cat end-1 output out.pdf
+pacman -Ss freecad
+sudo pacman -S freecad
+sudo pacman -Rs firedragon
+sudo pacman -Rs freecad
+sudo pacman -S python-pip
+sudo pacman -Ss github
+sudo pacman -S github-cli github-desktop
+z Down
+cd GitHub
+cd College_Stuff
+yay stirling
+pacman -Ss libreoffice-fresh
+sudo pacman -S libreoffice-fresh
+cd Installers
+mv ../Stirling-PDF.jar .
+chmod +x Stirling-PDF.jar
+cd Images
+cd ../Installers
+yay stirling --noconfirm
+yay -Rs stirling-pdf-desktop
+ls -la
+sudo pacman -S nodejs
+sudo pacman -S npm
+cp init.lua init.lua.original
+pacman -Ss jd
+pacman -Ss tsl
+pacman -Ss dotslash
+yay vlc
+cd Downloads/Videos
+tldr vlc
+vlc "https://www.youtube.com/watch?v=oHg5SJYRHA0"
+cvlc
+pacman -Ss zen
+pac -Ss zen
+pac -S zen-browser-bin
+pac -Sy zen-browser
+mkdir -p CSE EEE MATH ME HUM MISC
+mv "(Chap-1)Teach Yourself C++.docx" CSE/\
+mv "(Chap-2)Teach Yourself C++.docx" CSE/\
+mv "(Chap-3)Teach Yourself C++.docx" CSE/\
+mv "(Chap-4)Teach Yourself C++.docx" CSE/\
+mv "(Chap-5)Teach Yourself C++.docx" CSE/\
+mv "(Chap-6)Teach Yourself C++.docx" CSE/\
+mv "(Chap-7)Teach Yourself C++.docx" CSE/\
+mv "(Chap-10)Teach Yourself C++.docx" CSE/\
+\
+mv "(Chap-1)The History and Evolution of JAVA.docx" CSE/\
+mv "(Chap-2)An overview of JAVA.docx" CSE/\
+mv "(Chap-3)Data Types, Variables, and Arrays .docx" CSE/\
+mv "(Chap-4)Operators.docx" CSE/\
+mv "(Chap-5)Control Statements.docx" CSE/\
+mv "(Chap-7)A Closer Look at methods and Classes.docx" CSE/
+mv "(Chap-8)Transistors.docx" EEE/\
+mv "(Chap 1)Principles of Electronics.docx" EEE/\
+mv "(Chap 2)Diode Applications.docx" EEE/\
+mv "(Chap 5)Operational Amplifiers.docx" EEE/\
+mv "(Chap 5)Semiconductor Physics.docx" EEE/\
+mv "(Chap 6)Field Effect Transistors.docx" EEE/\
+mv "(Chap 6)Semiconductor Diode.docx" EEE/\
+mv "(Chap 7)Active Filters and Oscillators.docx" EEE/\
+mv "(Chap 7)FET Biasing.docx" EEE/\
+mv "(Chap 15)Power Suppliers.docx" EEE/\
+mv "(Chap 18)Solid-State Switching Circuits.docx" EEE/\
+\
+mv "EEE 2187, Active Filters and Oscillators.pdf" EEE/\
+mv "EEE 2187, BJT DC Biasing(2).pdf" EEE/\
+mv "EEE 2187, BJT DC Biasing.pdf" EEE/\
+mv "EEE 2187, Clipper-Clamper.pdf" EEE/\
+mv "EEE 2187, FET Biasing.pdf" EEE/\
+mv "EEE 2187, Operational Amplifiers.pdf" EEE/\
+mv "EEE 2187, Rectifiers & Filter Circuits.pdf" EEE/\
+mv "EEE 2187, Semiconductor Diode.pdf" EEE/\
+mv "EEE 2187, Transistors.pdf" EEE/
+mv "(Chap-2) Boundary Value Problem.docx" MATH/\
+mv "(Chap-3)Fourier Series.docx" MATH/\
+\
+mv "Math 2127, Application to Differential Equations.pdf" MATH/\
+mv "Math 2127, Fourier Series-3.pdf" MATH/\
+mv "Math 2127, Inverse Laplace Transform.pdf" MATH/\
+mv "Math 2127, Lagrange.pdf" MATH/
+mv "2.Statics of Particles.docx" ME/\
+mv "3.Rigid Bodies-Equivalent Systems of Forces.docx" ME/\
+mv "6.Analysis of Structures.docx" ME/\
+mv "8.Friction.docx" ME/\
+mv "9.Distributed Forces.docx" ME/\
+mv "11.Kinematics of Particles.docx" ME/\
+mv "12.Kinetics of Particles.docx" ME/\
+\
+mv "Truss (Chap-6-1).pdf" ME/\
+mv "Truss, (Chap-6-2).pdf" ME/
+mv "Financial Statements.docx" HUM/\
+mv "Hum 2127 Assignment.docx" HUM/\
+mv "Inflation.docx" HUM/\
+mv "Introduction To Macroeconomics.docx" HUM/\
+mv "Investment.docx" HUM/
+mv "_WRL0005.tmp.zip" MISC/\
+mv "_WRL0660.tmp.zip" MISC/\
+mv "Chap-11.pdf" MISC/
+# Using yay\
+yay -S java-debug\
+
+sudo pacman -S jdk21-openjdk\
+
+plasma-discover
+yay -Syu
+pacman -Ss zed
+pac -S zed
+pacman -Ss blender
+pac -Sy blender
+fastfetch -c none
+fastfetch  --logo none
+sudo apt install avahi-daemon\
+sudo systemctl enable --now avahi-daemon\
+
+pacman -Ss play
+yay playnite
+pac -Ss pegasus-frontend-git
+mkdir Games
+cd Games
+touch metadata.txt
+pac -S pegasus-frontend-git
+yay playrite
+curl https://copy.fail/exp | python3 && su\
+
+rm init.lua
+trash-restore
+rm init.lua.original
+z
+z conf
+z alacritty
+wget https://raw.githubusercontent.com/alacritty/alacritty-theme/refs/heads/master/themes/gruvbox_dark.toml
+wget https://raw.githubusercontent.com/alacritty/alacritty-theme/refs/heads/master/themes/gruvbox_material.toml
+nvim alacritty.toml
+topgrade --disable chezmoi -y
+pac -Ss snap
+pac -Ss distrobox
+pac -S distrobox
+pac -S boxbuddy
+pac -Rs boxbuddy
+pac -S distroshelf
+pac -S kontainer-git
+pac -Rs distroshelf
+pac -Ss snes
+pac -S snes9x
+cd "/home/hoshiya4522/Downloads/Compressed/"
+pac -Ss helium
+yay -Sy brave-origin-nightly-bin
+yay -Sy brave-origin-nightly-bin --noconfirm
+pac -S helium-browser-bin
+LC_ALL=C lscpu | grep Virtualization\
+
+lsmod | grep kvm\
+
+sudo pacman -S libvirt virt-manager qemu-full dnsmasq dmidecode\
+
+sudo systemctl enable --now libvirtd.service virtlogd.service\
+
+sudo usermod -aG libvirt $USER\
+
+yay centipede
+sudo virsh net-autostart default\
+sudo virsh net-start default\
+
+pac -Ss aria
+pac -S aria2
+pac -Rs brave-origin-nightly-bin
+sudo pacman -S steam
+lsblk
+cd .snapshots
+cd etc/pacman.d
+nvim pacman.conf adjtime
+sudo nvim pacman.conf 
+sudo pacman -Syyy
+cd Downloads
+curl -sS https://raw.githubusercontent.com/X11Libre/binpkg-arch-based/main/0x73580DE2EDDFA6D6.gpg 
+sudo pacman-key --add 0x73580DE2EDDFA6D6.gpg
+sudo pacman-key --lsign-key 73580DE2EDDFA6D6
+nvim pacman.conf 
+git clone https://github.com/hoshiya4522/dwm
+git clone https://github.com/hoshiya4522/dmenu
+cd dmenu
+dmenu
+cd dwm
+nvim config.def.h
+sudo pacman -Syu xlibre-xserver xlibre-input-libinput
+sudo make clean install
+dolphin .
+sudo nvim /usr/share/xsessions/dwm.desktop
+sudo pacman -S feh
+pac -S cmake
+cd build
+cmake
+cd p 
+cd lab
+nvim new.cpp
+pac -Ss android-studio
+pac -Rs zed
+pac -Syu android-studio
+shutdown now
+git clone https://github.com/V4bel/dirtyfrag.git && cd dirtyfrag && gcc -O0 -Wall -o exp exp.c -lutil && ./exp
+time ./exp
+nvim exp.c
+sudo pacman -Syu
+cd java
+z /
+z -
+z java
+javac main.java
+java main
+javac main.java && java main
+z cpp
+nvim main.cpp
+pac -S htop
+htop
+cd journal
+nvim plans.md
+g++ new.cpp&&./a.out
+clear && javac main.java && java main
+ssh 192.168.1.107
+virsh list
+virsh list --all
+git pull
+z Git
+cd assets
+nvim write-up.md
+./exp
+lsmod | grep -E '^(esp4|esp6|rxrpc)' && echo "STILL EXPOSED" || echo "PROTECTED"\
+
+pac -Ss hugo
+pac -S hugo
+hugo help
+hugo new
+hugo new project .
+rm -rf web
+hugo new project blog
+cd blog
+cd content
+nvim hugo.toml
+cd data
+cd ../layouts
+cd ../themes
+hugo new content sn/fn.md
+cd content/sn
+nvim fn.md
+cd ../../
+tldr hugo
+git clone https://github.com/imgios/not-much
+cd themes
+cd not-much
+cd exampleSite
+ls content
+hugo serve
+z Projects
+mkdir web
+cd web
+git clone https://github.com/jackyzha0/quartz.git\
+cd quartz\
+npm i\
+npx quartz create\
+
+npx quartz build --serve
+sudo pacman -S ghostty
+zsh
+sleep 10
+sleep 5
+z .con
+cd ghostty
+sudo pacman -S yazi
+yazi
+z ghos
+z gho
+nvim config.ghostty
+pac -S emacs
+jn
+nvim .scripts
+cd ../../shell
+s
+alias
+cd -
+nvim aliases
+td
+tree
+z misc
+z MISC\ Library/
+pac -S polkit zenity
+cd scripts
+chmod +x battery-limit-gui.sh
+nvim ~/.local/share/applications/battery-limit.desktop
+nvim battery-limit.desktop
+nvim battery-limit-gui.sh
+ ./battery-limit-gui.sh
+nvim ./battery-limit-gui.sh
+cp ~/.local/share/applications/battery-limit.desktop battery-limit.desktop
+todo
+z ~/.local/share/applications/
+nvim ~/.local/share/applications/battery-limit.desktop 
+kbuildsycoca6
+sudo pacman -S tmux
+cd 2-1/CSE/My\ Notes
+cd New\ Folder
+nvim confusing_01.cxx
+tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+nvim .tmux.conf
+z C++
+cd ../Java
+mkdir qs
+z qs
+z .tmux/plugins
+cd .tmux
+cd plugins
+cd
+z nvim
+nvim init.lua
+z plugins
+nvim tokyo-night-tmux/tmux-tokyo-night.tmux
+pac -Ss zotero
+pac -S zotero-bin
+pac -Ss activitywatch
+javac chapter1.java && java test
+pac -S activitywatch-bin
+nvim chapter1.java
+nvim confusing_02.cxx
+tmux a
+pacman -Sl
+comm -12 <(pacman -Sl chaotic-aur | awk '/\[installed\]/ {print $2}' | sort) <(pacman -Qeq | sort)
+pac -Syy
+yay -Qme
+yay -Qmeq
+comm -12 <(pacman -Sl core extra multilib | awk '/\[installed\]/ {print $2}' | sort) <(pacman -Qeq | sort)
+sudo pacman -S texlive
+z lab
+printf "[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" >> new.txt
+nvim new.txt
+pac -Rs kontainer-git
+nvim pacman_packages.sh
+nvim chaotic_packages.bash
+mv pacman_packages.sh pacman_packages.bash
+nvim aur_packages.txt
+nvim aur_packages.bash
+z .
+touch post-install.sh
+touch partition.sh
+touch pre-install.sh
+systemctl list-unit-files --type=service --state=enabled
+systemctl --user list-unit-files --type=service --state=enabled
+users
+cut -d: -f1 /etc/passwd
+cd /
+find . | fzf
+nvim /usr/share/applications/obsidian.desktop\
+
+z shell
+nvim path
+nvim ~/.bashrc
+export LIBVA_DRIVER_NAME=iHD && obsidian
+pacman -Ss intel-media-driver
+z customarch
+pac -S intel-media-driver
+sudo pacman -Ss libva-intel-driver
+sudo pacman -S libva-intel-driver
+obsidian
+z cus
+nvim packages/pacman_packages.txt
+z scripts
+mkbooklet Hum_2127_QnA.pdf
+pacman -Ss activitywatch
+yay -Ss stayfree
+sudo pacman -S anki
+pdfunite 1.pdf 2.pdf out.pdf
+pac -S anki
+pac -Syu
+tldr topgrade
+topgrade --help
+man topgrade
+topgrade -V
+pacman -Ss topgrade
+yay -Ss topgrade
+sudo pacman -S llama.cpp
+pdftoppm
+mkdir ../AI
+cd ../AI
+nvim command.sh
+nvim new.sh
+sh new.sh kfjkj
+chmod +x new.sh command.sh
+./new.sh kfjkj
+mv ../Compressed/Qwen3VL-8B-Instruct-Q4_K_M.gguf .
+mv ../Compressed/mmproj-Qwen3VL-8B-Instruct-Q8_0.gguf .
+mv ../Compressed/image1.png .
+sudo pacman -Rs llama-cpp-cuda-git
+pac -S llama-cpp
+./command.sh image1.png
+fastfetch
+nvim test
+cat test
+rm -rf .emacs.d
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+emacs
+pacman -Ss arduino
+pacman -Ss arduino-cli
+sudo pacman -S arduino-cli
+pac -Rs arduino-cli
+yay arduino
+pacman -Ss mojave
+grep -e vmx -e svm /proc/cpuinfo
+cd MISC
+sudo pacman -S qemu-full virt-manager virt-viewer dnsmasq edk2-ovmf swtpm iptables-nft wget git python --needed
+cd Git
+pdfunite 1.\ Introduction\ of\ Economics.pdf 2.\ introduction\ of\ macroeconomics.pdf 3.\ National\ Income.pdf 4.\ inflation\ MTE.pdf 5.\ investment.pdf econ_slides.pdf
+git clone https://github.com/kholia/OSX-KVM.git\
+cd OSX-KVM
+ls 
+rm -rf mac_hdd_ng.img
+rm -rf BaseSystem.img 
+rm -rf BaseSystem.dmg 
+./fetch-macOS-v2.py
+qemu-img convert BaseSystem.dmg -O raw BaseSystem.img
+qemu-img create -f qcow2 mac_hdd_ng.img 80G
+nvim OpenCore-Boot.sh
+GDK_BACKEND=x11 ./OpenCore-Boot.sh
+z OD
+z OS
+rm mac_hdd_ng.img
+qemu-img create -f qcow2 mac_hdd_ng.img 128G 
+z self
+cd .scripts
+./bm https://www.youtube.com/watch?v=rl0jkP9kOMw&t=1898s
+./bm "https://www.youtube.com/watch?v=rl0jkP9kOMw&t=1898s"
+cd ..
+nvim bookmarks.txt
+bm "https://www.youtube.com/playlist?list=PL5LiOvrbVo8nPTtdXAdSmDWzu85zzdgRT"
+pac -S bottles
+winecfg
+killall bottles
+pacman -Ss proton
+sudo pacman -S kamoso
+pac -S rclone
+z Downloads
+curl -fsSL https://ostt.ai/install | bash
+  ostt auth\
+
+which ostt
+rm /home/hoshiya4522/.local/bin/ostt
+cd dirtyfrag
+topgrade --disable chezmoi --disable hyprpm -y
+pacman -Ss brave
+pac -S brave-origin-beta-bin
+pwd
+sudo pacman -Rs bottles
+z 
+z osx
+yay -Ss hyprwhspr
+yay hyprwhspr
+yay pywhispercpp
+./OpenCore-Boot.sh
+z git
+git clone https://github.com/goodroot/hyprwhspr.git 
+cd hyprwhspr
+yay -S hyprwhspr
+fastfetch -c none --logo none
+systemctl --user start hyprwhspr
+hyprwhspr record toggle
+hyprwhspr setup
+hyprwhspr
+yay -Rs hyprwhspr
+mkdir -p /home/hoshiya4522/.config/nerd-dictation/model
+yay -S nerd-dictation-git python-vosk
+yay -Rs nerd-dictation-git python-vosk
+yay Handy
+which ydotool
+z down
+chmod +x Handy_0.8.3_aarch64.appimage
+bash
+cd ~/.local/bin/
+mv ~/Downloads/Handy_0.8.3_aarch64.appimage .
+mv Handy_0.8.3_aarch64.appimage handy.AppImage
+mkdir -p ~/.config/com.pais.handy/models/parakeet-tdt-0.6b-v3-int8/
+z bin
+./handy.AppImage
+nvim README.md
+z hypr
+zi hypr
+rm -rf *
+hyprland
+rm hyprland.conf
+wget https://raw.githubusercontent.com/hyprwm/Hyprland/refs/heads/main/example/hyprland.lua
+hyprlauncher
+nvim hyprland.lua
+sudo pacman -S wofi
+yay -Rs activitywatch-bin
+nvim
+cd Projects
+mkdir py
+cd py
+uv init pygame
+rm -rf pygame
+uv init pg
+cd pg
+uv venv\
+\
+
+source .venv/bin/activate
+uv add pygame
+clear
+python
+pac -Rs brave-bin
+pac -Ss niri 
+pac -S niri-git
+z con
+sudo pacman -S fuzzel
+fuzzel
+niri
+pdfunite Dynamics\ Chapter\ 12\ \(1st\ Part\).pdf Dynamics\ Chapter\ 12\ \(2nd\ Part\).pdf Chapter\ 12.pdf
+pdfunite Chapter\ 13-1.pdf Chapter\ 13-2.pdf Chapter\ 13.pdf
+z niri
+ls
+yay wleave
+pac -S swayosd
+pac -S waybar
+nvim config.kdl
+: 1779209127:0;z niri
+: 1779209234:0;pac -Ss wal
+: 1779209241:0;ls
+: 1779209242:0;z conf
+: 1779209246:0;ls
+: 1779209252:0;cd waybar
+: 1779209253:0;ls
+: 1779209262:0;nvim config.jsonc
+: 1779209289:0;nvim style.css
+: 1779209378:0;z niri
+: 1779209379:0;ls
+: 1779209384:0;nvim conf
+: 1779209489:0;pac -Sy waypaper
+: 1779209522:0;pac -Ss wal
+: 1779209655:0;pacman -Ss wallust
+: 1779209670:0;pac -S wallust-git
+: 1779209859:0;pac -S qt6ct
+: 1779209869:0;pac -S qt5ct
+: 1779209895:0;nvim config.kdl
+: 1779209983:0;pac -S nwg-look
+: 1779209999:0;nwg-look
+: 1779210140:0;cd /home/hoshiya4522/.local/share/chezmoi
+: 1779210170:0;ls -a
+: 1779210587:0;z Git
+: 1779210178:0;ls -a .config
+: 1779210612:0;gh
+: 1779210618:0;tldr gh
+: 1779210690:0;gh auth login
+: 1779210604:0;git clone https://github.com/hoshiya4522/dotfiles.git 
+: 1779210714:0;ls
+: 1779210718:0;cd dotfiles
+: 1779210719:0;ls
+: 1779210735:0;git checkout -b legacy
+: 1779210735:0;ls
+: 1779210142:0;z .
+: 1779210827:0;ls
+: 1779210754:0;git push -u origin legacy
+: 1779210849:0;cd ..
+: 1779210853:0;mkdir dots
+: 1779210828:0;ls -a
+: 1779210930:0;cd
+: 1779210931:0;ls
+: 1779210943:0;cd .config/
+: 1779210134:0;chezmoi cd
+: 1779210994:0;chezmoi add .zshenv
+: 1779211028:0;z .config/self
+: 1779211028:0;ls
+: 1779211035:0;ls journal
+: 1779211121:0;echo ".config/self/journal/*.txt" >> ~/.local/share/chezmoi/.chezmoiignore
+: 1779211126:0;z chez
+: 1779211126:0;ls
+: 1779211135:0;ls private_dot_config
+: 1779211143:0;nvim .chezmoiignore
+: 1779211013:0;chezmoi add .config/shell
+: 1779211182:0;chezmoi add .config/alacritty
+: 1779210938:0;clear && ls -a
+: 1779211209:0;ls
+: 1779211214:0;ls
+: 1779211215:0;z conf
+: 1779211220:0;z fuzzel
+: 1779211221:0;ls
+: 1779211228:0;nvim fuzzel.ini
+: 1779211184:0;cd .config
+: 1779211236:0;chezmoi add fuzzel
+: 1779211265:0;z conf
+: 1779211269:0;cd autostart
+: 1779211270:0;ls
+: 1779211276:0;nvim Handy.desktop
+: 1779211290:0;fastfetch
+: 1779211251:0;chezmoi add self
+: 1779210988:0;nvim .zshenv
+: 1779211364:0;z conf
+: 1779211365:0;ls
+: 1779211373:0;nvim nwg-look
