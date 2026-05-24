@@ -1,0 +1,8 @@
+http://feeds.bbci.co.uk/news/world/rss.xml      "News"
+https://www.thedailystar.net/taxonomy/term/107/rss.xml	"News"
+https://news.ycombinator.com/rss                "News" "Tech"
+
+https://hackaday.com/feed/                      "DIY" "Hardware"
+
+https://news.mit.edu/rss/research               "Research" "MIT"
+https://spectrum.ieee.org/feeds/feed.rss        "IEEE" "Research"
