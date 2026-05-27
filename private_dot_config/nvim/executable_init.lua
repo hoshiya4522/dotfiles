@@ -75,8 +75,8 @@ vim.pack.add({
 -- ──────────────────────────────────────────────────────────────────────
 
 -- Set your theme here (Try "dracula", "nord", "oceanic_next", or "moonfly")
--- vim.cmd.colorscheme("tokyonight")
-vim.cmd.colorscheme("gruvbox")
+vim.cmd.colorscheme("tokyonight")
+-- vim.cmd.colorscheme("gruvbox")
 
 -- Mini Modules
 require("mini.statusline").setup()
@@ -96,34 +96,63 @@ require'colorizer'.setup()
 
 -- Treesitter
 -- ──────────────────────────────────────────────────────────────────────
---  NEW TREESITTER CONFIGURATION
+--  NEW TREESITTER CONFIGURATION (Kickstart Style)
 -- ──────────────────────────────────────────────────────────────────────
 
--- 1. Install your required parsers (sync_install = false is the default)
+-- 1. Install your everyday parsers upfront
+local my_parsers = { 
+    "bash", "c", "css", "go", "html", "java", "javascript", "json",
+    "lua", "markdown", "markdown_inline", "python", "query", "rust",
+    "tsx", "typescript", "typst", "vim", "vimdoc"
+}
 pcall(function()
-    require("nvim-treesitter").install({
-        "bash", "c", "css", "go", "html", "java", "javascript", "json",
-        "lua", "markdown", "markdown_inline", "python", "query", "rust",
-        "tsx", "typescript", "typst", "vim", "vimdoc"
-    })
+    require('nvim-treesitter').install(my_parsers)
 end)
 
--- 2. Enable Highlighting, Indentation, and Auto-Install
-vim.api.nvim_create_autocmd("FileType", {
-    callback = function(ev)
-        local lang = vim.treesitter.language.get_lang(ev.match)
-        if lang then
-            -- Auto-install missing parsers (replaces auto_install = true)
-            pcall(function() require("nvim-treesitter").install(lang) end)
-            
-            -- Enable syntax highlighting (replaces highlight = { enable = true })
-            pcall(vim.treesitter.start)
-            
-            -- Enable treesitter indentation (replaces indent = { enable = true })
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+-- Helper function to enable highlighting and indentation
+---@param buf integer
+---@param language string
+local function treesitter_try_attach(buf, language)
+    if not vim.treesitter.language.add(language) then return end
+
+    -- Enable syntax highlighting
+    pcall(vim.treesitter.start, buf, language)
+
+    -- Check if treesitter indentation is available for this language
+    local has_indent_query = vim.treesitter.query.get(language, 'indents') ~= nil
+    if has_indent_query then 
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+end
+
+-- 2. Smart Auto-Install and Attach
+local available_parsers = require('nvim-treesitter').get_available()
+
+vim.api.nvim_create_autocmd('FileType', {
+    callback = function(args)
+        local buf, filetype = args.buf, args.match
+        local language = vim.treesitter.language.get_lang(filetype)
+        if not language then return end
+
+        local installed_parsers = require('nvim-treesitter').get_installed('parsers')
+
+        if vim.tbl_contains(installed_parsers, language) then
+            -- Enable the parser if it is already installed
+            treesitter_try_attach(buf, language)
+        elseif vim.tbl_contains(available_parsers, language) then
+            -- Auto-install it and enable it after the installation is done
+            require('nvim-treesitter').install(language):await(function()
+                treesitter_try_attach(buf, language)
+            end)
+        else
+            -- Try to enable features in case the parser exists but is not from `nvim-treesitter`
+            treesitter_try_attach(buf, language)
         end
     end,
 })
+
+
+
 -- require("nvim-treesitter.configs").setup({
 --     ensure_installed = {
 --         "bash", "c", "css", "go", "html", "java", "javascript", "json",
