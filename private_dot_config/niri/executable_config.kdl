@@ -216,6 +216,13 @@ window-rule {
     open-floating true
 }
 
+
+window-rule {
+	match app-id=r#"WinBoat$"#
+    open-floating true
+}
+
+
 window-rule {
 	match app-id=r#"zen$"#
 	default-column-width {

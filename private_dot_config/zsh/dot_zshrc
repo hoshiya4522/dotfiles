@@ -86,6 +86,8 @@ source $HOME/.config/shell/aliases
 # --- PATH ---
 source ~/.config/shell/path
 
+# --- Exports ---
+source ~/.config/shell/exports
 
 
 

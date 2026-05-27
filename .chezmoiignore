@@ -1,2 +1,5 @@
+.config/zsh/.zsh_history
+.config/zsh/.zcompdump*
 .config/self/journal/*.txt
 ~/.newsboat/cache.db
+
