@@ -2,7 +2,7 @@
 
 alias ls="eza --icons --group-directories-first"
 alias rm=trash
-alias pac="sudo pacman"
+alias pac="sudo pacman --needed"
 alias chezcd="cd /home/hoshiya4522/.local/share/chezmoi"
 
 

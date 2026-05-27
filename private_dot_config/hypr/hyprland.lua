@@ -56,6 +56,7 @@ hl.on("hyprland.start", function ()
 
 	hl.exec_cmd("swayosd-server") 
 	hl.exec_cmd("swaync")
+	hl.exec_cmd("nwg-drawer -r")
 
 	-- Necessary for KDE applications to work properly
 	hl.exec_cmd("kded6")
@@ -276,7 +277,11 @@ hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("wlogout")) -- pacman -S wlog
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+
+hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("nwg-drawer"), { release = true })
+
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
