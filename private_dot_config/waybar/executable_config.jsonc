@@ -2,6 +2,7 @@
 {
     "reload_style_on_change": true,
     "layer": "top",
+    // "position": "top",
     "position": "bottom",
     "height": 30,
     "spacing": 4,
@@ -33,6 +34,9 @@
         "warp-on-scroll": true,
         "format": "{name}:{icon}",
         "format-icons": {
+			// "active": "",
+			// "default": "",
+			// "urgent": "",
 			"1": "󰲠",
 			"2": "󰲢",
 			"3": "󰲤",
@@ -43,9 +47,6 @@
 			"8": "󰲮",
 			"9": "󰲰",
 			"10": "󰿬"
-            // "active": "",
-            // "default": "",
-            // "urgent": ""
         },
         "on-scroll-up": "hyprctl dispatch \"hl.dsp.focus({ workspace = 'e+1' })\"",
         "on-scroll-down": "hyprctl dispatch \"hl.dsp.focus({ workspace = 'e-1' })\""
@@ -178,5 +179,14 @@
         "on-click": "sleep 0.1 && swaync-client -t -sw",
         "on-click-right": "sleep 0.1 && swaync-client -d -sw",
         "escape": true
-    }
+    },
+
+	"network": {
+		"format-wifi": "{essid} ({signalStrength}%) ",
+		"format-ethernet": "{ipaddr}/{cidr} 󰈀",
+		"tooltip-format": "{ifname} via {gwaddr} 󰊗",
+		"format-linked": "{ifname} (No IP) 󰈀",
+		"format-disconnected": "Disconnected ⚠",
+		"format-alt": "{ifname}: {ipaddr}/{cidr}"
+	}
 }
