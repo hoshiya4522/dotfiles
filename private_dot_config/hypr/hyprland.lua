@@ -400,3 +400,19 @@ hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 hl.env("XDG_MENU_PREFIX", "plasma-")
 
+-- template
+-- hl.gesture({ 
+-- 	fingers = 4, 
+-- 	direction = "up", 
+-- 	action = function() hl.exec_cmd("ghostty") end 
+-- })
+
+hl.gesture({
+    fingers = 3,
+    direction = "pinch",
+    action = "cursorZoom",
+    zoom_level = 1,
+    mode = "live"
+})
+
+
