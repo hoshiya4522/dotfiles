@@ -152,11 +152,11 @@
         "max-length": 15,
 
         "player-icons": {
-            "default": "⏸"
+            "default": "▶"
         },
 
         "status-icons": {
-            "paused": "▶"
+            "paused": "⏸"
         }
     },
 

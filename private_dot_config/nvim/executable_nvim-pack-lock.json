@@ -9,7 +9,7 @@
       "src": "https://github.com/rafi/awesome-vim-colorschemes"
     },
     "blink.cmp": {
-      "rev": "0593548ee0b0978abf303d30f449234e07f951d1",
+      "rev": "56507d063ff412baf49a359e7f57d8473a8b6547",
       "src": "https://github.com/Saghen/blink.cmp"
     },
     "cmp-buffer": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "44657837c7338e52727facc85c1d95bec1f6bd7c",
+      "rev": "15abccbe23525ee0502d2efe620c77db00bfb93c",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim": {
@@ -78,7 +78,7 @@
       "src": "https://github.com/norcalli/nvim-colorizer.lua"
     },
     "nvim-lspconfig": {
-      "rev": "a4ed4e761c400849e8c9f8bda33e5083f890268c",
+      "rev": "9573948c38bfabeec353ae7dd7d3ffec4c506a6b",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -90,7 +90,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
-      "rev": "0d7d35fa946837b8738b17c18d1faa1ac351e7f9",
+      "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "obsidian.nvim": {
@@ -143,7 +143,7 @@
       "src": "https://github.com/tpope/vim-surround"
     },
     "vimtex": {
-      "rev": "182ad387e3f3107699483606c9a2b6648f8437b2",
+      "rev": "24e229914182ff301496a3e2c4214b28c4928d3f",
       "src": "https://github.com/lervag/vimtex"
     },
     "which-key.nvim": {

@@ -392,6 +392,7 @@ end
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", "Clear search highlight")
 map("i", "jk", "<Esc>", "Quick escape")
 map("n", "S", ":w<CR>", "Save file")
+map({"n", "v", "x"}, ";", ":")
 
 -- Clipboard
 map("n", "<leader>cf", "mmggVG\"+yg'm", "Copy entire file")

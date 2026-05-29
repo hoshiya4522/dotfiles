@@ -29,7 +29,8 @@ hl.monitor({
 
 -- Set programs that you use
 local browser     = "firefox"
-local terminal    = "alacritty"
+local terminal    = "foot"
+-- local terminal    = "alacritty"
 local fileManager = "dolphin"
 local menu        = "fuzzel"
 
@@ -50,17 +51,26 @@ local menu        = "fuzzel"
 -- end)
 
 hl.on("hyprland.start", function () 
-	hl.exec_cmd("nm-applet")
+	hl.exec_cmd("nm-applet --indicator")
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("pypr")  -- yay -S pyprland
 
 	hl.exec_cmd("swayosd-server") 
 	hl.exec_cmd("swaync")
-	hl.exec_cmd("nwg-drawer -r")
+	hl.exec_cmd("nwg-look -a")
+	hl.exec_cmd("snappy-switcher toggle")
 
 	-- Necessary for KDE applications to work properly
 	hl.exec_cmd("kded6")
 	hl.exec_cmd("kbuildsycoca6")
+
+	-- Clipboard (requires cliphist)
+	hl.exec_cmd("wl-paste --type text --watch cliphist store")
+	hl.exec_cmd("wl-paste --type image --watch cliphist store")
+
+	-- Alt Tab (Requires snappy-switcher)
+	hl.exec_cmd("snappy-switcher --daemon")
+
 end)
 
 -------------------------------
@@ -69,9 +79,20 @@ end)
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
-hl.env("XCURSOR_SIZE", "48")
-hl.env("HYPRCURSOR_SIZE", "48")
+-- hl.env("XCURSOR_SIZE", "48")
+-- hl.env("HYPRCURSOR_SIZE", "48")
+hl.env("XCURSOR_THEME","breeze_cursors")
+hl.env("XCURSOR_SIZE","60")
+hl.env("GTK_THEME","Breeze-Dark")
 
+-- Necessary for KDE applications to work properly
+hl.env("QT_QPA_PLATFORMTHEME", "kde")
+hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
+hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
+hl.env("XDG_MENU_PREFIX", "plasma-")
+
+hl.env("QT_QPA_PLATFORM","wayland")
+hl.env("MOZ_ENABLE_WAYLAND", "1")
 
 -----------------------
 ----- PERMISSIONS -----
@@ -115,7 +136,8 @@ hl.config({
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing = false,
 
-        layout = "dwindle",
+        layout = "master",
+        -- layout = "dwindle",
         -- layout = "scrolling",
     },
 
@@ -160,20 +182,21 @@ hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dam
 hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
 hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
 hl.animation({ leaf = "windows",       enabled = true,  speed = 4.79, spring = "easy" })
-hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4.1,  spring = "easy",         style = "popin 87%" })
-hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 1.49, bezier = "linear",       style = "popin 87%" })
 hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 1.73, bezier = "almostLinear" })
 hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 1.46, bezier = "almostLinear" })
 hl.animation({ leaf = "fade",          enabled = true,  speed = 3.03, bezier = "quick" })
 hl.animation({ leaf = "layers",        enabled = true,  speed = 3.81, bezier = "easeOutQuint" })
-hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "easeOutQuint", style = "fade" })
-hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
 hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
 hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
+hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4.1,  spring = "easy",         style = "popin 87%" })
+hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 1.49, bezier = "linear",       style = "popin 87%" })
+hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "easeOutQuint", style = "fade" })
+hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
+-- hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspaces",    enabled = true,  speed = 3,    bezier = "default",      style = "slidevert" })
+hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "slidevert" })
+hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "slidevert" })
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
@@ -239,19 +262,29 @@ hl.config({
         kb_rules   = "",
 
         follow_mouse = 1,
+		-- force_no_accel = 1,
+		-- accel_profile = "flat",
 
-        sensitivity = 0.55, -- -1.0 - 1.0, 0 means no modification.
+        sensitivity = 0.5, -- -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
-            natural_scroll = true,
+			tap_and_drag = true,
+			drag_lock = false,
+            natural_scroll = true
         },
     },
 })
 
 hl.gesture({
     fingers = 3,
-    direction = "horizontal",
+    -- direction = "horizontal",
+    direction = "vertical", -- specifically for workspace animation -slidevert
     action = "workspace"
+})
+
+hl.device({
+    name        = "elan076c:00-04f3:3245-touchpad",
+    sensitivity = 0.6, -- Change this number to test different speeds
 })
 
 -- Example per-device config
@@ -274,13 +307,16 @@ hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("wlogout")) -- pacman -S wlogout
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+
+-- hl.bind(mainMod .. " + M", function() hl.dispatch("fullscreen", "1") end)
+-- hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 
-hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("nwg-drawer"), { release = true })
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("nwg-drawer"), { release = true })
 
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
@@ -291,13 +327,14 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
+-- Workspace switching and moving windows
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
-for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
-end
+-- for i = 1, 10 do
+--     local key = i % 10 -- 10 maps to key 0
+--     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
+--     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+-- end
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
@@ -311,6 +348,7 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
+
 -- Laptop multimedia keys for volume and LCD brightness
 -- hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
 -- hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
@@ -320,16 +358,28 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
 
 -- Requires playerctl
-hl.bind("XF86Launch8",  hl.dsp.exec_cmd("playerctl play-pause"),       { locked = true })
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
--- Magnification (requires Pyprland)
-hl.bind(mainMod .. " + equal", hl.dsp.exec_cmd("pypr zoom +0.5"))
-hl.bind(mainMod .. " + minus", hl.dsp.exec_cmd("pypr zoom -0.5"))
-hl.bind(mainMod .. " + SHIFT + equal", hl.dsp.exec_cmd("pypr zoom"))
+-- Magnification (Native Hyprland)
+-- Zoom In (e.g., SUPER + EQUAL)
+hl.bind(mainMod .. " + equal", function()
+    local currentZoom = hl.get_config("cursor.zoom_factor")
+    hl.config({ cursor = { zoom_factor = currentZoom * 1.1 } })
+end, { repeating = true, description = "Zoom in" })
+
+-- Zoom Out (e.g., SUPER + MINUS)
+hl.bind(mainMod .. " + minus", function()
+    local currentZoom = hl.get_config("cursor.zoom_factor")
+    hl.config({ cursor = { zoom_factor = math.max(1.0, currentZoom / 1.1) } })
+end, { repeating = true, description = "Zoom out" })
+
+-- Reset Zoom (e.g., SUPER + SHIFT + MINUS)
+hl.bind(mainMod .. " + SHIFT + minus", function()
+    hl.config({ cursor = { zoom_factor = 1.0 } })
+end, { description = "Reset zoom" })
 
 -- Requires SwayOSD
 -- Laptop multimedia keys for volume and LCD brightness
@@ -339,10 +389,52 @@ hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("swayosd-client --output-volume 
 hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"),   { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("swayosd-client --brightness +5"),                  { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("swayosd-client --brightness -5"),                  { locked = true, repeating = true })
+hl.bind("XF86Launch8",  hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"),       { locked = true })
 
 -- Screenshot
 hl.bind("Print",hl.dsp.exec_cmd("hyprshot --clipboard -zm region"),                  { locked = true, repeating = true })
 
+-- STT
+hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("/home/hoshiya4522/.local/bin/handy.AppImage --toggle-transcription"))
+
+-- TTS
+hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("/home/hoshiya4522/.config/shell/scripts/read-smart.sh"))
+
+-- Alt Tab (Requires snappy-switcher)
+hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("snappy-switcher toggle"))
+hl.bind("ALT + TAB", hl.dsp.exec_cmd("snappy-switcher next"))
+hl.bind("ALT + SHIFT + TAB", hl.dsp.exec_cmd("snappy-switcher prev"))
+
+
+-- SUPER SHIFT N = scrolling (because [N]iri)
+-- SUPER SHIFT B = dwindlw (because [B]spwn)
+-- SUPER SHIFT M = master (because [M]aster)
+-- SUPER SHIFT F = monocle (because [F]ullscreen)
+hl.bind(mainMod .. " + SHIFT + N", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "scrolling" }) end)
+hl.bind(mainMod .. " + SHIFT + F", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "monocle" }) end)
+hl.bind(mainMod .. " + SHIFT + M", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "master" }) end)
+hl.bind(mainMod .. " + SHIFT + B", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "dwindle" }) end)
+
+-- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Uncommon-tips-and-tricks/#cycle-layout-for-current-workspace
+hl.bind(mainMod .. " + M", function ()
+    local layouts     = { "scrolling", "dwindle", "master", "monocle" }
+    local workspace   = hl.get_active_workspace()
+    local next_layout = "dwindle"
+
+    if not workspace then
+        return
+    end
+
+    for i = 1, #layouts do
+        if layouts[i] == workspace.tiled_layout then
+            local next_layout_idx = (i % #layouts) + 1
+            next_layout = layouts[next_layout_idx]
+            break
+        end
+    end
+
+    hl.workspace_rule({ workspace = workspace.name, layout = next_layout })
+end)
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
@@ -394,11 +486,17 @@ hl.window_rule({
     float = true,
 })
 
--- Necessary for KDE applications to work properly
-hl.env("QT_QPA_PLATFORMTHEME", "kde")
-hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
-hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
-hl.env("XDG_MENU_PREFIX", "plasma-")
+hl.window_rule({
+    name = "firefox-pip",
+    match = {
+        class = "firefox",
+        title = "Picture-in-Picture"
+    },
+    float = true,
+	pin = true
+})
+
+
 
 -- template
 -- hl.gesture({ 
@@ -414,5 +512,72 @@ hl.gesture({
     zoom_level = 1,
     mode = "live"
 })
+
+
+-- Middle Click + Right Click for hexecute (Requires Hexecute, ofc)
+-- Gemini made the following code
+-- 1. Create the special mode (submap) for the mouse chord
+hl.define_submap("mouse_chord", function()
+    -- If Right Click (mouse:273) is pressed, run the command and exit the submap
+    hl.bind("mouse:274", hl.dsp.exec_cmd("hexecute"))
+    hl.bind("mouse:274", hl.dsp.submap("reset"))
+
+    -- If Middle Click (mouse:274) is released without a right click, exit the submap.
+    -- We use non_consuming so the app still receives the release click.
+    hl.bind("mouse:273", hl.dsp.submap("reset"), { release = true, non_consuming = true })
+end)
+
+-- 2. When Middle Click is pressed, enter the submap.
+-- We use non_consuming so the click is not blocked from your open apps.
+hl.bind("mouse:273", hl.dsp.submap("mouse_chord"), { non_consuming = true })
+
+
+
+
+-- Hyprland workspace switching should go overall workspaces in between 
+-- Most of the following code was made with Claude
+local smoothSwitch = true
+local stepDelay    = 100
+
+local function switch_workspace_through(target)
+    local current = hl.get_active_workspace().id
+
+    if not smoothSwitch or type(current) ~= "number" or type(target) ~= "number" or current == target then
+        hl.dispatch(hl.dsp.focus({ workspace = target }))
+        return
+    end
+
+    local step = (target > current) and 1 or -1
+    local ws = current + step
+
+    local function schedule_next()
+        if (step > 0 and ws > target) or (step < 0 and ws < target) then
+            return
+        end
+
+        local this_ws = ws
+        ws = ws + step
+
+        hl.timer(function()
+            hl.dispatch(hl.dsp.focus({ workspace = this_ws }))
+            schedule_next()
+        end, { timeout = stepDelay, type = "oneshot" })
+    end
+
+    schedule_next()
+end
+
+for i = 1, 10 do
+    local key    = i % 10  -- 10 maps to key 0
+    local target = i
+
+    hl.bind(mainMod .. " + " .. key, function()
+        switch_workspace_through(target)
+    end)
+
+    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i, follow=false }))
+
+end
+
 
 

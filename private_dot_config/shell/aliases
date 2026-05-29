@@ -1,8 +1,9 @@
 #!/bin/bash
 
 alias ls="eza --icons --group-directories-first"
+alias sl=ls # because im retarded
 alias rm=trash
-alias pac="sudo pacman --needed"
+alias pac="sudo pacman"
 alias chezcd="cd /home/hoshiya4522/.local/share/chezmoi"
 
 
