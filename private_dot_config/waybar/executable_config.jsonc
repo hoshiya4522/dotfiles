@@ -4,11 +4,12 @@
     "layer": "top",
     // "position": "top",
     "position": "bottom",
-    "height": 30,
+    "height": 48,
     "spacing": 4,
 
     "modules-left": [
         "hyprland/workspaces",
+		"custom/hypr_mode",
         "custom/notification",
         "mpris"
     ],
@@ -21,6 +22,7 @@
     "modules-right": [
         "keyboard-state",
 		"tray",
+		"network",
         "cpu",
         "memory",
         "pulseaudio",
@@ -218,11 +220,26 @@
     },
 
 	"network": {
-		"format-wifi": "{essid} ({signalStrength}%) ",
-		"format-ethernet": "{ipaddr}/{cidr} 󰈀",
-		"tooltip-format": "{ifname} via {gwaddr} 󰊗",
-		"format-linked": "{ifname} (No IP) 󰈀",
-		"format-disconnected": "Disconnected ⚠",
-		"format-alt": "{ifname}: {ipaddr}/{cidr}"
+		// "format-wifi": "{essid} ({signalStrength}%) ",
+		// "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+		// "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+		// "format-linked": "{ifname} (No IP) 󰈀",
+		// "format-disconnected": "Disconnected ⚠",
+		// "format-alt": "{ifname}: {ipaddr}/{cidr}",
+		"format-wifi": "{icon}",
+		"format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
+		"on-click": "nm-connection-editor",
+		"interval": "5",
+		"tooltip-format": "{essid} ({signalStrength}%)"
+
+	},
+
+	"custom/hypr_mode": {
+		"exec": "~/.config/waybar/scripts/hypr_mode.sh",
+		"interval": 1,
+		"format": "| {} |",
+		"on-click": "hyprctl eval 'cycle_layouts()'",
+		"tooltip": false
 	}
+
 }

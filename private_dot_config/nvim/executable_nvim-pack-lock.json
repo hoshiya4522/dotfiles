@@ -130,6 +130,10 @@
       "rev": "0ae3de1",
       "src": "https://github.com/ThePrimeagen/vim-be-good"
     },
+    "vim-markdown": {
+      "rev": "1bc9d0cd8e1cc3e901b0a49c2b50a843f1c89397",
+      "src": "https://github.com/preservim/vim-markdown"
+    },
     "vim-nand2tetris-syntax": {
       "rev": "f5d4360",
       "src": "https://github.com/sevko/vim-nand2tetris-syntax"

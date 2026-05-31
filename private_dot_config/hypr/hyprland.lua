@@ -53,9 +53,7 @@ hl.on("hyprland.start", function ()
 	-- Necessary for KDE applications to work properly
 	hl.exec_cmd("kded6")
 	hl.exec_cmd("kbuildsycoca6")
-	hl.exec_cmd("nwg-look -a")
 
-	hl.exec_cmd("nm-applet --indicator") -- wifi indicator
 	hl.exec_cmd("waybar") -- bar
 
 	hl.exec_cmd("swayosd-server") -- OSD 
@@ -68,6 +66,15 @@ hl.on("hyprland.start", function ()
 
 	-- Alt Tab (Requires snappy-switcher)
 	hl.exec_cmd("snappy-switcher --daemon")
+
+	-- Hotcorners (Requires waycorner)
+	hl.exec_cmd("waycorner")
+
+	-- hyprpm
+	hl.exec_cmd("hyprpm reload")
+
+	-- nwg-loog themes load
+	hl.exec_cmd("nwg-look -a")
 end)
 
 -------------------------------
@@ -232,7 +239,9 @@ hl.config({
 hl.config({
     scrolling = {
         fullscreen_on_one_column = true,
-    },
+        explicit_column_widths = "0.333, 0.667, 1.0", -- like niri
+        column_width = 0.5 -- for newly opened windows
+    }
 })
 
 ----------------
@@ -318,18 +327,36 @@ hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("wlogout")) -- pacman -S wlog
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("nwg-drawer"), { release = true })
 
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+
+
+-- Dwindle Specific
+-- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+
+
+
+
+-- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Uncommon-tips-and-tricks/#per-layout-bindings
+
+--Scrolling Specific
+hl.bind("SUPER + R", hl.dsp.layout("colresize +conf"))
+
+-- Master Specific
+hl.bind("SUPER + RETURN", hl.dsp.layout("swapwithmaster"))
+hl.bind("SUPER + I", hl.dsp.layout("addmaster"))
+hl.bind("SUPER + SHIFT + I", hl.dsp.layout("removemaster"))
+
+
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + K",    hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
 --
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
@@ -398,23 +425,29 @@ hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("/home/hoshiya4522/.local/bin
 hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("/home/hoshiya4522/.config/shell/scripts/read-smart.sh"))
 
 -- Alt Tab (Requires snappy-switcher)
-hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("snappy-switcher toggle"))
 hl.bind("ALT + TAB", hl.dsp.exec_cmd("snappy-switcher next"))
 hl.bind("ALT + SHIFT + TAB", hl.dsp.exec_cmd("snappy-switcher prev"))
 
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
+
 
 -- SUPER SHIFT N = scrolling (because [N]iri)
 -- SUPER SHIFT B = dwindlw (because [B]spwn)
 -- SUPER SHIFT M = master (because [M]aster)
+-- SUPER SHIFT N = monocle (because mo[N]ocle)
+-- SUPER SHIFT P = go thought all the layouts
 -- SUPER SHIFT F = monocle (because [F]ullscreen)
+-- SUPER M = maximize - togglable (because [m]aximize)
+hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + N", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "scrolling" }) end)
-hl.bind(mainMod .. " + SHIFT + F", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "monocle" }) end)
+hl.bind(mainMod .. " + SHIFT + K", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "monocle" }) end)
 hl.bind(mainMod .. " + SHIFT + M", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "master" }) end)
 hl.bind(mainMod .. " + SHIFT + B", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "dwindle" }) end)
 
+--
 -- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Uncommon-tips-and-tricks/#cycle-layout-for-current-workspace
-hl.bind(mainMod .. " + M", function ()
+function cycle_layouts()
     local layouts     = { "scrolling", "dwindle", "master", "monocle" }
     local workspace   = hl.get_active_workspace()
     local next_layout = "dwindle"
@@ -434,15 +467,16 @@ hl.bind(mainMod .. " + M", function ()
         master    = "rgb(ff9933)",
         monocle   = "rgb(cc66ff)"
     }
-	hl.notification.create({
-		text = "Layout changed to: " .. next_layout,
-		font_size = 12,
-		color = layout_colors[next_layout],
-		duration = 1500
-	})
+	-- hl.notification.create({
+	-- 	text = "Layout changed to: " .. next_layout,
+	-- 	font_size = 12,
+	-- 	color = layout_colors[next_layout],
+	-- 	duration = 1500
+	-- })
 	hl.workspace_rule({ workspace = workspace.name, layout = next_layout })
-end)
+end
 
+hl.bind(mainMod .. " + SHIFT + P", cycle_layouts)
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
@@ -593,26 +627,50 @@ end
 local moveFloat = 15
 -- Move the window relative to its current position
 -- 'repeating = true' allows you to hold the keys down to keep moving the window
-hl.bind("SUPER + SHIFT + Left", hl.dsp.window.move({ x = -moveFloat, y = 0, relative = true }), { repeating = true })
-hl.bind("SUPER + SHIFT + Right", hl.dsp.window.move({ x = moveFloat, y = 0, relative = true }), { repeating = true })
-hl.bind("SUPER + SHIFT + Up", hl.dsp.window.move({ x = 0, y = -moveFloat, relative = true }), { repeating = true })
-hl.bind("SUPER + SHIFT + Down", hl.dsp.window.move({ x = 0, y = moveFloat, relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + H", hl.dsp.window.move({ x = -moveFloat, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + L", hl.dsp.window.move({ x = moveFloat, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + K", hl.dsp.window.move({ x = 0, y = -moveFloat, relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + J", hl.dsp.window.move({ x = 0, y = moveFloat, relative = true }), { repeating = true })
 
 -- Set how many pixels to resize by
 local resizeFloat = 15
 -- Resize the window using arrow keys
 -- 'relative = true' means it adds or subtracts from the current size
-hl.bind("SUPER + CONTROL + Up", hl.dsp.window.resize({ x = 0, y = -resizeFloat, relative = true }), { repeating = true })
-hl.bind("SUPER + CONTROL + Down", hl.dsp.window.resize({ x = 0, y = resizeFloat, relative = true }), { repeating = true })
-hl.bind("SUPER + CONTROL + Left", hl.dsp.window.resize({ x = -resizeFloat, y = 0, relative = true }), { repeating = true })
-hl.bind("SUPER + CONTROL + Right", hl.dsp.window.resize({ x = resizeFloat, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + CONTROL + K", hl.dsp.window.resize({ x = 0, y = -resizeFloat, relative = true }), { repeating = true })
+hl.bind("SUPER + CONTROL + J", hl.dsp.window.resize({ x = 0, y = resizeFloat, relative = true }), { repeating = true })
+hl.bind("SUPER + CONTROL + H", hl.dsp.window.resize({ x = -resizeFloat, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + CONTROL + L", hl.dsp.window.resize({ x = resizeFloat, y = 0, relative = true }), { repeating = true })
 
 -- Move the floating window to the extreme edges of the screen
-hl.bind("SUPER + SHIFT + ALT + Up", hl.dsp.window.move({ direction = "u" }))
-hl.bind("SUPER + SHIFT + ALT + Down", hl.dsp.window.move({ direction = "d" }))
-hl.bind("SUPER + SHIFT + ALT + Left", hl.dsp.window.move({ direction = "l" }))
-hl.bind("SUPER + SHIFT + ALT + Right", hl.dsp.window.move({ direction = "r" }))
+hl.bind("SUPER + SHIFT + ALT + K", hl.dsp.window.move({ direction = "u" }))
+hl.bind("SUPER + SHIFT + ALT + J", hl.dsp.window.move({ direction = "d" }))
+hl.bind("SUPER + SHIFT + ALT + H", hl.dsp.window.move({ direction = "l" }))
+hl.bind("SUPER + SHIFT + ALT + L", hl.dsp.window.move({ direction = "r" }))
+
+
+-- Hyprexpo
+-- hyprpm add https://github.com/sandwichfarm/hyprexpo
+-- hyprpm enable hyprexpo
+-- hyprpm reload
+hl.config({
+    plugin = {
+        hyprexpo = {
+            columns = 3,
+            gaps_in = 5,
+            gaps_out = 0,
+            bg_col = "rgb(111111)",
+            workspace_method = "center current",
+            gesture_distance = 200,
+            cancel_key = "escape",
+            show_cursor = 1,
+        },
+    },
+})
+hl.bind("SUPER + W", function() hl.plugin.hyprexpo.expo("toggle") end)
 
 
 
--- require("testing")
+-- hl.workspace_rule({ workspace = "5", layout = "scrolling" })
+
+require("testing")
+

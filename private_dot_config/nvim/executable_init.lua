@@ -55,6 +55,7 @@ vim.pack.add({
     { src = "https://github.com/sevko/vim-nand2tetris-syntax" },
     { src = "https://github.com/chomosuke/typst-preview.nvim" },
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+	{ src = "https://github.com/preservim/vim-markdown" },
 	{ src = "https://github.com/norcalli/nvim-colorizer.lua" },
 
 
@@ -225,7 +226,6 @@ require("mason-lspconfig").setup({
         "tinymist",
         "ts_ls",
         "ty",
-		"harper_ls"
     }
 })
 
