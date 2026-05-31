@@ -9,17 +9,18 @@
 
     "modules-left": [
         "hyprland/workspaces",
-        "tray",
         "custom/notification",
         "mpris"
     ],
 
     "modules-center": [
+		"hyprland/windowcount",
         "hyprland/window"
     ],
 
     "modules-right": [
         "keyboard-state",
+		"tray",
         "cpu",
         "memory",
         "pulseaudio",
@@ -33,24 +34,55 @@
         "all-outputs": true,
         "warp-on-scroll": true,
         "format": "{name}:{icon}",
+		"persistent-workspaces": {
+			"1":"",
+			"2":"",
+			"3":"",
+			"4":"",
+			"5":"",
+			"6":"",
+			"7":"",
+			"8":"",
+			"9":""
+			// "1": "󰲠",
+			// "2": "󰲢",
+			// "3": "󰲤",
+			// "4": "󰲦",
+			// "5": "󰲨",
+			// "6": "󰲪",
+		},
         "format-icons": {
-			// "active": "",
-			// "default": "",
-			// "urgent": "",
-			"1": "󰲠",
-			"2": "󰲢",
-			"3": "󰲤",
-			"4": "󰲦",
-			"5": "󰲨",
-			"6": "󰲪",
-			"7": "󰲬",
-			"8": "󰲮",
-			"9": "󰲰",
-			"10": "󰿬"
+			"1":"",
+			"2":"",
+			"3":"",
+			"4":"",
+			"5":"",
+			"6":"",
+			"7":"",
+			"8":"",
+			"9":"",
+			// "1": "󰲠",
+			// "2": "󰲢",
+			// "3": "󰲤",
+			// "4": "󰲦",
+			// "5": "󰲨",
+			// "6": "󰲪",
+			// "7": "󰲬",
+			// "8": "󰲮",
+			// "9": "󰲰",
+			// "10": "󰿬",
+			"default": "",
+			"urgent": ""
         },
         "on-scroll-down": "hyprctl dispatch \"hl.dsp.focus({ workspace = 'e+1' })\"",
         "on-scroll-up": "hyprctl dispatch \"hl.dsp.focus({ workspace = 'e-1' })\""
     },
+
+	"hyprland/windowcount": {
+		"format": "[{}]",
+		"format-empty": "",
+		"separate-outputs": true
+	},
 
     "hyprland/window": {
         "max-length": 80
