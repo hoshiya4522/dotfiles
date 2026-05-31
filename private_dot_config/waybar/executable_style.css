@@ -69,8 +69,8 @@ window#waybar.empty #window {
 }
 
 #workspaces button.active {
-    color: @foreground;
-	background-color: @background;
+    color: @background;
+	background-color: @foreground;
 }
 
 #workspaces button.urgent {
