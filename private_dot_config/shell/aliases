@@ -5,6 +5,7 @@ alias sl=ls # because im retarded
 alias rm=trash
 alias pac="sudo pacman"
 alias chezcd="cd /home/hoshiya4522/.local/share/chezmoi"
+alias here="dolphin . & disown"
 
 
 source /home/hoshiya4522/.config/self/.scripts/aliases

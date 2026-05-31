@@ -34,7 +34,6 @@ local terminal    = "foot"
 local fileManager = "dolphin"
 local menu        = "fuzzel"
 
-
 -------------------
 ---- AUTOSTART ----
 -------------------
@@ -51,18 +50,17 @@ local menu        = "fuzzel"
 -- end)
 
 hl.on("hyprland.start", function () 
-	hl.exec_cmd("nm-applet --indicator")
-	hl.exec_cmd("waybar")
-	hl.exec_cmd("pypr")  -- yay -S pyprland
-
-	hl.exec_cmd("swayosd-server") 
-	hl.exec_cmd("swaync")
-	hl.exec_cmd("nwg-look -a")
-	hl.exec_cmd("snappy-switcher toggle")
-
 	-- Necessary for KDE applications to work properly
 	hl.exec_cmd("kded6")
 	hl.exec_cmd("kbuildsycoca6")
+	hl.exec_cmd("nwg-look -a")
+
+	hl.exec_cmd("nm-applet --indicator") -- wifi indicator
+	hl.exec_cmd("waybar") -- bar
+
+	hl.exec_cmd("swayosd-server") -- OSD 
+	hl.exec_cmd("swaync") -- notification center
+	-- hl.exec_cmd("flameshot") -- screenshot
 
 	-- Clipboard (requires cliphist)
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
@@ -70,13 +68,11 @@ hl.on("hyprland.start", function ()
 
 	-- Alt Tab (Requires snappy-switcher)
 	hl.exec_cmd("snappy-switcher --daemon")
-
 end)
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
-
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
 -- hl.env("XCURSOR_SIZE", "48")
@@ -170,11 +166,12 @@ hl.config({
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
-hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1},    {0.32, 1}    } })
-hl.curve("easeInOutCubic", { type = "bezier", points = { {0.65, 0.05}, {0.36, 1}    } })
-hl.curve("linear",         { type = "bezier", points = { {0, 0},       {1, 1}       } })
-hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}    } })
-hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
+hl.curve("idk",				{ type = "bezier", points = { {0, 0},       {0, 0}       } })
+hl.curve("easeOutQuint",	{ type = "bezier", points = { {0.23, 1},    {0.32, 1}    } })
+hl.curve("easeInOutCubic",	{ type = "bezier", points = { {0.65, 0.05}, {0.36, 1}    } })
+hl.curve("linear",			{ type = "bezier", points = { {0, 0},       {1, 1}       } })
+hl.curve("almostLinear",	{ type = "bezier", points = { {0.5, 0.5},   {0.75, 1}    } })
+hl.curve("quick",			{ type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
 
 -- Default springs
 hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
@@ -194,7 +191,8 @@ hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 1.49, bezier = "
 hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "easeOutQuint", style = "fade" })
 hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
 -- hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 3,    bezier = "default",      style = "slidevert" })
+-- hl.animation({ leaf = "workspaces",    enabled = true,  speed = 3,    bezier = "linear",      style = "slidevert" })
+hl.animation({ leaf = "workspaces",    enabled = true,  speed = 3,    bezier = "idk",          style = "slidevert" })
 hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "slidevert" })
 hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "slidevert" })
 
@@ -258,8 +256,11 @@ hl.config({
         kb_layout  = "us",
         kb_variant = "",
         kb_model   = "",
-        kb_options = "",
+		-- Absolute 100x developer
+        kb_options = "caps:escape_shifted_capslock",
         kb_rules   = "",
+
+
 
         follow_mouse = 1,
 		-- force_no_accel = 1,
@@ -268,9 +269,12 @@ hl.config({
         sensitivity = 0.5, -- -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
+			disable_while_typing = true,
+			natural_scroll = true,
+
+			-- https://wayland.freedesktop.org/libinput/doc/latest/tapping.html#tap-and-drag
 			tap_and_drag = true,
-			drag_lock = false,
-            natural_scroll = true
+			drag_lock = 1
         },
     },
 })
@@ -326,23 +330,14 @@ hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
-
--- Workspace switching and moving windows
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
--- for i = 1, 10 do
---     local key = i % 10 -- 10 maps to key 0
---     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
---     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
--- end
-
+--
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + mouse_down",   hl.dsp.focus({ workspace = "e-1" }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
@@ -392,7 +387,9 @@ hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("swayosd-client --brightness -5"
 hl.bind("XF86Launch8",  hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"),       { locked = true })
 
 -- Screenshot
-hl.bind("Print",hl.dsp.exec_cmd("hyprshot --clipboard -zm region"),                  { locked = true, repeating = true })
+-- hl.bind("Print",hl.dsp.exec_cmd("flameshot gui"),                  { locked = true, repeating = true })
+-- hl.bind("Print",hl.dsp.exec_cmd("hyprshot --clipboard -zm region"),                  { locked = true, repeating = true })
+hl.bind("Print",hl.dsp.exec_cmd("hyprshot -o /home/hoshiya4522/Pictures/Screenshots --freeze -m region"),                  { locked = true, repeating = true })
 
 -- STT
 hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("/home/hoshiya4522/.local/bin/handy.AppImage --toggle-transcription"))
@@ -405,6 +402,7 @@ hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("snappy-switcher toggle"))
 hl.bind("ALT + TAB", hl.dsp.exec_cmd("snappy-switcher next"))
 hl.bind("ALT + SHIFT + TAB", hl.dsp.exec_cmd("snappy-switcher prev"))
 
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 
 -- SUPER SHIFT N = scrolling (because [N]iri)
 -- SUPER SHIFT B = dwindlw (because [B]spwn)
@@ -420,11 +418,9 @@ hl.bind(mainMod .. " + M", function ()
     local layouts     = { "scrolling", "dwindle", "master", "monocle" }
     local workspace   = hl.get_active_workspace()
     local next_layout = "dwindle"
-
     if not workspace then
         return
     end
-
     for i = 1, #layouts do
         if layouts[i] == workspace.tiled_layout then
             local next_layout_idx = (i % #layouts) + 1
@@ -432,8 +428,19 @@ hl.bind(mainMod .. " + M", function ()
             break
         end
     end
-
-    hl.workspace_rule({ workspace = workspace.name, layout = next_layout })
+	local layout_colors = {
+		dwindle   = "rgb(33ccff)",
+        scrolling = "rgb(00ff99)",
+        master    = "rgb(ff9933)",
+        monocle   = "rgb(cc66ff)"
+    }
+	hl.notification.create({
+		text = "Layout changed to: " .. next_layout,
+		font_size = 12,
+		color = layout_colors[next_layout],
+		duration = 1500
+	})
+	hl.workspace_rule({ workspace = workspace.name, layout = next_layout })
 end)
 
 --------------------------------
@@ -534,50 +541,78 @@ hl.bind("mouse:273", hl.dsp.submap("mouse_chord"), { non_consuming = true })
 
 
 
+-- Workspace switching and moving windows
+-- Switch workspaces with mainMod + [0-9]
+-- Move active window to a workspace with mainMod + SHIFT + [0-9]
 -- Hyprland workspace switching should go overall workspaces in between 
 -- Most of the following code was made with Claude
-local smoothSwitch = true
+local smoothSwitch = false
 local stepDelay    = 100
 
 local function switch_workspace_through(target)
     local current = hl.get_active_workspace().id
-
     if not smoothSwitch or type(current) ~= "number" or type(target) ~= "number" or current == target then
         hl.dispatch(hl.dsp.focus({ workspace = target }))
         return
     end
-
     local step = (target > current) and 1 or -1
     local ws = current + step
-
     local function schedule_next()
         if (step > 0 and ws > target) or (step < 0 and ws < target) then
             return
         end
-
         local this_ws = ws
         ws = ws + step
-
         hl.timer(function()
             hl.dispatch(hl.dsp.focus({ workspace = this_ws }))
             schedule_next()
         end, { timeout = stepDelay, type = "oneshot" })
     end
-
     schedule_next()
 end
+
 
 for i = 1, 10 do
     local key    = i % 10  -- 10 maps to key 0
     local target = i
 
-    hl.bind(mainMod .. " + " .. key, function()
-        switch_workspace_through(target)
-    end)
-
+	if (smoothSwitch) then
+		hl.bind(mainMod .. " + " .. key, function()
+			switch_workspace_through(target)
+		end)
+	else
+		hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
+	end
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i, follow=false }))
 
 end
 
 
 
+-- Define how many pixels to move
+local moveFloat = 15
+-- Move the window relative to its current position
+-- 'repeating = true' allows you to hold the keys down to keep moving the window
+hl.bind("SUPER + SHIFT + Left", hl.dsp.window.move({ x = -moveFloat, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + Right", hl.dsp.window.move({ x = moveFloat, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + Up", hl.dsp.window.move({ x = 0, y = -moveFloat, relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + Down", hl.dsp.window.move({ x = 0, y = moveFloat, relative = true }), { repeating = true })
+
+-- Set how many pixels to resize by
+local resizeFloat = 15
+-- Resize the window using arrow keys
+-- 'relative = true' means it adds or subtracts from the current size
+hl.bind("SUPER + CONTROL + Up", hl.dsp.window.resize({ x = 0, y = -resizeFloat, relative = true }), { repeating = true })
+hl.bind("SUPER + CONTROL + Down", hl.dsp.window.resize({ x = 0, y = resizeFloat, relative = true }), { repeating = true })
+hl.bind("SUPER + CONTROL + Left", hl.dsp.window.resize({ x = -resizeFloat, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + CONTROL + Right", hl.dsp.window.resize({ x = resizeFloat, y = 0, relative = true }), { repeating = true })
+
+-- Move the floating window to the extreme edges of the screen
+hl.bind("SUPER + SHIFT + ALT + Up", hl.dsp.window.move({ direction = "u" }))
+hl.bind("SUPER + SHIFT + ALT + Down", hl.dsp.window.move({ direction = "d" }))
+hl.bind("SUPER + SHIFT + ALT + Left", hl.dsp.window.move({ direction = "l" }))
+hl.bind("SUPER + SHIFT + ALT + Right", hl.dsp.window.move({ direction = "r" }))
+
+
+
+-- require("testing")
