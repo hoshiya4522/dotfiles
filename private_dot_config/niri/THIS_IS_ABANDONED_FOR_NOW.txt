@@ -1,0 +1,6 @@
+I'm currently using hyprland now.
+Niri caused problems with winboat which actually is integral in my workfow as i need
+to run solidworks and autocad for my uni courses.
+
+winboat works fine with Hyprland.
+I havent configured Hyprland's scrolling mode but lets see if it fully covers my needs.
