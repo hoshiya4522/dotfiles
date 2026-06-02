@@ -9,6 +9,7 @@ alias here="dolphin . & disown"
 
 # Chezmoi specific
 alias chez="chezmoi"
+alias cz="chezmoi"
 alias czc="cd /home/hoshiya4522/.local/share/chezmoi"
 alias czl="czc && lazygit && cd -"
 

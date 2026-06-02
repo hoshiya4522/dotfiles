@@ -199,9 +199,9 @@ hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "
 hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
 -- hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
 -- hl.animation({ leaf = "workspaces",    enabled = true,  speed = 3,    bezier = "linear",      style = "slidevert" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 3,    bezier = "idk",          style = "slidevert" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "slidevert" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "slidevert" })
+hl.animation({ leaf = "workspaces",    enabled = true,  speed = 0.7,    bezier = "idk",          style = "slidevert" })
+hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 0.7, bezier = "almostLinear", style = "slidevert" })
+hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 0.7, bezier = "almostLinear", style = "slidevert" })
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
@@ -317,8 +317,13 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+
+-- Polite way
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
+
+
+
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("wlogout")) -- pacman -S wlogout
 
 -- hl.bind(mainMod .. " + M", function() hl.dispatch("fullscreen", "1") end)
@@ -432,18 +437,34 @@ hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
 
 
 -- SUPER SHIFT N = scrolling (because [N]iri)
--- SUPER SHIFT B = dwindlw (because [B]spwn)
+-- SUPER SHIFT B = dwindle (because [B]spwn)
 -- SUPER SHIFT M = master (because [M]aster)
--- SUPER SHIFT N = monocle (because mo[N]ocle)
+-- SUPER SHIFT V = monocle (because idk[V])
 -- SUPER SHIFT P = go thought all the layouts
 -- SUPER SHIFT F = monocle (because [F]ullscreen)
 -- SUPER M = maximize - togglable (because [m]aximize)
 hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" }))
-hl.bind(mainMod .. " + SHIFT + N", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "scrolling" }) end)
-hl.bind(mainMod .. " + SHIFT + K", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "monocle" }) end)
-hl.bind(mainMod .. " + SHIFT + M", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "master" }) end)
-hl.bind(mainMod .. " + SHIFT + B", function () hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "dwindle" }) end)
+
+hl.bind(mainMod .. " + SHIFT + N", function () 
+	hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "scrolling" }) 
+	hl.dispatch(hl.dsp.exec_cmd("pkill -RTMIN+8 waybar"))
+end)
+
+hl.bind(mainMod .. " + SHIFT + V", function () 
+	hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "monocle" })
+	hl.dispatch(hl.dsp.exec_cmd("pkill -RTMIN+8 waybar"))
+end)
+
+hl.bind(mainMod .. " + SHIFT + M", function ()
+	hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "master" })
+	hl.dispatch(hl.dsp.exec_cmd("pkill -RTMIN+8 waybar"))
+end)
+
+hl.bind(mainMod .. " + SHIFT + B", function ()
+	hl.workspace_rule({ workspace = hl.get_active_workspace().name, layout = "dwindle" })
+	hl.dispatch(hl.dsp.exec_cmd("pkill -RTMIN+8 waybar"))
+end)
 
 --
 -- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Uncommon-tips-and-tricks/#cycle-layout-for-current-workspace
@@ -474,6 +495,7 @@ function cycle_layouts()
 	-- 	duration = 1500
 	-- })
 	hl.workspace_rule({ workspace = workspace.name, layout = next_layout })
+	hl.dispatch(hl.dsp.exec_cmd("pkill -RTMIN+8 waybar"))
 end
 
 hl.bind(mainMod .. " + SHIFT + P", cycle_layouts)

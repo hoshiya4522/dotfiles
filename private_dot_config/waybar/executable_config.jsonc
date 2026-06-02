@@ -17,6 +17,7 @@
     "modules-center": [
 		"hyprland/windowcount",
         "hyprland/window"
+		// "custom/window_icon"
     ],
 
     "modules-right": [
@@ -114,11 +115,13 @@
     },
 
     "cpu": {
-        "format": "{usage}% "
+        "format": "{usage}% ",
+		"on-click": "foot htop"
     },
 
     "memory": {
-        "format": "{}% "
+        "format": "{}% ",
+		"on-click": "foot htop"
     },
 
     "backlight": {
@@ -158,7 +161,8 @@
             "󰂁",
             "󰂂",
             "󰁹"
-        ]
+        ],
+		"on-click": "auto-cpufreq"
     },
 
     "pulseaudio": {
@@ -228,18 +232,27 @@
 		// "format-alt": "{ifname}: {ipaddr}/{cidr}",
 		"format-wifi": "{icon}",
 		"format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
+		"format-ethernet": "󰈀",
 		"on-click": "nm-connection-editor",
 		"interval": "5",
-		"tooltip-format": "{essid} ({signalStrength}%)"
+		"tooltip-format": "{essid} ({signalStrength}%)\n{ipaddr}"
 
 	},
 
 	"custom/hypr_mode": {
-		"exec": "~/.config/waybar/scripts/hypr_mode.sh",
-		"interval": 1,
-		"format": "| {} |",
-		"on-click": "hyprctl eval 'cycle_layouts()'",
-		"tooltip": false
-	}
+        "exec": "~/.config/waybar/scripts/hypr_mode.sh",
+        "interval": "once",
+        "signal": 8,
+        "format": "| {} |",
+        "on-click": "hyprctl eval 'cycle_layouts()' && pkill -RTMIN+8 waybar",
+        "tooltip": true
+	},
+
+	"custom/window_icon": {
+        "exec": "~/.config/waybar/scripts/window_icon.sh",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true
+    }
 
 }
