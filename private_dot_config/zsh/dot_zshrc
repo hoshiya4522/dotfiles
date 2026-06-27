@@ -1,9 +1,11 @@
 export EDITOR="nvim"
 
 # --- Vi Mode & Basic Keybindings ---
-bindkey -v
-export KEYTIMEOUT=1
-bindkey -M viins 'jk' vi-cmd-mode
+# bindkey -v
+# export KEYTIMEOUT=1
+# bindkey -M viins 'jk' vi-cmd-mode
+ZVM_KEYTIMEOUT=0.05
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
 # Home, End, and Delete keys
 bindkey '^[[H' beginning-of-line
@@ -39,6 +41,8 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+# setopt CORRECT
+setopt CORRECT_ALL
 
 # --- Antidote Package Manager ---
 # Must load BEFORE compinit
@@ -51,6 +55,8 @@ if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
 fi
 source ${zsh_plugins}.zsh
 
+fpath+=~/.config/zsh/auto_comp
+
 # --- Autocompletion ---
 # Must load AFTER plugins
 autoload -U compinit && compinit
@@ -61,7 +67,12 @@ bindkey '^p' history-substring-search-up
 bindkey '^n' history-substring-search-down
 
 # Ctrl+Y to accept Zsh Autosuggestions
-bindkey '^y' autosuggest-accept
+# bindkey '^y' autosuggest-accept
+# Run custom keybindings after zsh-vi-mode loads
+function zvm_after_init() {
+	# something i picked up from kickstart.nvim
+	zvm_bindkey viins '^y' autosuggest-accept
+}
 
 # --- Zstyle & Completions ---
 # Case insensetive tab
@@ -135,3 +146,25 @@ function y() {
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	command rm -f -- "$tmp"
 }
+
+
+#https://github.com/practicalli-johnny/neovim-config-archive/issues/2
+function nvim-selector() {
+  items=("default" "rewrite-nvim")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+
+
+
+# for using ros2 in distrobox
+if [[ "$CONTAINER_ID" == "ros2-jazzy" ]]; then
+	source $HOME/.config/zsh/ros2-jazzy.zsh
+fi

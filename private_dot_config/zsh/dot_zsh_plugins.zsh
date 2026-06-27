@@ -12,3 +12,5 @@ fpath+=( "$HOME/.cache/antidote/github.com/zsh-users/zsh-completions" )
 source "$HOME/.cache/antidote/github.com/zsh-users/zsh-completions/zsh-completions.plugin.zsh"
 fpath+=( "$HOME/.cache/antidote/github.com/Aloxaf/fzf-tab" )
 source "$HOME/.cache/antidote/github.com/Aloxaf/fzf-tab/fzf-tab.plugin.zsh"
+fpath+=( "$HOME/.cache/antidote/github.com/jeffreytse/zsh-vi-mode" )
+source "$HOME/.cache/antidote/github.com/jeffreytse/zsh-vi-mode/zsh-vi-mode.plugin.zsh"

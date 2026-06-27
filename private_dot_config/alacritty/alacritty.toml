@@ -1,8 +1,8 @@
 general.import = [
   # "~/.config/alacritty/tokyo-night-storm.toml"
-  # "~/.config/alacritty/tokyo-night.toml"
+  "~/.config/alacritty/tokyo-night.toml"
   # "~/.config/alacritty/gruvbox_dark.toml"
-  "~/.config/alacritty/gruvbox_material.toml"
+  # "~/.config/alacritty/gruvbox_material.toml"
 ]
 
 [font]

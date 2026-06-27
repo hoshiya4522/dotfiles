@@ -1,15 +1,3 @@
--- This is an example Hyprland Lua config file.
--- Refer to the wiki for more information.
--- https://wiki.hypr.land/Configuring/Start/
-
--- Please note not all available settings / options are set here.
--- For a full list, see the wiki
-
--- You can (and should!!) split this configuration into multiple files
--- Create your files separately and then require them like this:
--- require("myColors")
-
-
 ------------------
 ---- MONITORS ----
 ------------------
@@ -30,7 +18,6 @@ hl.monitor({
 -- Set programs that you use
 local browser     = "firefox"
 local terminal    = "foot"
--- local terminal    = "alacritty"
 local fileManager = "dolphin"
 local menu        = "fuzzel"
 
@@ -71,7 +58,7 @@ hl.on("hyprland.start", function ()
 	hl.exec_cmd("waycorner")
 
 	-- hyprpm
-	hl.exec_cmd("hyprpm reload")
+	-- hl.exec_cmd("hyprpm reload")
 
 	-- nwg-loog themes load
 	hl.exec_cmd("nwg-look -a")
@@ -318,9 +305,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 
--- Polite way
-local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
+hl.bind(mainMod .. " + C", hl.dsp.window.close())
 
 
 
@@ -577,70 +562,12 @@ hl.gesture({
 })
 
 
--- Middle Click + Right Click for hexecute (Requires Hexecute, ofc)
--- Gemini made the following code
--- 1. Create the special mode (submap) for the mouse chord
-hl.define_submap("mouse_chord", function()
-    -- If Right Click (mouse:273) is pressed, run the command and exit the submap
-    hl.bind("mouse:274", hl.dsp.exec_cmd("hexecute"))
-    hl.bind("mouse:274", hl.dsp.submap("reset"))
 
-    -- If Middle Click (mouse:274) is released without a right click, exit the submap.
-    -- We use non_consuming so the app still receives the release click.
-    hl.bind("mouse:273", hl.dsp.submap("reset"), { release = true, non_consuming = true })
-end)
-
--- 2. When Middle Click is pressed, enter the submap.
--- We use non_consuming so the click is not blocked from your open apps.
-hl.bind("mouse:273", hl.dsp.submap("mouse_chord"), { non_consuming = true })
-
-
-
-
--- Workspace switching and moving windows
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
--- Hyprland workspace switching should go overall workspaces in between 
--- Most of the following code was made with Claude
-local smoothSwitch = false
-local stepDelay    = 100
-
-local function switch_workspace_through(target)
-    local current = hl.get_active_workspace().id
-    if not smoothSwitch or type(current) ~= "number" or type(target) ~= "number" or current == target then
-        hl.dispatch(hl.dsp.focus({ workspace = target }))
-        return
-    end
-    local step = (target > current) and 1 or -1
-    local ws = current + step
-    local function schedule_next()
-        if (step > 0 and ws > target) or (step < 0 and ws < target) then
-            return
-        end
-        local this_ws = ws
-        ws = ws + step
-        hl.timer(function()
-            hl.dispatch(hl.dsp.focus({ workspace = this_ws }))
-            schedule_next()
-        end, { timeout = stepDelay, type = "oneshot" })
-    end
-    schedule_next()
-end
-
-
+-- Move into workspaces and move windows into workspaces
 for i = 1, 10 do
     local key    = i % 10  -- 10 maps to key 0
-    local target = i
-
-	if (smoothSwitch) then
-		hl.bind(mainMod .. " + " .. key, function()
-			switch_workspace_through(target)
-		end)
-	else
-		hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-	end
+	hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i, follow=false }))
-
 end
 
 
@@ -670,29 +597,7 @@ hl.bind("SUPER + SHIFT + ALT + H", hl.dsp.window.move({ direction = "l" }))
 hl.bind("SUPER + SHIFT + ALT + L", hl.dsp.window.move({ direction = "r" }))
 
 
--- Hyprexpo
--- hyprpm add https://github.com/sandwichfarm/hyprexpo
--- hyprpm enable hyprexpo
--- hyprpm reload
-hl.config({
-    plugin = {
-        hyprexpo = {
-            columns = 3,
-            gaps_in = 5,
-            gaps_out = 0,
-            bg_col = "rgb(111111)",
-            workspace_method = "center current",
-            gesture_distance = 200,
-            cancel_key = "escape",
-            show_cursor = 1,
-        },
-    },
-})
-hl.bind("SUPER + W", function() hl.plugin.hyprexpo.expo("toggle") end)
-
 
 
 -- hl.workspace_rule({ workspace = "5", layout = "scrolling" })
-
-require("testing")
 
