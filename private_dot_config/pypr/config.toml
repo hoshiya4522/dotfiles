@@ -1,6 +1,0 @@
-[pyprland]
-plugins = [
-    # "scratchpads",
-    # "gamemode",
-    "magnify",
-]
