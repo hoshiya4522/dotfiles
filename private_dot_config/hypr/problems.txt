@@ -1,0 +1,3 @@
+1. Hyprland starts with error then goes away as hyprpm is reloaded. 1s of lag
+2. nm-applet starts but icon is not visible. after running `nwg-look -a` it becomes visible
+
