@@ -1,0 +1,48 @@
+(defvar
+	tt	100	;; tap repress timeout
+	ht	200	;; hold timeout
+)
+
+
+(defcfg 
+  process-unmapped-keys yes
+)
+
+;; Keyboard layout
+;; -----------------
+;;  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+;;  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+;;  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+;;  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+;;  lctl lmet lalt           spc            ralt rmet rctl
+
+
+;; defsrc defines which of your key inputs will be processed by kanata
+;; keys excluding this wont be processed if process-unmapped-keys is not set
+;; formet: (defsrc $key1 $key2 ... $keyN)
+(defsrc
+	grv
+	a s d f  h j k l
+)
+
+
+;; defines how keys defined in defsrc behaves
+;; format: (deflayer $layer-name $action1 $action2 ... $actionN)
+(deflayer default
+	_
+	@a_hrm @s_hrm @d_hrm @f_hrm  _ _ _ _
+)
+
+
+(deflayer vim_to_arrow
+	_
+	_ _ _ _   left down up right
+)
+
+
+(defalias
+	d_hrm (tap-hold $tt $ht d lctl)
+	f_hrm (tap-hold $tt $ht f lmet)
+	a_hrm (tap-hold $tt $ht a (layer-toggle vim_to_arrow))
+	s_hrm (tap-hold $tt $ht s lsft)
+)
