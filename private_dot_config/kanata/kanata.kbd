@@ -22,7 +22,7 @@
 ;; formet: (defsrc $key1 $key2 ... $keyN)
 (defsrc
 	grv
-	a s d f  h j k l
+	a s d f  h j k l ;
 )
 
 
@@ -30,19 +30,21 @@
 ;; format: (deflayer $layer-name $action1 $action2 ... $actionN)
 (deflayer default
 	_
-	@a_hrm @s_hrm @d_hrm @f_hrm  _ _ _ _
+	@a_hrm @s_hrm @d_hrm @f_hrm  _ _ _ _ _
 )
-
 
 (deflayer vim_to_arrow
 	_
-	_ _ _ _   left down up right
+	_ _ _ _   left down up right bspc
 )
 
 
 (defalias
-	d_hrm (tap-hold $tt $ht d lctl)
-	f_hrm (tap-hold $tt $ht f lmet)
-	a_hrm (tap-hold $tt $ht a (layer-toggle vim_to_arrow))
+	d_hrm (tap-hold $tt $ht d lctl) ;; d -> ctrl
+	f_hrm (tap-hold $tt $ht f lmet) ;; f -> super
 	s_hrm (tap-hold $tt $ht s lsft)
+
+	;; vim
+	;; toggle
+	a_hrm (tap-hold $tt $ht a (layer-toggle vim_to_arrow))
 )
