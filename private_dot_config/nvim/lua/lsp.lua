@@ -7,7 +7,8 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- local merged_capabilities = vim.tbl_deep_extend("force", capabilities, require("mini.completion").get_lsp_capabilities())
 
 -- merge native capabilities with blink-cmp capabilities (in the case of conflict, prioritize mini completion)
-local merged_capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
+local merged_capabilities = vim.tbl_deep_extend('force', capabilities,
+	require('blink.cmp').get_lsp_capabilities({}, false))
 
 -- Configurations.
 vim.lsp.config("lua_ls", {
@@ -16,6 +17,15 @@ vim.lsp.config("lua_ls", {
 			diagnostics = { globals = { "vim" } },
 		},
 	},
+})
+
+vim.lsp.config("ty", {
+	-- from gemini
+	root_dir = function(bufnr)
+		local fname = vim.api.nvim_buf_get_name(bufnr)
+		local project_root = vim.fs.root(bufnr, { '.git', 'pyproject.toml', 'requirements.txt' })
+		return project_root or vim.fs.dirname(fname)
+	end,
 })
 
 vim.diagnostic.config({
@@ -42,6 +52,7 @@ vim.lsp.enable({
 
 	"lua_ls",
 
+	-- python
 	"ruff", -- Python linter and code formatter
 	"ty" -- Python type checker and language server
 })
@@ -49,7 +60,8 @@ vim.lsp.enable({
 -- LSP Keybinds
 vim.keymap.set("n", "<leader>=", vim.lsp.buf.format, { desc = "Format local buffer", silent = true })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "[g]oto [d]efinition", silent = true })
-vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, { desc = "Open [d]iagnostics [f]loat window", silent = true })
+vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float,
+	{ desc = "Open [d]iagnostics [f]loat window", silent = true })
 
 
 -- These GLOBAL keymaps are created unconditionally when Nvim starts:

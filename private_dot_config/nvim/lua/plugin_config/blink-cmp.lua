@@ -1,7 +1,21 @@
 -- for v2
 local cmp = require('blink.cmp')
 cmp.build():pwait()
-cmp.setup()
+cmp.setup({
+	keymap = {
+		['<C-l>'] = { 'snippet_forward', 'fallback' },
+		['<C-h>'] = { 'snippet_backward', 'fallback' },
+	},
+
+	snippets = {
+		preset = "luasnip",
+	},
+
+	completion = {
+		documentation = { auto_show = true },
+		menu = { draw = { treesitter = { 'lsp' } } }
+	},
+})
 
 -- for v1
 -- require("blink.cmp").setup({
