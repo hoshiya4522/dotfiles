@@ -233,7 +233,8 @@
 		"format-wifi": "{icon}",
 		"format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
 		"format-ethernet": "󰈀",
-		"on-click": "nm-connection-editor",
+		// "on-click": "nm-connection-editor",
+		"on-click": "foot wlctl",
 		"interval": "5",
 		"tooltip-format": "{essid} ({signalStrength}%)\n{ipaddr}"
 
