@@ -33,9 +33,9 @@
 	@a_hrm @s_hrm @d_hrm @f_hrm  _ _ _ _ _
 )
 
-(deflayer vim_to_arrow
+(deflayer intuitive
 	_
-	_ _ _ _   left down up right bspc
+	_ _ lctl _   left down up right bspc
 )
 
 
@@ -46,5 +46,5 @@
 
 	;; vim
 	;; toggle
-	a_hrm (tap-hold $tt $ht a (layer-toggle vim_to_arrow))
+	a_hrm (tap-hold $tt $ht a (layer-toggle intuitive))
 )
