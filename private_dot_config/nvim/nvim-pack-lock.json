@@ -69,7 +69,7 @@
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "50bf3871b539896bd0650b882f6e6b467cc1c1eb",
+      "rev": "47059d71b42d74b0a1e9f61c1d99d301039c3b5b",
       "src": "https://github.com/williamboman/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -114,7 +114,7 @@
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "obsidian.nvim": {
-      "rev": "092e51064a526554c22dd71129d84714d14557df",
+      "rev": "3fab7347007710209284d101b287c337ad4aa39c",
       "src": "https://github.com/obsidian-nvim/obsidian.nvim"
     },
     "oil.nvim": {
@@ -186,7 +186,7 @@
       "src": "https://github.com/tpope/vim-sensible"
     },
     "vimtex": {
-      "rev": "9388638aec092cceab6ac20dc08541f4e429e8ce",
+      "rev": "5e6a06f5cec5ede3dc6ba045ef6eda13b6dccb1f",
       "src": "https://github.com/lervag/vimtex"
     },
     "which-key.nvim": {

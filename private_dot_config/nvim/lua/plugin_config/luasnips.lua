@@ -1,5 +1,13 @@
 local ls = require("luasnip")
+ls.setup({
+	-- stop the snippet if cursor is moved out of the snippet box
+	-- or esc is pressed
+	region_check_events = "CursorMoved,InsertLeave",
+	-- delete snippet memory when place holder is deleted
+	delete_check_events = "TextChanged,InsertLeave",
+})
 require("luasnip.loaders.from_vscode").lazy_load()
+
 -- check blink-cmp.lua for keybinds
 
 
