@@ -13,7 +13,7 @@ Managed with [Chezmoi](https://www.chezmoi.io/)
 - **Notification Center:** SwayNC
 - **Status Bar:** Waybar
 - **Logout Menu:** wlogout
-- **MISC:** Hexecute
+- **MISC:** [Hexecute](https://github.com/ThatOtherAndrew/Hexecute)
 - **Shell:** zsh
     - **Plugin Manager for zsh:** Antidote
 - **RSS Reader:** Newsboat
