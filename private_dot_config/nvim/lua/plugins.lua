@@ -4,6 +4,12 @@ vim.pack.add({
 	{ src = 'https://github.com/nvim-tree/nvim-web-devicons' },
 	{ src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
 	{ src = "https://github.com/folke/which-key.nvim" },
+	{ src = "https://github.com/catgoose/nvim-colorizer.lua" },
+
+	-- telescope
+	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
 
 	-- Themes
 	{ src = 'https://github.com/vague-theme/vague.nvim' },
@@ -44,4 +50,6 @@ require("plugin_config.indent-blankline")
 require("plugin_config.colorscheme") -- Colorscheme
 require("plugin_config.typst-preview")
 require("plugin_config.blink-cmp")
+require("plugin_config.colorizer")
+require("plugin_config.telescope")
 require("plugin_config.luasnips") -- snippet engine
