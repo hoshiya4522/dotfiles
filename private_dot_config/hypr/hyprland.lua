@@ -62,6 +62,10 @@ hl.on("hyprland.start", function ()
 
 	-- nwg-loog themes load
 	hl.exec_cmd("nwg-look -a")
+
+	hl.exec_cmd("waypaper --random --folder ~/Pictures/Wallpapers --backend awww")
+
+	hl.exec_cmd("kanata")
 end)
 
 -------------------------------
