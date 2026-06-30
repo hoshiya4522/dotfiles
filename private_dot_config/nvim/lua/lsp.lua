@@ -47,6 +47,8 @@ vim.lsp.enable({
 
 	"jdtls",
 
+	"bash-language-server",
+
 	"texlab", -- LSP for LaTeX
 	"tinymist", -- LSP for Typst
 
