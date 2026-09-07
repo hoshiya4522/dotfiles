@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE khotnewstuff3>
+<hotnewstuffregistry>
+ <stuff category="720">
+  <name>Mouse Tiler</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>rxappdev</author>
+  <homepage>https://store.kde.org/p/2334027</homepage>
+  <licence></licence>
+  <version>6.3.2</version>
+  <rating>81</rating>
+  <downloads>15625</downloads>
+  <installedfile>/home/hoshiya4522/.local/share/kwin/scripts/mousetiler/</installedfile>
+  <id>2334027</id>
+  <releasedate>2026-04-15</releasedate>
+  <summary>&lt;p>The Mouse Tiler is the fastest and simplest tiler and virtual desktop manager for KDE Plasma 6+ that gives you full freedom at your fingertip. No need to remember dozens of keyboard shortcuts or be limited by a fixed tile layout. Now also a fully featured auto tiler.&lt;br />&lt;br />Use one of two mouse adapted tilers (or both). The Popup Grid tiler lets you quickly place your window by moving the window a few pixels. The Overlay tiler is a classical full screen overlay ( similar to FancyZones ) that lets you place your window into one tile, or span multiple tiles. Define your own layouts or use some of the many predefined ones.&lt;br />&lt;br />Key features:&lt;br />- Auto-tiling with 18 pre-defined auto-tiler layouts and ability to create your own including carousel and stacking layouts&lt;br />- Two mouse tiling modes - Popup Grid and Overlay (use one or both)&lt;br />- Virtual desktop manager (in Popup Grid mode)&lt;br />- Manual text configuration of the modes&lt;br />- Follow system theme or use one of pre-defined color themes&lt;br />- Highly customizable, from tile size to grid position (over 20 settings)&lt;br />- Multi-monitor support&lt;br />- Tiling works using mouse, stylus, touch (including Wacom) - press Ctrl+Alt+I to toggle input modes, or change default input mode in settings&lt;br />&lt;br />Community discord where you can discuss, report bugs or request features can be found here ( &lt;a href="https://discord.gg/Js6AYsnQQj">https://discord.gg/Js6AYsnQQj&lt;/a> ).&lt;/p></summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/cache/770x540-4/img/00/00/83/87/73/2334027/icon.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-4/img/00/00/83/87/73/2334027/icon.png</previewBig>
+  <payload>https://files06.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTc3NjI1NDY2MCwibyI6IjEiLCJzIjoiOGMxMGRiMzJhMTRlYTkxZmVhZjA2N2U5YmVkMWJjODkzN2IxYmRjZjQzZTYzM2E3ZWVhMTViYTNjYTk4MmI3OWMzOTYwMDU2YTY3ODU0ZDVlNmViZjE4YzQ0ZGNkZjdhZjhkNDU4NzNkZTI1MDkxYTY3ZDU4YjdjOGZjYmJkYTIiLCJ0IjoxNzc4MzA1ODY0LCJzdGZwIjpudWxsLCJzdGlwIjoiMTE4LjE3OS4xMTAuMTc2In0.8DOSbxILPCYrUIkN1tsBwaOOP8nyDWUhbu7Cygs1fpE/mousetiler.kwinscript</payload>
+  <tags>original-product,fancyzones,gplv3,linux,mouse,tiler,unix,virtual-desktop,auto</tags>
+  <status>installed</status>
+ </stuff>
+</hotnewstuffregistry>

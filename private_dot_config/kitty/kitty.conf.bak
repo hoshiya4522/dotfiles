@@ -1,0 +1,4 @@
+# vim:fileencoding=utf-8:foldmethod=marker
+
+include current-theme.conf
+shell /usr/bin/zsh

@@ -1,0 +1,17 @@
+[Applications][brave-browser]
+Seen=true
+
+[Applications][ferdium]
+Seen=true
+
+[Applications][firefox]
+Seen=true
+
+[Applications][heroic]
+Seen=true
+
+[Applications][org.qbittorrent.qBittorrent]
+Seen=true
+
+[DoNotDisturb]
+Until=2027,8,22,16,51,22.343

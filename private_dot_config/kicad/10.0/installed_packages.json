@@ -1,0 +1,102 @@
+{
+    "packages": [
+        {
+            "current_version": "5.3.0",
+            "install_timestamp": 1785670778,
+            "package": {
+                "author": {
+                    "contact": {
+                        "github": "https://github.com/bennymeg"
+                    },
+                    "name": "Benny Megidish"
+                },
+                "description": "JLC PCB fabrication toolkit\nAutomate PCB fabrication process in conjunction with JLC PCB",
+                "description_full": "Toolkit for automating PCB fabrication process with KiCad and JLC PCB. \n\n Features: \n• Generates gerber files in correct format for production. \n• Generates BOM file in correct format for production. \n• Generates Pick and Place file in correct format for assembly. \n• Automatic and manual component translations. \n• Many more unique additional features. \n♥ https://github.com/sponsors/bennymeg",
+                "identifier": "com.github.bennymeg.JLC-Plugin-for-KiCad",
+                "license": "Apache-2.0",
+                "maintainer": {
+                    "contact": {
+                        "github": "https://github.com/bennymeg"
+                    },
+                    "name": "Benny Megidish"
+                },
+                "name": "Fabrication Toolkit",
+                "resources": {
+                    "Sponsor": "https://github.com/sponsors/bennymeg",
+                    "homepage": "https://github.com/bennymeg/JLC-Plugin-for-KiCad"
+                },
+                "tags": [
+                    "jlc",
+                    "production",
+                    "fabrication",
+                    "toolkit"
+                ],
+                "type": "plugin",
+                "versions": [
+                    {
+                        "download_sha256": "70fe1ecc4858c5c44a3aedb6eafff80515e7837e48921c983c6fb2d8b19d9938",
+                        "download_size": 21723,
+                        "download_url": "https://github.com/bennymeg/Fabrication-Toolkit/releases/download/v5.3.0/Fabrication-Toolkit-5.3.0.zip",
+                        "install_size": 59132,
+                        "kicad_version": "6.00",
+                        "status": "stable",
+                        "version": "5.3.0"
+                    },
+                    {
+                        "download_sha256": "2285113715d24d6e581ee1bee4c8e2fd92ad92bc72737e1dd05f7c05210e0e67",
+                        "download_size": 17732,
+                        "download_url": "https://github.com/bennymeg/JLC-Plugin-for-KiCad/releases/download/4.5.0/JLC-Plugin-for-KiCad-4.5.0.zip",
+                        "install_size": 44106,
+                        "kicad_version": "6.00",
+                        "status": "stable",
+                        "version": "4.5.0"
+                    }
+                ]
+            },
+            "pinned": false,
+            "repository_id": "46f88614eade3439",
+            "repository_name": "KiCad official repository"
+        },
+        {
+            "current_version": "0.1.2",
+            "install_timestamp": 1786878914,
+            "package": {
+                "author": {
+                    "contact": {
+                        "web": "https://github.com/cooked/kimotor"
+                    },
+                    "name": "Stefano Cottafavi"
+                },
+                "description": "PCB motor parametric design and layout",
+                "description_full": "PCB motor parametric design and layout",
+                "identifier": "com.github.cooked.kimotor",
+                "license": "GPL-2.0",
+                "maintainer": {
+                    "contact": {
+                        "web": "https://github.com/cooked/kimotor"
+                    },
+                    "name": "Stefano Cottafavi"
+                },
+                "name": "kimotor",
+                "resources": {
+                    "homepage": "https://github.com/cooked/kimotor"
+                },
+                "type": "plugin",
+                "versions": [
+                    {
+                        "download_sha256": "93d8e058af7bd750c58187cdbe0fd46aad37436bc563a38ed8f6ae05cd78cbfe",
+                        "download_size": 28817,
+                        "download_url": "https://github.com/cooked/kimotor/releases/download/v0.1.2/kimotor-pcm.zip",
+                        "install_size": 102997,
+                        "kicad_version": "6.0",
+                        "status": "development",
+                        "version": "0.1.2"
+                    }
+                ]
+            },
+            "pinned": false,
+            "repository_id": "46f88614eade3439",
+            "repository_name": "KiCad official repository"
+        }
+    ]
+}

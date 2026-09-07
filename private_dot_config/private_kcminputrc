@@ -1,0 +1,12 @@
+[Libinput][1267][12869][ELAN076C:00 04F3:3245 Mouse]
+PointerAcceleration=0.800
+PointerAccelerationProfile=1
+
+[Libinput][1267][12869][ELAN076C:00 04F3:3245 Touchpad]
+NaturalScroll=true
+PointerAcceleration=0.600
+PointerAccelerationProfile=2
+TapDragLock=true
+
+[Mouse]
+cursorSize=60

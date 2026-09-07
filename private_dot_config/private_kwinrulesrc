@@ -1,0 +1,32 @@
+[General]
+count = 2
+rules = d1a8921a-0037-493e-9fa1-5ade45762d41,vboard
+
+[d1a8921a-0037-493e-9fa1-5ade45762d41]
+Description = Brave PiP
+above = true
+aboverule = 3
+desktops = \\0
+desktopsrule = 3
+title = Picture in picture
+titlematch = 1
+wmclass = brave
+wmclassmatch = 1
+
+[vboard]
+Description = vboard always on top, no focus, remember position
+Enabled = true
+wmclass = io.github.archisman-panigrahi.vboard
+wmclassmatch = 1
+wmclasscomplete = false
+position = 0,0
+positionrule = 4
+above = true
+aboverule = 2
+acceptfocus = false
+acceptfocusrule = 2
+skiptaskbar = true
+skiptaskbarrule = 2
+skippager = true
+skippagerrule = 2
+

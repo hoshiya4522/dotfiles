@@ -1,0 +1,518 @@
+{
+  "api": {
+    "enable_server": false,
+    "interpreter_path": "/usr/bin/python3"
+  },
+  "appearance": {
+    "grid_striping": false,
+    "hicontrast_dimming_factor": 0.8,
+    "icon_theme": 2,
+    "show_scrollbars": false,
+    "text_editor_zoom": 0,
+    "toolbar_icon_size": 24,
+    "use_custom_cursors": true,
+    "use_icons_in_menus": true,
+    "zoom_correction_factor": 1.0
+  },
+  "auto_backup": {
+    "enabled": true,
+    "format": 0,
+    "limit_total_size": 104857600,
+    "location": 0
+  },
+  "dialog": {
+    "controls": {
+      "*Configure Paths": {
+        "__geometry": {
+          "h": 283,
+          "w": 626,
+          "x": 0,
+          "y": 0
+        },
+        "wxStaticBox_0wxGrid_0": "0 1",
+        "wxStaticBox_0wxGrid_0wxWindow_2wxComboCtrl_0": "/home/hoshiya4522/.local/share/kicad-imports/ScottoKicad",
+        "wxStaticBox_0wxGrid_0wxWindow_2wxComboCtrl_0wxTextCtrl_0": "/home/hoshiya4522/.local/share/kicad-imports/ScottoKicad",
+        "wxStaticBox_0wxGrid_0wxWindow_2wxTextCtrl_0": "SCOTTOKEEBS_KICAD"
+      },
+      "Choose Power Symbol": {
+        "__geometry": {
+          "h": 767,
+          "w": 880,
+          "x": 0,
+          "y": 0
+        },
+        "wxCheckBox_0": false,
+        "wxCheckBox_1": true,
+        "wxPanel_0wxSplitterWindow_0": 460,
+        "wxPanel_0wxSplitterWindow_0wxPanel_0wxHtmlWindow_0": 0,
+        "wxPanel_0wxSplitterWindow_0wxSplitterWindow_0": 440,
+        "wxPanel_0wxSplitterWindow_0wxSplitterWindow_0wxPanel_0wxPanel_0wxSearchCtrl_0": "mpu 6050"
+      },
+      "Choose Symbol": {
+        "__geometry": {
+          "h": 767,
+          "w": 880,
+          "x": 0,
+          "y": 0
+        },
+        "wxCheckBox_0": false,
+        "wxCheckBox_1": true,
+        "wxPanel_0wxSplitterWindow_0": 440,
+        "wxPanel_0wxSplitterWindow_0wxPanel_0wxPanel_0wxHtmlWindow_0": 0,
+        "wxPanel_0wxSplitterWindow_0wxPanel_0wxPanel_0wxSearchCtrl_0": "mpu",
+        "wxPanel_0wxSplitterWindow_0wxPanel_1wxPanel_1wxOwnerDrawnComboBox_0": 0
+      },
+      "Configure Paths": {
+        "__geometry": {
+          "h": 283,
+          "w": 626,
+          "x": 0,
+          "y": 0
+        },
+        "wxStaticBox_0wxGrid_0": "0 1"
+      },
+      "Footprint Libraries": {
+        "__geometry": {
+          "h": 648,
+          "w": 1010,
+          "x": 0,
+          "y": 0
+        },
+        "wxPanel_0wxAuiNotebook_0": "Global Libraries *",
+        "wxPanel_0wxAuiNotebook_0wxPanel_0wxGrid_0": "0 1 3 4 5 6 7",
+        "wxPanel_0wxAuiNotebook_0wxPanel_0wxGrid_0wxWindow_3wxComboCtrl_0": "/home/hoshiya4522/.local/share/kicad-imports/ESP32-DevKit-V1-DOIT/ESP32.pretty",
+        "wxPanel_0wxAuiNotebook_0wxPanel_0wxGrid_0wxWindow_3wxComboCtrl_0wxTextCtrl_0": "/home/hoshiya4522/.local/share/kicad-imports/ESP32-DevKit-V1-DOIT/ESP32.pretty",
+        "wxPanel_0wxAuiNotebook_0wxPanel_0wxGrid_0wxWindow_3wxTextCtrl_0": "ESP32",
+        "wxPanel_0wxAuiNotebook_0wxPanel_1wxGrid_0": "0 1 3 4 5 6 7",
+        "wxPanel_0wxGrid_0": "0 1"
+      },
+      "Global Label Properties": {
+        "__geometry": {
+          "h": 446,
+          "w": 932,
+          "x": 0,
+          "y": 0
+        },
+        "wxCheckBox_0": false,
+        "wxComboCtrl_0": "Row 1",
+        "wxComboCtrl_0wxPopupTransientWindow_0wxPanel_0wxTextCtrl_0": "",
+        "wxComboCtrl_0wxTextCtrl_0": "Row 1",
+        "wxStaticBox_0wxGrid_0": "0 1 2 3 4 5 6 7",
+        "wxStaticBox_1wxRadioButton_0": true,
+        "wxStaticBox_1wxRadioButton_1": false,
+        "wxStaticBox_1wxRadioButton_2": false,
+        "wxStaticBox_1wxRadioButton_3": false,
+        "wxStaticBox_1wxRadioButton_4": false,
+        "wxStaticBox_1wxRadioButton_5": false,
+        "wxStaticBox_1wxRadioButton_6": false,
+        "wxStaticBox_1wxRadioButton_7": false,
+        "wxStaticBox_1wxRadioButton_8": false,
+        "wxStaticBox_2wxCheckBox_0": false,
+        "wxStaticBox_2wxOwnerDrawnComboBox_0": 0,
+        "wxStaticBox_2wxOwnerDrawnComboBox_0wxTextCtrl_0": "Default Font",
+        "wxStaticBox_2wxTextCtrl_0": 12700,
+        "wxTextCtrl_0": "",
+        "wxTextCtrl_1": ""
+      },
+      "Grid Settings": {
+        "__geometry": {
+          "h": 202,
+          "w": 239,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "Hierarchical Label Properties": {
+        "__geometry": {
+          "h": 446,
+          "w": 932,
+          "x": 0,
+          "y": 0
+        },
+        "wxCheckBox_0": false,
+        "wxComboCtrl_0": "",
+        "wxComboCtrl_0wxPopupTransientWindow_0wxPanel_0wxTextCtrl_0": "",
+        "wxComboCtrl_0wxTextCtrl_0": "",
+        "wxStaticBox_0wxGrid_0": "0 1 2 3 4 5 6 7",
+        "wxStaticBox_1wxRadioButton_0": true,
+        "wxStaticBox_1wxRadioButton_1": false,
+        "wxStaticBox_1wxRadioButton_2": false,
+        "wxStaticBox_1wxRadioButton_3": false,
+        "wxStaticBox_1wxRadioButton_4": false,
+        "wxStaticBox_1wxRadioButton_5": false,
+        "wxStaticBox_1wxRadioButton_6": false,
+        "wxStaticBox_1wxRadioButton_7": false,
+        "wxStaticBox_1wxRadioButton_8": false,
+        "wxStaticBox_2wxCheckBox_0": false,
+        "wxStaticBox_2wxOwnerDrawnComboBox_0": 0,
+        "wxStaticBox_2wxOwnerDrawnComboBox_0wxTextCtrl_0": "Default Font",
+        "wxStaticBox_2wxTextCtrl_0": 12700,
+        "wxTextCtrl_0": "",
+        "wxTextCtrl_1": ""
+      },
+      "Label Properties": {
+        "__geometry": {
+          "h": 389,
+          "w": 932,
+          "x": 0,
+          "y": 0
+        },
+        "wxCheckBox_0": false,
+        "wxComboCtrl_0": "",
+        "wxComboCtrl_0wxPopupTransientWindow_0wxPanel_0wxTextCtrl_0": "",
+        "wxComboCtrl_0wxTextCtrl_0": "",
+        "wxStaticBox_0wxGrid_0": "0 1 2 3 4 5 6 7",
+        "wxStaticBox_1wxRadioButton_0": true,
+        "wxStaticBox_1wxRadioButton_1": false,
+        "wxStaticBox_1wxRadioButton_2": false,
+        "wxStaticBox_1wxRadioButton_3": false,
+        "wxStaticBox_1wxRadioButton_4": false,
+        "wxStaticBox_1wxRadioButton_5": false,
+        "wxStaticBox_1wxRadioButton_6": false,
+        "wxStaticBox_1wxRadioButton_7": false,
+        "wxStaticBox_1wxRadioButton_8": false,
+        "wxStaticBox_2wxCheckBox_0": false,
+        "wxStaticBox_2wxOwnerDrawnComboBox_0": 0,
+        "wxStaticBox_2wxOwnerDrawnComboBox_0wxTextCtrl_0": "Default Font",
+        "wxStaticBox_2wxTextCtrl_0": 12700,
+        "wxTextCtrl_0": "",
+        "wxTextCtrl_1": ""
+      },
+      "Line Properties": {
+        "__geometry": {
+          "h": 180,
+          "w": 363,
+          "x": 0,
+          "y": 0
+        },
+        "wxBitmapComboBox_0": "Dash-Dot",
+        "wxTextCtrl_0": 0
+      },
+      "Page Settings": {
+        "__geometry": {
+          "h": 704,
+          "w": 897,
+          "x": 0,
+          "y": 0
+        },
+        "wxCheckBox_0": true,
+        "wxCheckBox_1": false,
+        "wxCheckBox_10": false,
+        "wxCheckBox_11": false,
+        "wxCheckBox_12": false,
+        "wxCheckBox_13": false,
+        "wxCheckBox_2": false,
+        "wxCheckBox_3": false,
+        "wxCheckBox_4": false,
+        "wxCheckBox_5": false,
+        "wxCheckBox_6": false,
+        "wxCheckBox_7": false,
+        "wxCheckBox_8": false,
+        "wxCheckBox_9": false,
+        "wxChoice_0": 1,
+        "wxChoice_1": 0,
+        "wxDatePickerCtrl_0wxComboCtrl_0": "08/16/2026",
+        "wxDatePickerCtrl_0wxComboCtrl_0wxTextCtrl_0": "08/16/2026",
+        "wxTextCtrl_0": 2794000,
+        "wxTextCtrl_1": 4318000,
+        "wxTextCtrl_10": "",
+        "wxTextCtrl_11": "",
+        "wxTextCtrl_12": "",
+        "wxTextCtrl_13": "",
+        "wxTextCtrl_14": "",
+        "wxTextCtrl_15": "",
+        "wxTextCtrl_2": "",
+        "wxTextCtrl_3": "16th August, 2026",
+        "wxTextCtrl_4": "1",
+        "wxTextCtrl_5": "Self Balancing Two Wheeled Robot",
+        "wxTextCtrl_6": "Rajshahi University of Engineering and Technology",
+        "wxTextCtrl_7": "",
+        "wxTextCtrl_8": "",
+        "wxTextCtrl_9": ""
+      },
+      "Plugin And Content Manager": {
+        "__geometry": {
+          "h": 532,
+          "w": 916,
+          "x": 0,
+          "y": 0
+        },
+        "wxNotebook_0": "Repository (123)",
+        "wxNotebook_0wxPanel_0wxChoice_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0": "Plugins (78)",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_0wxSplitterWindow_0": 380,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_0wxSplitterWindow_0wxPanel_0wxScrolledWindow_0": 446,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_0wxSplitterWindow_0wxPanel_0wxSearchCtrl_0": "",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_0wxSplitterWindow_0wxPanel_1wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_0wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxCheckBox_0": false,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_0wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxGrid_0": "0 1 2 3 4",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_0wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxHtmlWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_1wxSplitterWindow_0": 380,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_1wxSplitterWindow_0wxPanel_0wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_1wxSplitterWindow_0wxPanel_0wxSearchCtrl_0": "esp",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_1wxSplitterWindow_0wxPanel_1wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_1wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxCheckBox_0": false,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_1wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxGrid_0": "0 1 2 3 4",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_1wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxHtmlWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_2wxSplitterWindow_0": 380,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_2wxSplitterWindow_0wxPanel_0wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_2wxSplitterWindow_0wxPanel_0wxSearchCtrl_0": "esp",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_2wxSplitterWindow_0wxPanel_1wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_2wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxCheckBox_0": false,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_2wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxGrid_0": "0 1 2 3 4",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_2wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxHtmlWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_3wxSplitterWindow_0": 380,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_3wxSplitterWindow_0wxPanel_0wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_3wxSplitterWindow_0wxPanel_0wxSearchCtrl_0": "",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_3wxSplitterWindow_0wxPanel_1wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_3wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxCheckBox_0": false,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_3wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxGrid_0": "0 1 2 3 4",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_3wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxHtmlWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_4wxSplitterWindow_0": 380,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_4wxSplitterWindow_0wxPanel_0wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_4wxSplitterWindow_0wxPanel_0wxSearchCtrl_0": "",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_4wxSplitterWindow_0wxPanel_1wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_4wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxCheckBox_0": false,
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_4wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxGrid_0": "0 1 2 3 4",
+        "wxNotebook_0wxPanel_0wxNotebook_0wxPanel_4wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxHtmlWindow_0": 0,
+        "wxNotebook_0wxPanel_1wxPanel_0wxSplitterWindow_0": 380,
+        "wxNotebook_0wxPanel_1wxPanel_0wxSplitterWindow_0wxPanel_0wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_1wxPanel_0wxSplitterWindow_0wxPanel_0wxSearchCtrl_0": "",
+        "wxNotebook_0wxPanel_1wxPanel_0wxSplitterWindow_0wxPanel_1wxScrolledWindow_0": 0,
+        "wxNotebook_0wxPanel_1wxPanel_0wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxCheckBox_0": false,
+        "wxNotebook_0wxPanel_1wxPanel_0wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxGrid_0": "0 1 2 3 4",
+        "wxNotebook_0wxPanel_1wxPanel_0wxSplitterWindow_0wxPanel_1wxScrolledWindow_0wxHtmlWindow_0": 0,
+        "wxNotebook_0wxPanel_2wxGrid_0": "0 1 2 3"
+      },
+      "Preferences": {
+        "__geometry": {
+          "h": 703,
+          "w": 980,
+          "x": 0,
+          "y": 0
+        },
+        "wxPanel_0wxTreebook_0wxPanel_0wxSearchCtrl_0": "",
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_0": true,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_1": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_10": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_11": true,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_2": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_3": true,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_4": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_5": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_6": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_7": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_8": true,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxCheckBox_9": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxChoice_0": 2,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxChoice_1": 0,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxChoice_2": 0,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxPanel_2wxChoice_0": 0,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxPanel_2wxSpinCtrl_0": 91,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_0": true,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_1": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_10": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_11": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_12": true,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_2": true,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_3": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_4": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_5": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_6": true,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_7": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_8": true,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxRadioButton_9": false,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxSpinCtrl_0": 9,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxSpinCtrl_1": 100,
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxTextCtrl_0": "",
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxTextCtrl_1": "",
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxTextCtrl_2": "",
+        "wxPanel_0wxTreebook_0wxPanel_1wxPanel_0wxTextCtrl_3": "80",
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxCheckBox_0": false,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxCheckBox_1": false,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxCheckBox_2": false,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxCheckBox_3": false,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxCheckBox_4": false,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxChoice_0": 16,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxChoice_1": 17,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxChoice_2": 17,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxChoice_3": 20,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxChoice_4": 19,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxChoice_5": 19,
+        "wxPanel_0wxTreebook_0wxPanel_32wxPanel_0wxChoice_6": 16,
+        "wxPanel_0wxTreebook_0wxPanel_55wxCheckBox_0": false,
+        "wxPanel_0wxTreebook_0wxPanel_55wxFilePickerCtrl_0wxTextCtrl_0": "/usr/bin/python3",
+        "wxPanel_0wxTreebook_0wxPanel_56wxSpinCtrl_0": 30
+      },
+      "Print": {
+        "__geometry": {
+          "h": 238,
+          "w": 335,
+          "x": 0,
+          "y": 0
+        },
+        "wxCheckBox_0": true,
+        "wxCheckBox_1": false,
+        "wxCheckBox_2": true,
+        "wxChoice_0": 0,
+        "wxChoice_1": 2,
+        "wxPanel_0wxStaticBox_0wxChoice_0": -1
+      },
+      "Project Template Selector": {
+        "__geometry": {
+          "h": 358,
+          "w": 650,
+          "x": 0,
+          "y": 0
+        },
+        "wxPanel_0wxScrolledWindow_0": 0,
+        "wxSplitterWindow_0": 384,
+        "wxSplitterWindow_0wxPanel_0wxChoice_0": 1,
+        "wxSplitterWindow_0wxPanel_0wxScrolledWindow_0": 0,
+        "wxSplitterWindow_0wxPanel_0wxSearchCtrl_0": ""
+      },
+      "Symbol Libraries": {
+        "__geometry": {
+          "h": 648,
+          "w": 1010,
+          "x": 0,
+          "y": 0
+        },
+        "wxPanel_0wxAuiNotebook_0": "Global Libraries *",
+        "wxPanel_0wxAuiNotebook_0wxPanel_0wxGrid_0": "0 1 2 3 4 5 6 7",
+        "wxPanel_0wxAuiNotebook_0wxPanel_0wxGrid_0wxWindow_3wxTextCtrl_0": "",
+        "wxPanel_0wxAuiNotebook_0wxPanel_1wxGrid_0": "0 1 2 3 4 5 6 7",
+        "wxPanel_0wxGrid_0": "0 1"
+      },
+      "Text PropertiesSchematicFrame": {
+        "__geometry": {
+          "h": 387,
+          "w": 852,
+          "x": 0,
+          "y": 0
+        },
+        "wxBitmapComboBox_0": "",
+        "wxCheckBox_0": false,
+        "wxCheckBox_1": false,
+        "wxCheckBox_2": false,
+        "wxCheckBox_3": false,
+        "wxCheckBox_4": false,
+        "wxCheckBox_5": false,
+        "wxCheckBox_6": false,
+        "wxOwnerDrawnComboBox_0": 0,
+        "wxOwnerDrawnComboBox_0wxTextCtrl_0": "Default Font",
+        "wxOwnerDrawnComboBox_1": -1,
+        "wxOwnerDrawnComboBox_1wxTextCtrl_0": "",
+        "wxTextCtrl_0": 12700,
+        "wxTextCtrl_1": 0
+      },
+      "Update PCB from Schematic": {
+        "__geometry": {
+          "h": 685,
+          "w": 727,
+          "x": 0,
+          "y": 0
+        },
+        "wxPanel_0wxStaticBox_0wxCheckBox_0": true,
+        "wxPanel_0wxStaticBox_0wxCheckBox_1": true,
+        "wxPanel_0wxStaticBox_0wxCheckBox_2": true,
+        "wxPanel_0wxStaticBox_0wxCheckBox_3": true,
+        "wxPanel_0wxStaticBox_0wxCheckBox_4": true,
+        "wxPanel_0wxStaticBox_0wxHtmlWindow_0": 16,
+        "wxStaticBox_0wxCheckBox_0": false,
+        "wxStaticBox_0wxCheckBox_1": false,
+        "wxStaticBox_0wxCheckBox_2": false,
+        "wxStaticBox_1wxCheckBox_0": true,
+        "wxStaticBox_1wxCheckBox_1": false,
+        "wxStaticBox_1wxCheckBox_2": false,
+        "wxStaticBox_2wxCheckBox_0": true,
+        "wxStaticBox_2wxCheckBox_1": false
+      }
+    }
+  },
+  "do_not_show_again": {
+    "data_collection_prompt": true,
+    "env_var_overwrite_warning": false,
+    "migrate_wrl_prompt": false,
+    "scaled_3d_models_warning": false,
+    "update_check_prompt": true,
+    "zone_fill_warning": false
+  },
+  "embed_file_defaults": {
+    "datasheet": true,
+    "drawing_sheet": true,
+    "model_3d": false,
+    "sim_model": false
+  },
+  "environment": {
+    "vars": {
+      "SCOTTOKEEBS_KICAD": "/home/hoshiya4522/.local/share/kicad-imports/ScottoKicad"
+    }
+  },
+  "git": {
+    "authorEmail": "",
+    "authorName": "",
+    "enableGit": true,
+    "repositories": null,
+    "updatInterval": 5,
+    "useDefaultAuthor": true
+  },
+  "graphics": {
+    "antialiasing_mode": 2,
+    "canvas_type": 1
+  },
+  "input": {
+    "auto_pan": false,
+    "auto_pan_acceleration": 5,
+    "center_on_zoom": true,
+    "focus_follow_sch_pcb": false,
+    "horizontal_pan": false,
+    "hotkey_feedback": true,
+    "immediate_actions": true,
+    "motion_pan_modifier": 0,
+    "mouse_left": -1,
+    "mouse_middle": 2,
+    "mouse_right": 2,
+    "reverse_scroll_pan_h": false,
+    "reverse_scroll_zoom": false,
+    "scroll_modifier_pan_h": 308,
+    "scroll_modifier_pan_v": 306,
+    "scroll_modifier_zoom": 0,
+    "warp_mouse_on_move": true,
+    "zoom_acceleration": false,
+    "zoom_speed": 1,
+    "zoom_speed_auto": true
+  },
+  "meta": {
+    "version": 6
+  },
+  "package_manager": {
+    "sash_pos": 380
+  },
+  "session": {
+    "pinned_design_block_libs": [],
+    "pinned_fp_libs": [],
+    "pinned_symbol_libs": [],
+    "remember_open_files": false
+  },
+  "spacemouse": {
+    "pan_speed": 5,
+    "reverse_pan_x": false,
+    "reverse_pan_y": false,
+    "reverse_rotate": false,
+    "reverse_zoom": false,
+    "rotate_speed": 5
+  },
+  "system": {
+    "clear_3d_cache_interval": 30,
+    "extra_3d_search_dirs": [],
+    "file_explorer": "",
+    "file_history_size": 9,
+    "language": "Default",
+    "local_history_debounce": 5,
+    "pdf_viewer_name": "",
+    "text_editor": "",
+    "use_system_pdf_viewer": true,
+    "working_dir": "/home/hoshiya4522/Documents/Kicad"
+  }
+}

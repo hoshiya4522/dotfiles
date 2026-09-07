@@ -1,0 +1,7 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "KiCad") (type "Table") (uri "/usr/share/kicad/template/sym-lib-table") (options "") (descr "KiCad Default Libraries"))
+	(lib (name "ScottoKeebs") (type "KiCad") (uri "${SCOTTOKEEBS_KICAD}/symbols/ScottoKeebs.kicad_sym") (options "") (descr ""))
+	(lib (name "DEVKIT_V1_ESP32-WROOM-32") (type "KiCad") (uri "/home/hoshiya4522/.local/share/kicad-imports/ESP32-DevKit-V1-DOIT/DEVKIT_V1_ESP32-WROOM-32.kicad_sym") (options "") (descr ""))
+	(lib (name "usini_sensors") (type "KiCad") (uri "/home/hoshiya4522/.local/share/kicad-imports/usini_kicad_sensors/usini_sensors.kicad_sym") (options "") (descr ""))
+)

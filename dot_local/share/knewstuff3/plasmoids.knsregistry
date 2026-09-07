@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE khotnewstuff3>
+<hotnewstuffregistry>
+ <stuff category="706">
+  <name>Netspeed Widget</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>HessiJames</author>
+  <homepage>https://store.kde.org/p/2136505</homepage>
+  <licence></licence>
+  <version>3.1</version>
+  <rating>77</rating>
+  <downloads>93914</downloads>
+  <installedfile>/home/hoshiya4522/.local/share/plasma/plasmoids/org.kde.netspeedWidget/</installedfile>
+  <id>2136505</id>
+  <releasedate>2024-03-10</releasedate>
+  <summary>&lt;p>Plasma 6 widget that displays the currently used network bandwidth.&lt;br />&lt;br />The appearance can be customized in the configuration dialog and a user defined application (eg. nethogs) can be launched when the applet is clicked.&lt;br />&lt;br />Required dependencies:&lt;br />&lt;br /> - awk&lt;br />&lt;br />Optional dependencies:&lt;br />&lt;br />- plasma-addons (may be called plasma5-addons, kdeplasma-addons or similar - used to launch a user defined application when the applet is clicked)&lt;/p></summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/cache/770x540-4/img/00/00/03/18/67/2136505/logo.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-4/img/00/00/03/18/67/2136505/logo.png</previewBig>
+  <payload>https://files06.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTcxMDEwMzc0MCwibyI6IjEiLCJzIjoiNTIzMGVlOTQ3OTZlZTNiNDFmZTA2NmRlNGEwMzM0NTE1ZGFlM2ZiMTI4NDAxNzllYzRmYjFiZjIzYjI4YmQ1NWRkZmMwNzc5YTQwMTE1MTg2ZGFmNDU5NTZiOTVkZTFjZGE3ZmYwNGZmOTNmMTBmYjcwNmI4NmQ1NGRlN2EwNzQiLCJ0IjoxNzc4MDQ4NDE1LCJzdGZwIjpudWxsLCJzdGlwIjoiMTE4LjE3OS4xMTAuMTc2In0.n7YbGv8hUz3-quRXOOM56mC5H9zqPdnSOfcQ5uCMlww/netspeed-widget-3.1.plasmoid</payload>
+  <tags>unix,plasma##majorversion=6,kde,linux,monitor,extension,gplv2-later,plasma,original-product,network,widget</tags>
+  <status>installed</status>
+ </stuff>
+</hotnewstuffregistry>

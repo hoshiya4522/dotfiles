@@ -1,0 +1,2 @@
+[General]
+GlobalMuteSourcesMutedDevices=alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.pro-input-0.4294967295,alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.pro-input-6.4294967295,alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.pro-input-7.4294967295

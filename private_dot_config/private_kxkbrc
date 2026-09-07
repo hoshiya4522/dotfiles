@@ -1,0 +1,7 @@
+[Layout]
+DisplayNames=,
+LayoutList=us,us
+Options=caps:escape_shifted_capslock
+ResetOldOptions=true
+Use=true
+VariantList=,dvp
