@@ -6,6 +6,8 @@ alias ll="ls -lh"
 alias lla="ls -lAh"
 alias la="ls -A"
 alias sl=ls # because im retarded
+alias oil="nvim -c Oil ."
+
 alias rm=trash
 alias pac="sudo pacman"
 

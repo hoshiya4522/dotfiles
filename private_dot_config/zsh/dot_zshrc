@@ -161,10 +161,22 @@ function nvim-selector() {
   NVIM_APPNAME=$config nvim $@
 }
 
-
+# for lazyloading nvm
+# https://github.com/nvm-sh/nvm/issues/730
+# nvm() {
+#   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+#   nvm $@
+# }
 
 
 # for using ros2 in distrobox
 if [[ "$CONTAINER_ID" == "ros2-jazzy" ]]; then
 	source $HOME/.config/zsh/ros2-jazzy.zsh
 fi
+
+# Turso
+export PATH="$PATH:/home/hoshiya4522/.turso"
+
+
+bindkey -s '^X' 'libpick^M'
+

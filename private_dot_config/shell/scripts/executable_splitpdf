@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+# splitpdf - split a PDF into odd (front) and even (back) pages for manual duplex printing.
+#
+# Usage:
+#   splitpdf file.pdf          -> file_front.pdf (odd pages, 1 3 5 ...)
+#                                  file_back.pdf  (even pages, 2 4 6 ...)
+#   splitpdf file.pdf -r       -> same, but back.pdf pages are reversed
+#
+# Why -r exists:
+#   Print front.pdf first (pages come out 1,3,5,... in order, page 1 on top).
+#   Take the stack, flip it, and reload into the tray to print the back side.
+#   Depending on your printer's feed direction, after the flip the sheet
+#   whose front was page 1 may now be at the BOTTOM of the feeder instead of
+#   the top. If that's the case, the printer will print page 2 onto the sheet
+#   that was actually page (N-1), etc. -> pages end up out of order.
+#
+#   Fix: reverse the back set with -r so the last back page prints first,
+#   matching the flipped stack order.
+#
+#   Practically: just try it on a 4-6 page test file first. If front/back
+#   line up, you didn't need -r. If they're swapped/misaligned, use -r
+#   (or physically flip the stack the other axis - short edge vs long edge).
+
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+    echo "Usage: $(basename "$0") <file.pdf> [-r]" >&2
+    exit 1
+fi
+
+infile="$1"
+reverse=0
+[[ "${2:-}" == "-r" ]] && reverse=1
+
+if [[ ! -f "$infile" ]]; then
+    echo "Error: '$infile' not found" >&2
+    exit 1
+fi
+
+base="${infile%.pdf}"
+front="${base}_front.pdf"
+back="${base}_back.pdf"
+
+python3 - "$infile" "$front" "$back" "$reverse" <<'EOF'
+import sys
+from pypdf import PdfReader, PdfWriter
+
+infile, front_out, back_out, reverse = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4] == "1"
+
+reader = PdfReader(infile)
+pages = reader.pages
+n = len(pages)
+
+odd = [pages[i] for i in range(0, n, 2)]   # 0-indexed even -> 1,3,5...
+even = [pages[i] for i in range(1, n, 2)]  # 0-indexed odd  -> 2,4,6...
+
+if reverse:
+    even = list(reversed(even))
+
+def write(pages_list, path):
+    w = PdfWriter()
+    for p in pages_list:
+        w.add_page(p)
+    with open(path, "wb") as f:
+        w.write(f)
+
+write(odd, front_out)
+write(even, back_out)
+
+print(f"{n} pages total -> {len(odd)} front, {len(even)} back")
+EOF
+
+echo "Print instructions:"
+echo "  1. Print ${front}  (odd pages, page 1 on top of output stack)"
+echo "  2. Flip the whole stack over (do NOT reorder pages)"
+echo "  3. Load it back into the tray as-is"
+echo "  4. Print ${back}"
+echo "  If back pages land misaligned/reversed, redo with: $(basename "$0") $infile -r"
+

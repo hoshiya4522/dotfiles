@@ -1,0 +1,178 @@
+#!/bin/bash
+# MADE BY CLAUDE SONNET
+# libpick - fuzzy-find and open Books/Slides from your semester library
+#
+# Keybindings inside fzf:
+#   Enter    open selection(s)
+#   Tab      multi-select
+#   Ctrl-R   re-scan the library (pick up newly added files)
+#   Ctrl-O   reveal the highlighted file in Dolphin
+
+set -u
+
+LIBRARY_DIR="$HOME/Documents/Library/2-2"
+
+# ---------------------------------------------------------------------------
+# Dependency check (only the hard requirements; preview extras are optional
+# and degrade gracefully on their own).
+# ---------------------------------------------------------------------------
+for bin in fzf find; do
+    if ! command -v "$bin" &> /dev/null; then
+        echo "Error: '$bin' is required but not installed." >&2
+        exit 1
+    fi
+done
+
+# ---------------------------------------------------------------------------
+# build_list: emits one line per document as
+#   Subject | Type | Display Name<TAB>/full/real/path
+# Called both on normal startup and by the Ctrl-R reload binding
+# (invoked as: libpick --list).
+# ---------------------------------------------------------------------------
+build_list() {
+    shopt -s nullglob
+    local search_dirs=("$LIBRARY_DIR"/*/Books "$LIBRARY_DIR"/*/Slides)
+    shopt -u nullglob
+
+    if [ ${#search_dirs[@]} -eq 0 ]; then
+        return 1
+    fi
+
+    find "${search_dirs[@]}" -type f \
+        \( -iname "*.pdf" -o -iname "*.ppt*" -o -iname "*.doc*" -o -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \) \
+        2>/dev/null | sort | \
+    while IFS= read -r filepath; do
+        relative_path="${filepath#$LIBRARY_DIR/}"
+
+        IFS='/' read -r -a path_parts <<< "$relative_path"
+
+        # First word of the subject folder name (e.g. "MTE - Circuits" -> "MTE")
+        full_subject="${path_parts[0]}"
+        subject="${full_subject%% *}"
+
+        if [[ "${path_parts[1]}" == "Books" ]]; then
+            doc_type="Book"
+        else
+            doc_type="Slide"
+        fi
+
+        filename="${filepath##*/}"
+
+        if (( ${#path_parts[@]} > 3 )); then
+            subfolder="${path_parts[2]}"
+            display_name="$subfolder - $filename"
+        else
+            display_name="$filename"
+        fi
+
+        # Pad first, then wrap in color, so ANSI codes don't throw off alignment
+        subject_col=$(printf '%-5s' "$subject")
+        type_col=$(printf '%-5s' "$doc_type")
+
+        printf '\033[36m%s\033[0m | \033[33m%s\033[0m | %s\t%s\n' \
+            "$subject_col" "$type_col" "$display_name" "$filepath"
+    done
+}
+
+# --list mode: used internally by the Ctrl-R reload binding, just prints and exits
+if [[ "${1:-}" == "--list" ]]; then
+    build_list
+    exit 0
+fi
+
+if ! build_list > /tmp/.libpick_check 2>/dev/null || [ ! -s /tmp/.libpick_check ]; then
+    rm -f /tmp/.libpick_check
+    echo "No Books or Slides folders found under: $LIBRARY_DIR"
+    exit 1
+fi
+
+# ---------------------------------------------------------------------------
+# Launch fzf
+# ---------------------------------------------------------------------------
+export FZF_DEFAULT_OPTS=""
+
+SELECTED_LINES=$(cat /tmp/.libpick_check | \
+    fzf --prompt="📖 Select Document: " \
+        --delimiter='\t' \
+        --with-nth=1 \
+        --ansi \
+        --multi \
+        --info=inline \
+        --layout=reverse \
+        --border=rounded \
+        --header='Enter: open | Tab: multi-select | Ctrl-R: refresh | Ctrl-O: reveal in file manager' \
+        --bind "ctrl-r:reload($0 --list)" \
+        --bind 'ctrl-o:execute-silent(dolphin --select {2} > /dev/null 2>&1 &)' \
+        --preview='
+            filepath={2}
+            filename=$(basename "$filepath")
+
+            echo -e "\033[1;34mFull Name:\033[0m $filename"
+
+            if [[ "$filepath" == *.pdf || "$filepath" == *.PDF ]]; then
+                if command -v pdfinfo &> /dev/null; then
+                    pages=$(pdfinfo "$filepath" 2>/dev/null | grep "^Pages:" | tr -s " " | cut -d" " -f2)
+                    [ -n "$pages" ] && echo -e "\033[1;34mPages:\033[0m $pages"
+                fi
+                echo "----------------------------------------"
+
+                pdf_text=$(pdftotext "$filepath" - 2>/dev/null | head -n 40)
+                clean_text=$(echo "$pdf_text" | tr -d " \n\r\t")
+
+                if [ -z "$clean_text" ]; then
+                    if command -v pdftoppm &> /dev/null && command -v chafa &> /dev/null; then
+                        cols=${FZF_PREVIEW_COLUMNS:-60}
+                        lines=${FZF_PREVIEW_LINES:-30}
+                        pdftoppm -jpeg -f 1 -l 1 "$filepath" - 2>/dev/null | chafa -f symbols --size="${cols}x${lines}" -
+                    else
+                        echo "Scanned PDF (No text found)."
+                        echo "Install chafa and poppler (sudo pacman -S chafa poppler) for image previews."
+                    fi
+                else
+                    echo "$pdf_text" | fold -s -w ${FZF_PREVIEW_COLUMNS:-80}
+                fi
+            elif [[ "$filepath" == *.png || "$filepath" == *.PNG || "$filepath" == *.jpg || "$filepath" == *.JPG || "$filepath" == *.jpeg || "$filepath" == *.JPEG ]]; then
+                echo "----------------------------------------"
+                if command -v chafa &> /dev/null; then
+                    cols=${FZF_PREVIEW_COLUMNS:-60}
+                    lines=${FZF_PREVIEW_LINES:-30}
+                    chafa -f symbols --size="${cols}x${lines}" "$filepath"
+                else
+                    echo "Image file. Install chafa (sudo pacman -S chafa) for image previews."
+                fi
+            else
+                echo "----------------------------------------"
+                file -b "$filepath" | fold -s -w ${FZF_PREVIEW_COLUMNS:-80}
+            fi
+        ' \
+        --preview-window="right:40%:wrap")
+
+rm -f /tmp/.libpick_check
+
+# ---------------------------------------------------------------------------
+# Open whatever was selected (supports multiple files via Tab)
+# ---------------------------------------------------------------------------
+if [ -n "$SELECTED_LINES" ]; then
+    while IFS= read -r line; do
+        [ -z "$line" ] && continue
+        SELECTED_FILE="${line#*$'\t'}"
+
+        EXT="${SELECTED_FILE##*.}"
+        EXT="${EXT,,}"
+
+        case "$EXT" in
+            pdf)
+                okular "$SELECTED_FILE" > /dev/null 2>&1 &
+                ;;
+            png|jpg|jpeg)
+                gwenview "$SELECTED_FILE" > /dev/null 2>&1 &
+                ;;
+            doc|docx|ppt|pptx)
+                onlyoffice-desktopeditors "$SELECTED_FILE" > /dev/null 2>&1 &
+                ;;
+            *)
+                xdg-open "$SELECTED_FILE" > /dev/null 2>&1 &
+                ;;
+        esac
+    done <<< "$SELECTED_LINES"
+fi

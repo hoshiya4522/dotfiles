@@ -5,6 +5,9 @@ vim.pack.add({
 	{ src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/catgoose/nvim-colorizer.lua" },
+	{ src = "https://github.com/stevearc/oil.nvim" },
+	{ src = "https://github.com/CRAG666/code_runner.nvim" },
+
 
 	-- telescope
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
@@ -40,6 +43,8 @@ vim.pack.add({
 	{ src = "https://github.com/xeluxee/competitest.nvim" },
 	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- dependency for competitest
 	{ src = "https://github.com/szymonwilczek/vim-be-better" },
+	{ src = "https://github.com/nvzone/typr" },
+	{ src = "https://github.com/nvzone/volt" } -- dependency for typr
 })
 
 
@@ -53,3 +58,5 @@ require("plugin_config.blink-cmp")
 require("plugin_config.colorizer")
 require("plugin_config.telescope")
 require("plugin_config.luasnips") -- snippet engine
+require("plugin_config.oil")
+require("plugin_config.code_runner")

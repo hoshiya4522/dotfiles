@@ -56,7 +56,10 @@ vim.lsp.enable({
 
 	-- python
 	"ruff", -- Python linter and code formatter
-	"ty" -- Python type checker and language server
+	"ty", -- Python type checker and language server
+
+	-- sql
+	"sqls"
 })
 
 -- LSP Keybinds
