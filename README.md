@@ -4,7 +4,7 @@ Managed with [Chezmoi](https://www.chezmoi.io/)
 
 ## Setup Overview
 
-- **Terminal**: Foot (current), Alacritty
+- **Terminal**: Kitty (current), Foot, Alacritty
 - **Application Launcher:** Fuzzel
 - **Editor:** Neovim
 - **Compositor:** Hyprland (current), Niri
