@@ -11,24 +11,24 @@ done=ark-move-dirhistory-to-state-config
 mtime=1787159555
 
 [dolphin_detailsmodesettings.upd]
-ctime=1788107530
+ctime=1788802563
 done=rename-leading-padding,rename-side-padding,move-content-display
-mtime=1787502891
+mtime=1788201803
 
 [dolphin_replace_view_mode_with_view_settings_in_toolbar.upd]
-ctime=1788107530
+ctime=1788802563
 done=move-content-display,replace-view-mode-with-view-settings-in-toolbar
-mtime=1787502891
+mtime=1788201803
 
 [dolphin_statusandlocationbarssettings.upd]
-ctime=1788107530
+ctime=1788802563
 done=replace-view-mode-with-view-settings-in-toolbar,25.04-convert-bool-showstatusbar-to-enum-showstatusbar
-mtime=1787502891
+mtime=1788201803
 
 [dolphin_tab_key_shortcut_for_focus_other_view.upd]
-ctime=1788107530
+ctime=1788802563
 done=tab_key_shortcut_for_focus_other_view
-mtime=1787502891
+mtime=1788201803
 
 [gtkconfig.upd]
 ctime=1786210119
