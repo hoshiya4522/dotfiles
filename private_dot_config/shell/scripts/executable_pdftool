@@ -2,7 +2,7 @@
 """
 pdftool — unified CLI combining mkbooklet, slide2a4, slide2booklet,
           pdfgreyscale, splitpdf, plus nup, toc, merge, rotate,
-          compress, extract, and poster, into one toolkit.
+          compress, extract, poster, and reverse, into one toolkit.
 
 Usage:
     pdftool booklet       INPUT.pdf
@@ -18,6 +18,7 @@ Usage:
     pdftool extract       INPUT.pdf SPEC [-o OUTPUT.pdf]
     pdftool poster        INPUT.pdf [--rows R] [--cols C] [--overlap MM]
                            [--orientation portrait|landscape] [--page N] [-o OUTPUT.pdf]
+    pdftool reverse       INPUT.pdf [-o OUTPUT.pdf]
 
 Page SPEC grammar (used by --pages and extract), comma-separated tokens:
     5          single page
@@ -729,7 +730,7 @@ def cmd_extract(args):
 
 
 # ─────────────────────────────────────────────────────────────────────────
-# Command: poster  (was poster2a4.sh — one oversized page → RxC tiles)
+# Command: poster  (was poster2a4.sh — tile one page across an RxC grid)
 # ─────────────────────────────────────────────────────────────────────────
 
 def cmd_poster(args):
@@ -764,86 +765,24 @@ def cmd_poster(args):
 
 
 # ─────────────────────────────────────────────────────────────────────────
-# Command: poster  (was poster2a4.sh — tile one page across an RxC grid)
+# Command: reverse  (flip the order of all pages in a PDF)
 # ─────────────────────────────────────────────────────────────────────────
 
-MM_TO_PT = 72 / 25.4
-
-
-def cmd_poster(args):
+def cmd_reverse(args):
     input_path = _require_pdf(args.input)
-    if args.rows < 1 or args.cols < 1:
-        print("Error: --rows and --cols must be >= 1", file=sys.stderr)
-        sys.exit(1)
-
-    output_path = Path(args.output) if args.output else input_path.with_name(f"{input_path.stem}_poster.pdf")
+    output_path = Path(args.output) if args.output else input_path.with_name(f"{input_path.stem}_reversed.pdf")
 
     reader = PdfReader(str(input_path))
     n_pages = len(reader.pages)
-    page_num = args.page
-    if not (1 <= page_num <= n_pages):
-        print(f"Error: --page {page_num} out of range (1-{n_pages})", file=sys.stderr)
-        sys.exit(1)
-    src_idx = page_num - 1
-
-    a4_w, a4_h = 210 * MM_TO_PT, 297 * MM_TO_PT
-    if args.orientation.lower().startswith("l"):
-        tile_w, tile_h = a4_h, a4_w
-    else:
-        tile_w, tile_h = a4_w, a4_h
-
-    overlap_pt = args.overlap * MM_TO_PT
-    rows, cols = args.rows, args.cols
-
-    src_page = reader.pages[src_idx]
-    pw = float(src_page.mediabox.width)
-    ph = float(src_page.mediabox.height)
-
-    # The RxC grid of tiles overlaps by overlap_pt on shared edges, so the
-    # usable canvas is slightly smaller than rows*tile_h x cols*tile_w.
-    canvas_w = cols * tile_w - (cols - 1) * overlap_pt
-    canvas_h = rows * tile_h - (rows - 1) * overlap_pt
-
-    # Scale the source page to fit the canvas, preserving aspect ratio.
-    scale = min(canvas_w / pw, canvas_h / ph)
-    scaled_w, scaled_h = pw * scale, ph * scale
-
-    # Center the scaled page in the canvas.
-    offset_x = (canvas_w - scaled_w) / 2
-    offset_y = (canvas_h - scaled_h) / 2
 
     writer = PdfWriter()
-
-    # row: top row first, descending; col: left to right.
-    tile_count = 0
-    for row in range(rows - 1, -1, -1):
-        for col in range(cols):
-            tile_x0 = col * (tile_w - overlap_pt)
-            tile_y0 = row * (tile_h - overlap_pt)
-
-            tx = offset_x - tile_x0
-            ty = offset_y - tile_y0
-
-            # Re-read the page fresh each iteration so the transform
-            # doesn't accumulate across tiles.
-            page = PdfReader(str(input_path)).pages[src_idx]
-            page.add_transformation(Transformation().scale(scale).translate(tx, ty))
-            page.mediabox = RectangleObject((0, 0, tile_w, tile_h))
-            page.cropbox = RectangleObject((0, 0, tile_w, tile_h))
-
-            writer.add_page(page)
-            tile_count += 1
+    for page in reversed(reader.pages):
+        writer.add_page(page)
 
     with open(output_path, "wb") as f:
         writer.write(f)
 
-    print(f"Wrote {output_path}: page scaled {scale:.3f}x, "
-          f"{rows}x{cols} grid = {tile_count} tiles, "
-          f"tile {tile_w/MM_TO_PT:.0f}x{tile_h/MM_TO_PT:.0f}mm, "
-          f"overlap {args.overlap:.0f}mm")
-    print(f"Print at 100% scale ('actual size', NOT 'fit to page').")
-    print(f"Layout order: row-major, top-left first, {cols} tiles per row, {rows} rows.")
-    print("Trim along the overlap strips, then tape the tiles together.")
+    print(f"Reversed {n_pages} page(s) → {output_path}")
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -929,6 +868,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_poster.add_argument("--page", type=int, default=1, help="Which source page to tile, 1-indexed (default: 1)")
     p_poster.add_argument("-o", "--output", help="Output path (default: <stem>_poster.pdf)")
     p_poster.set_defaults(func=cmd_poster)
+
+    p_reverse = sub.add_parser("reverse", help="Reverse the order of all pages in a PDF.")
+    p_reverse.add_argument("input", help="Input PDF")
+    p_reverse.add_argument("-o", "--output", help="Output path (default: <stem>_reversed.pdf)")
+    p_reverse.set_defaults(func=cmd_reverse)
 
     return parser
 
