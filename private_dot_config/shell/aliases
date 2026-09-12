@@ -1,14 +1,21 @@
 #!/bin/bash
 
-alias ls="eza --icons -F --group-directories-first"
-alias tree="eza --tree --icons -F --group-directories-first"
+if command -v eza &> /dev/null; then
+	alias ls="eza --icons -F --group-directories-first"
+	alias tree="eza --tree --icons -F --group-directories-first"
+fi
+
+if command -v trash &> /dev/null; then
+	compdef _files trash
+	alias rm="trash"
+fi
+
 alias ll="ls -lh"
 alias lla="ls -lAh"
 alias la="ls -A"
 alias sl=ls # because im retarded
 alias oil="nvim -c Oil ."
 
-alias rm=trash
 alias pac="sudo pacman"
 
 alias here="dolphin . & disown"
@@ -27,4 +34,3 @@ source /home/hoshiya4522/.config/self/.scripts/aliases
 # rewrite nvim
 # Define an alias pointing to your custom Neovim config directory
 alias renvim="NVIM_APPNAME=renvim nvim"
-

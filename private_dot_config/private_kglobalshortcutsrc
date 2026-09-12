@@ -314,6 +314,8 @@ _launch=Launch (8)
 [services][net.local.read-smart.sh.desktop]
 _launch=Meta+Shift+A
 
+[services][org.kde.krunner.desktop]
+_launch=Search\tAlt+Space\tAlt+F2\tMeta+R
+
 [services][org.kde.spectacle.desktop]
-CurrentMonitorScreenShot=none
-OpenWithoutScreenshot=none
+RecordRegion=Meta+Shift+R

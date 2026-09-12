@@ -1,0 +1,223 @@
+#!/usr/bin/env python3
+"""
+slide2booklet — Turn a wide-aspect slide deck PDF into a printable booklet.
+
+Pipeline:
+  Stage 1 (from slide2a4):  pack 2 source slides per A4 portrait page
+                             (top/bottom, aspect-preserved), in memory.
+  Stage 2 (from mkbooklet):  take those A4 portrait pages and impose them
+                             2-up landscape into booklet sheets, split into
+                             separate fronts/backs files for non-duplex
+                             printers.
+
+Usage:
+    slide2booklet input.pdf
+
+Output:
+    input_booklet_fronts.pdf   ← Print this first
+    input_booklet_backs.pdf    ← Flip the stack, then print this
+
+After printing both files: take the fronts stack out of the tray WITHOUT
+flipping or rotating it, feed it back in for the backs print, then fold
+the whole stack in half and staple along the spine.
+"""
+
+import sys
+import io
+from pathlib import Path
+from pypdf import PdfReader, PdfWriter
+try:
+    from pypdf import Transformation
+except ImportError:
+    from pypdf.transformation import Transformation
+
+# A4 in points (1 pt = 1/72 inch)
+A4_W = 595.28
+A4_H = 841.89
+
+# Margin between the two slides and from edges, for stage 1 (points)
+SLIDE_MARGIN = 10
+
+
+# ─────────────────────────── Stage 1: slide2a4 ───────────────────────────
+
+def pack_slides_2up(reader: PdfReader) -> PdfWriter:
+    """
+    Pack source slide pages 2-per-A4-portrait-page (top/bottom),
+    preserving aspect ratio. Returns a PdfWriter with the packed pages.
+    """
+    writer = PdfWriter()
+
+    slot_w = A4_W - 2 * SLIDE_MARGIN
+    slot_h = (A4_H - 3 * SLIDE_MARGIN) / 2  # top, middle, bottom margins
+
+    pages = reader.pages
+    n = len(pages)
+
+    for i in range(0, n, 2):
+        out_page = writer.add_blank_page(width=A4_W, height=A4_H)
+
+        for slot, page_idx in enumerate([i, i + 1] if i + 1 < n else [i]):
+            src = pages[page_idx]
+            src_w = float(src.mediabox.width)
+            src_h = float(src.mediabox.height)
+
+            scale = min(slot_w / src_w, slot_h / src_h)
+            scaled_w = src_w * scale
+            scaled_h = src_h * scale
+
+            x_offset = SLIDE_MARGIN + (slot_w - scaled_w) / 2
+
+            if slot == 0:  # top half
+                y_offset = SLIDE_MARGIN + slot_h + SLIDE_MARGIN + (slot_h - scaled_h) / 2
+            else:  # bottom half
+                y_offset = SLIDE_MARGIN + (slot_h - scaled_h) / 2
+
+            tx = Transformation().scale(scale, scale).translate(x_offset, y_offset)
+            out_page.merge_transformed_page(src, tx)
+
+    return writer
+
+
+# ─────────────────────────── Stage 2: mkbooklet ───────────────────────────
+
+def pad_to_multiple_of_four(pages: list) -> list:
+    """Return page list padded with blanks (None) to a multiple of 4."""
+    pages = list(pages)
+    remainder = len(pages) % 4
+    if remainder:
+        blank_count = 4 - remainder
+        pages.extend([None] * blank_count)
+        print(f"  Padding with {blank_count} blank page(s) to reach {len(pages)} total pages.")
+    return pages
+
+
+def booklet_order(n_pages: int):
+    """
+    Return (fronts_order, backs_order) for a booklet with n_pages total
+    (n_pages must be a multiple of 4). Each element is a list of
+    (left_idx, right_idx) tuples for one sheet side.
+    """
+    n_sheets = n_pages // 4
+    fronts, backs = [], []
+    for s in range(n_sheets):
+        outer_right = n_pages - 1 - s * 2
+        outer_left = s * 2
+        inner_left = s * 2 + 1
+        inner_right = n_pages - 2 - s * 2
+
+        fronts.append((outer_right, outer_left))
+        backs.append((inner_left, inner_right))
+
+    return fronts, backs
+
+
+def impose_two_up(pages: list, order: list, src_w: float, src_h: float) -> PdfWriter:
+    """
+    Create a PDF where each sheet holds two source pages side-by-side.
+    order: list of (left_page_index, right_page_index) tuples; None = blank half.
+    Output page size: (2*src_w) x src_h.
+    """
+    writer = PdfWriter()
+    sheet_w = src_w * 2
+    sheet_h = src_h
+
+    for left_idx, right_idx in order:
+        out_page = writer.add_blank_page(width=sheet_w, height=sheet_h)
+
+        for idx, x_offset in [(left_idx, 0), (right_idx, src_w)]:
+            if idx is None:
+                continue
+            src_page = pages[idx]
+            if src_page is None:
+                continue
+            transform = Transformation().translate(tx=x_offset, ty=0)
+            out_page.merge_transformed_page(src_page, transform, expand=False)
+
+    return writer
+
+
+# ─────────────────────────────── Driver ───────────────────────────────
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: slide2booklet <input.pdf>", file=sys.stderr)
+        sys.exit(1)
+
+    input_path = Path(sys.argv[1])
+    if not input_path.is_file():
+        print(f"Error: file not found: {input_path}", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"\n📖  slide2booklet")
+    print(f"    Input : {input_path}")
+
+    src_reader = PdfReader(str(input_path))
+    print(f"    Slides: {len(src_reader.pages)}")
+
+    # Stage 1: pack 2 slides per A4 portrait page, in memory
+    print("\n  Packing slides 2-up …", end=" ", flush=True)
+    packed_writer = pack_slides_2up(src_reader)
+    buf = io.BytesIO()
+    packed_writer.write(buf)
+    buf.seek(0)
+    packed_reader = PdfReader(buf)
+    packed_pages = list(packed_reader.pages)
+    print(f"done  ({len(packed_pages)} A4 pages)")
+
+    # Stage 2: impose the packed A4 pages into a booklet
+    padded_pages = pad_to_multiple_of_four(packed_pages)
+    n = len(padded_pages)
+    n_sheets = n // 4
+    print(f"    Sheets: {n_sheets}  ({n} intermediate pages after padding)")
+
+    fronts_order, backs_order = booklet_order(n)
+
+    stem = input_path.stem
+    fronts_path = input_path.with_name(f"{stem}_booklet_fronts.pdf")
+    backs_path = input_path.with_name(f"{stem}_booklet_backs.pdf")
+
+    print("\n  Building fronts …", end=" ", flush=True)
+    fronts_writer = impose_two_up(padded_pages, fronts_order, A4_W, A4_H)
+    with open(fronts_path, "wb") as f:
+        fronts_writer.write(f)
+    print(f"done  →  {fronts_path}")
+
+    print("  Building backs  …", end=" ", flush=True)
+    backs_writer = impose_two_up(padded_pages, backs_order, A4_W, A4_H)
+    with open(backs_path, "wb") as f:
+        backs_writer.write(f)
+    print(f"done  →  {backs_path}")
+
+    print(f"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅  Done!  Each physical sheet holds 4 original slides
+             (2 via slide packing × 2 via booklet imposition).
+
+    1. {fronts_path.name}
+    2. {backs_path.name}
+
+  HOW TO PRINT (non-duplex):
+  ─────────────────────────
+  Step 1 │ Print  {fronts_path.name}
+         │   • Paper orientation: landscape (or let the PDF viewer decide)
+         │   • Scale: fit to page / actual size (your preference)
+
+  Step 2 │ Take the printed stack out of the output tray.
+         │ Place it back into the INPUT tray WITHOUT turning
+         │ or flipping it — same face, same direction.
+         │ (Do a single-sheet test first to confirm the
+         │  re-feed direction for your specific printer.)
+
+  Step 3 │ Print  {backs_path.name}
+
+  Step 4 │ Fold the whole stack in half.
+         │ Staple along the spine (centre fold).
+         │ Trim if needed.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+""")
+
+
+if __name__ == "__main__":
+    main()
+

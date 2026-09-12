@@ -134,7 +134,7 @@ ForegroundVisited=155,89,182
 
 [General]
 BrowserApplication=brave-origin-beta.desktop
-ColorSchemeHash=9d38eb71ded8ff549da26d57d7cbab9164da243a
+ColorSchemeHash=0efb452114ece4d3338057cb89f434aff85d80d0
 TerminalApplication=kitty
 TerminalService=kitty.desktop
 

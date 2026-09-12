@@ -1,0 +1,28 @@
+#!/bin/bash
+
+export MANPAGER="nvim +Man!"
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# Necessary for KDE applications to work properly
+export QT_QPA_PLATFORMTHEME="kde"
+export QT_AUTO_SCREEN_SCALE_FACTOR="1"
+export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+export XDG_MENU_PREFIX="plasma-"
+
+# For GTK Stuff
+export GTK_THEME="Breeze-Dark"
+export XCURSOR_THEME="breeze_cursors"
+export XCURSOR_SIZE="60"
+export QT_QPA_PLATFORM="wayland"
+
+export EDITOR=nvim
+export TERMINAL=alacritty
+
+# imports
+. "/home/hoshiya4522/.local/share/bob/env/env.sh"
+
+if [[ $SHELL != "/bin/zsh" ]]; then
+	# source /usr/share/nvm/init-nvm.sh
+fi
+
+

@@ -1,0 +1,974 @@
+#!/usr/bin/env python3
+"""
+pdftool — unified CLI combining mkbooklet, slide2a4, slide2booklet,
+          pdfgreyscale, splitpdf, plus nup, toc, merge, rotate,
+          compress, extract, and poster, into one toolkit.
+
+Usage:
+    pdftool booklet       INPUT.pdf
+    pdftool slide2a4      INPUT.pdf
+    pdftool slide2booklet INPUT.pdf
+    pdftool greyscale     INPUT.pdf
+    pdftool split         INPUT.pdf [-r]
+    pdftool nup           INPUT.pdf [--n N] [--cols C] [--margin PT]
+    pdftool toc           INPUT.pdf TOC.txt
+    pdftool merge         A.pdf B.pdf [C.pdf ...] [-o OUTPUT.pdf]
+    pdftool rotate        INPUT.pdf DEGREES [--pages SPEC]
+    pdftool compress      INPUT.pdf [--level {screen,ebook,printer,prepress,default}]
+    pdftool extract       INPUT.pdf SPEC [-o OUTPUT.pdf]
+    pdftool poster        INPUT.pdf [--rows R] [--cols C] [--overlap MM]
+                           [--orientation portrait|landscape] [--page N] [-o OUTPUT.pdf]
+
+Page SPEC grammar (used by --pages and extract), comma-separated tokens:
+    5          single page
+    5-10       inclusive range (reversed range like 10-5 walks backwards)
+    odd        all odd pages
+    even       all even pages
+    e.g. "1-3,7,odd" or just "odd"
+
+Run `pdftool <command> -h` for per-command help.
+
+Old command names (mkbooklet, slide2a4, slide2booklet, pdfgreyscale,
+splitpdf) still work if you symlink them to this file — see the
+"legacy aliases" note at the bottom of this file.
+"""
+
+import argparse
+import io
+import subprocess
+import sys
+from pathlib import Path
+
+from pypdf import PdfReader, PdfWriter
+from pypdf.generic import RectangleObject
+
+try:
+    from pypdf import Transformation
+except ImportError:
+    from pypdf.transformation import Transformation
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Shared constants
+# ─────────────────────────────────────────────────────────────────────────
+
+A4_W = 595.28  # points
+A4_H = 841.89  # points
+SLIDE_MARGIN = 10  # points, used by slide2a4 / slide2booklet
+MM_TO_PT = 72 / 25.4  # used by poster
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Shared helpers (imposition core, used by booklet + slide2booklet)
+# ─────────────────────────────────────────────────────────────────────────
+
+def get_media_box(page):
+    """Return (width, height) of a page in points."""
+    mb = page.mediabox
+    return float(mb.width), float(mb.height)
+
+
+def pad_to_multiple_of_four(pages: list) -> list:
+    """Return page list padded with None (blank) to a multiple of 4."""
+    pages = list(pages)
+    remainder = len(pages) % 4
+    if remainder:
+        blank_count = 4 - remainder
+        pages.extend([None] * blank_count)
+        print(f"  Padding with {blank_count} blank page(s) to reach {len(pages)} total pages.")
+    return pages
+
+
+def booklet_order(n_pages: int):
+    """
+    Return (fronts_order, backs_order) for a booklet with n_pages total
+    (n_pages must be a multiple of 4). Each element is a list of
+    (left_idx, right_idx) tuples for one sheet side.
+
+    Booklet imposition (0-indexed):
+      Sheet 1  front: [n-1,  0]
+      Sheet 1  back:  [1,    n-2]
+      Sheet 2  front: [n-3,  2]
+      Sheet 2  back:  [3,    n-4]
+      ...
+    """
+    n_sheets = n_pages // 4
+    fronts, backs = [], []
+    for s in range(n_sheets):
+        outer_right = n_pages - 1 - s * 2
+        outer_left = s * 2
+        inner_left = s * 2 + 1
+        inner_right = n_pages - 2 - s * 2
+
+        fronts.append((outer_right, outer_left))
+        backs.append((inner_left, inner_right))
+
+    return fronts, backs
+
+
+def impose_two_up(pages: list, order: list, src_w: float, src_h: float) -> PdfWriter:
+    """
+    Create a PDF where each sheet holds two source pages side-by-side.
+    order: list of (left_page_index, right_page_index) tuples; None = blank half.
+    Output page size: (2*src_w) x src_h.
+    """
+    writer = PdfWriter()
+    sheet_w = src_w * 2
+    sheet_h = src_h
+
+    for left_idx, right_idx in order:
+        out_page = writer.add_blank_page(width=sheet_w, height=sheet_h)
+
+        for idx, x_offset in [(left_idx, 0), (right_idx, src_w)]:
+            if idx is None:
+                continue
+            src_page = pages[idx]
+            if src_page is None:
+                continue
+            transform = Transformation().translate(tx=x_offset, ty=0)
+            out_page.merge_transformed_page(src_page, transform, expand=False)
+
+    return writer
+
+
+def pack_slides_2up(reader: PdfReader) -> PdfWriter:
+    """
+    Pack source slide pages 2-per-A4-portrait-page (top/bottom),
+    preserving aspect ratio. Returns a PdfWriter with the packed pages.
+    Shared by `slide2a4` and stage 1 of `slide2booklet`.
+    """
+    writer = PdfWriter()
+
+    slot_w = A4_W - 2 * SLIDE_MARGIN
+    slot_h = (A4_H - 3 * SLIDE_MARGIN) / 2  # top, middle, bottom margins
+
+    pages = reader.pages
+    n = len(pages)
+
+    for i in range(0, n, 2):
+        out_page = writer.add_blank_page(width=A4_W, height=A4_H)
+
+        for slot, page_idx in enumerate([i, i + 1] if i + 1 < n else [i]):
+            src = pages[page_idx]
+            src_w = float(src.mediabox.width)
+            src_h = float(src.mediabox.height)
+
+            scale = min(slot_w / src_w, slot_h / src_h)
+            scaled_w = src_w * scale
+            scaled_h = src_h * scale
+
+            x_offset = SLIDE_MARGIN + (slot_w - scaled_w) / 2
+
+            if slot == 0:  # top half
+                y_offset = SLIDE_MARGIN + slot_h + SLIDE_MARGIN + (slot_h - scaled_h) / 2
+            else:  # bottom half
+                y_offset = SLIDE_MARGIN + (slot_h - scaled_h) / 2
+
+            tx = Transformation().scale(scale, scale).translate(x_offset, y_offset)
+            out_page.merge_transformed_page(src, tx)
+
+    return writer
+
+
+def pack_nup(reader: PdfReader, n: int, cols: int, margin: float = 10) -> PdfWriter:
+    """
+    Pack n source pages per A4-portrait output page, in a `cols`-column
+    grid (rows computed from n and cols), preserving aspect ratio and
+    filling left-to-right, top-to-bottom. Generalizes pack_slides_2up.
+    """
+    writer = PdfWriter()
+    rows = -(-n // cols)  # ceil division
+
+    slot_w = (A4_W - (cols + 1) * margin) / cols
+    slot_h = (A4_H - (rows + 1) * margin) / rows
+
+    pages = reader.pages
+    total = len(pages)
+
+    for i in range(0, total, n):
+        out_page = writer.add_blank_page(width=A4_W, height=A4_H)
+        chunk = list(range(i, min(i + n, total)))
+
+        for slot, page_idx in enumerate(chunk):
+            src = pages[page_idx]
+            src_w = float(src.mediabox.width)
+            src_h = float(src.mediabox.height)
+
+            row = slot // cols
+            col = slot % cols
+
+            scale = min(slot_w / src_w, slot_h / src_h)
+            scaled_w = src_w * scale
+            scaled_h = src_h * scale
+
+            cell_x = margin + col * (slot_w + margin)
+            cell_y_top = A4_H - margin - row * (slot_h + margin)  # top edge of this row's cell
+
+            x_offset = cell_x + (slot_w - scaled_w) / 2
+            y_offset = cell_y_top - slot_h + (slot_h - scaled_h) / 2
+
+            tx = Transformation().scale(scale, scale).translate(x_offset, y_offset)
+            out_page.merge_transformed_page(src, tx)
+
+    return writer
+
+
+def parse_page_spec(spec: str, n_pages: int) -> list:
+    """
+    Parse a page spec into a 0-indexed list of page numbers, in the order
+    given by the spec (not deduped, not sorted — order is preserved so
+    e.g. "10-5" walks backwards).
+
+    Grammar (comma-separated tokens):
+        5        single page (1-indexed)
+        5-10     inclusive range (10-5 walks backwards)
+        odd      all odd pages, ascending
+        even     all even pages, ascending
+    """
+    result = []
+    for token in spec.split(","):
+        token = token.strip()
+        if not token:
+            continue
+        if token == "odd":
+            result.extend(i for i in range(0, n_pages, 2))
+        elif token == "even":
+            result.extend(i for i in range(1, n_pages, 2))
+        elif "-" in token:
+            start_s, end_s = token.split("-", 1)
+            start, end = int(start_s), int(end_s)
+            step = 1 if end >= start else -1
+            for p in range(start, end + step, step):
+                if not (1 <= p <= n_pages):
+                    print(f"Error: page {p} out of range (1-{n_pages})", file=sys.stderr)
+                    sys.exit(1)
+                result.append(p - 1)
+        else:
+            p = int(token)
+            if not (1 <= p <= n_pages):
+                print(f"Error: page {p} out of range (1-{n_pages})", file=sys.stderr)
+                sys.exit(1)
+            result.append(p - 1)
+    return result
+
+
+def pack_poster_tiles(input_path, page_index: int, rows: int, cols: int,
+                       overlap_mm: float, orientation: str):
+    """
+    Split one oversized page into a rows x cols grid of tiles for tiled
+    printing (the inverse of nup: one page becomes many). Adjacent tiles
+    share an `overlap_mm`-wide strip for trimming/alignment when taping.
+    Output page order: top-left → top-right ... → bottom-right, row by row.
+    Returns (writer, scale, tile_w, tile_h).
+    """
+    if orientation.lower().startswith("l"):
+        tile_w, tile_h = A4_H, A4_W
+    else:
+        tile_w, tile_h = A4_W, A4_H
+
+    overlap_pt = overlap_mm * MM_TO_PT
+
+    src_page = PdfReader(str(input_path)).pages[page_index]
+    pw = float(src_page.mediabox.width)
+    ph = float(src_page.mediabox.height)
+
+    canvas_w = cols * tile_w - (cols - 1) * overlap_pt
+    canvas_h = rows * tile_h - (rows - 1) * overlap_pt
+
+    scale = min(canvas_w / pw, canvas_h / ph)
+    scaled_w, scaled_h = pw * scale, ph * scale
+
+    offset_x = (canvas_w - scaled_w) / 2
+    offset_y = (canvas_h - scaled_h) / 2
+
+    writer = PdfWriter()
+
+    for row in range(rows - 1, -1, -1):  # top row first
+        for col in range(cols):  # left to right
+            tile_x0 = col * (tile_w - overlap_pt)
+            tile_y0 = row * (tile_h - overlap_pt)
+
+            tx = offset_x - tile_x0
+            ty = offset_y - tile_y0
+
+            # Re-read the page fresh each iteration so the transform below
+            # doesn't accumulate across tiles.
+            tile = PdfReader(str(input_path)).pages[page_index]
+            tile.add_transformation(Transformation().scale(scale).translate(tx, ty))
+            tile.mediabox = RectangleObject((0, 0, tile_w, tile_h))
+            tile.cropbox = RectangleObject((0, 0, tile_w, tile_h))
+
+            writer.add_page(tile)
+
+    return writer, scale, tile_w, tile_h
+
+
+PRINT_INSTRUCTIONS = """
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅  Done!  Two files created:
+
+    1. {fronts_name}
+    2. {backs_name}
+
+  HOW TO PRINT (non-duplex):
+  ─────────────────────────
+  Step 1 │ Print  {fronts_name}
+         │   • Paper orientation: landscape (or let the PDF viewer decide)
+         │   • Scale: fit to page / actual size (your preference)
+
+  Step 2 │ Take the printed stack out of the output tray.
+         │ Place it back into the INPUT tray WITHOUT turning
+         │ or flipping it — same face, same direction.
+         │ (Do a single-sheet test first to confirm the
+         │  re-feed direction for your specific printer.)
+
+  Step 3 │ Print  {backs_name}
+
+  Step 4 │ Fold the whole stack in half.
+         │ Staple along the spine (centre fold).
+         │ Trim if needed.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+
+
+def _require_pdf(path_str: str) -> Path:
+    path = Path(path_str)
+    if not path.is_file():
+        print(f"Error: file not found: {path}", file=sys.stderr)
+        sys.exit(1)
+    return path
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: booklet  (was mkbooklet)
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_booklet(args):
+    input_path = _require_pdf(args.input)
+
+    print(f"\n📖  Booklet converter")
+    print(f"    Input : {input_path}")
+
+    reader = PdfReader(str(input_path))
+    raw_pages = list(reader.pages)
+    print(f"    Pages : {len(raw_pages)}")
+
+    pages = pad_to_multiple_of_four(raw_pages)
+    n = len(pages)
+    n_sheets = n // 4
+    print(f"    Sheets: {n_sheets}  ({n} pages total after padding)")
+
+    src_w, src_h = get_media_box(raw_pages[0])
+    print(f"    Page size: {src_w:.1f} x {src_h:.1f} pt "
+          f"({src_w/72:.2f} x {src_h/72:.2f} in)")
+
+    fronts_order, backs_order = booklet_order(n)
+
+    stem = input_path.stem
+    fronts_path = input_path.with_name(f"{stem}_booklet_fronts.pdf")
+    backs_path = input_path.with_name(f"{stem}_booklet_backs.pdf")
+
+    print("\n  Building fronts …", end=" ", flush=True)
+    impose_two_up(pages, fronts_order, src_w, src_h).write(str(fronts_path))
+    print(f"done  →  {fronts_path}")
+
+    print("  Building backs  …", end=" ", flush=True)
+    impose_two_up(pages, backs_order, src_w, src_h).write(str(backs_path))
+    print(f"done  →  {backs_path}")
+
+    print(PRINT_INSTRUCTIONS.format(fronts_name=fronts_path.name, backs_name=backs_path.name))
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: slide2a4
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_slide2a4(args):
+    input_path = _require_pdf(args.input)
+    output_path = input_path.with_name(f"{input_path.stem}_concatenated.pdf")
+
+    reader = PdfReader(str(input_path))
+    writer = pack_slides_2up(reader)
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+    print(f"Done: {output_path}")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: slide2booklet  (slide2a4 pack, then booklet impose)
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_slide2booklet(args):
+    input_path = _require_pdf(args.input)
+
+    print(f"\n📖  slide2booklet")
+    print(f"    Input : {input_path}")
+
+    src_reader = PdfReader(str(input_path))
+    print(f"    Slides: {len(src_reader.pages)}")
+
+    print("\n  Packing slides 2-up …", end=" ", flush=True)
+    packed_writer = pack_slides_2up(src_reader)
+    buf = io.BytesIO()
+    packed_writer.write(buf)
+    buf.seek(0)
+    packed_pages = list(PdfReader(buf).pages)
+    print(f"done  ({len(packed_pages)} A4 pages)")
+
+    padded_pages = pad_to_multiple_of_four(packed_pages)
+    n = len(padded_pages)
+    n_sheets = n // 4
+    print(f"    Sheets: {n_sheets}  ({n} intermediate pages after padding)")
+
+    fronts_order, backs_order = booklet_order(n)
+
+    stem = input_path.stem
+    fronts_path = input_path.with_name(f"{stem}_booklet_fronts.pdf")
+    backs_path = input_path.with_name(f"{stem}_booklet_backs.pdf")
+
+    print("\n  Building fronts …", end=" ", flush=True)
+    impose_two_up(padded_pages, fronts_order, A4_W, A4_H).write(str(fronts_path))
+    print(f"done  →  {fronts_path}")
+
+    print("  Building backs  …", end=" ", flush=True)
+    impose_two_up(padded_pages, backs_order, A4_W, A4_H).write(str(backs_path))
+    print(f"done  →  {backs_path}")
+
+    print(f"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅  Done!  Each physical sheet holds 4 original slides
+             (2 via slide packing × 2 via booklet imposition).
+
+    1. {fronts_path.name}
+    2. {backs_path.name}
+""" + PRINT_INSTRUCTIONS.format(fronts_name=fronts_path.name, backs_name=backs_path.name).lstrip("\n"))
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: greyscale
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_greyscale(args):
+    input_path = _require_pdf(args.input)
+    output_path = input_path.with_name(f"{input_path.stem}_greyscale.pdf")
+
+    print(f"Converting to greyscale: {input_path} → {output_path}")
+
+    try:
+        subprocess.run(
+            [
+                "gs",
+                f"-sOutputFile={output_path}",
+                "-sDEVICE=pdfwrite",
+                "-sColorConversionStrategy=Gray",
+                "-dProcessColorModel=/DeviceGray",
+                "-dCompatibilityLevel=1.4",
+                "-dNOPAUSE",
+                "-dBATCH",
+                "-dQUIET",
+                str(input_path),
+            ],
+            check=True,
+        )
+    except FileNotFoundError:
+        print("Error: ghostscript (gs) not found on PATH.", file=sys.stderr)
+        sys.exit(1)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: ghostscript failed (exit {e.returncode})", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"Done: {output_path}")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: split  (was splitpdf)
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_split(args):
+    input_path = _require_pdf(args.input)
+    stem = input_path.stem
+    front_path = input_path.with_name(f"{stem}_front.pdf")
+    back_path = input_path.with_name(f"{stem}_back.pdf")
+
+    reader = PdfReader(str(input_path))
+    pages = reader.pages
+    n = len(pages)
+
+    odd = [pages[i] for i in range(0, n, 2)]   # 1,3,5,...
+    even = [pages[i] for i in range(1, n, 2)]  # 2,4,6,...
+
+    if args.reverse:
+        even = list(reversed(even))
+
+    def write(pages_list, path):
+        w = PdfWriter()
+        for p in pages_list:
+            w.add_page(p)
+        with open(path, "wb") as f:
+            w.write(f)
+
+    write(odd, front_path)
+    write(even, back_path)
+
+    print(f"{n} pages total -> {len(odd)} front, {len(even)} back")
+    print("Print instructions:")
+    print(f"  1. Print {front_path.name}  (odd pages, page 1 on top of output stack)")
+    print("  2. Flip the whole stack over (do NOT reorder pages)")
+    print("  3. Load it back into the tray as-is")
+    print(f"  4. Print {back_path.name}")
+    print(f"  If back pages land misaligned/reversed, redo with: pdftool split {input_path} -r")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: nup  (generalized N-per-page grid, subsumes slide2a4's use case)
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_nup(args):
+    input_path = _require_pdf(args.input)
+    if args.n < 1:
+        print("Error: --n must be >= 1", file=sys.stderr)
+        sys.exit(1)
+    if args.cols < 1 or args.cols > args.n:
+        print("Error: --cols must be between 1 and --n", file=sys.stderr)
+        sys.exit(1)
+
+    output_path = input_path.with_name(f"{input_path.stem}_{args.n}up.pdf")
+
+    reader = PdfReader(str(input_path))
+    writer = pack_nup(reader, n=args.n, cols=args.cols, margin=args.margin)
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+    rows = -(-args.n // args.cols)
+    print(f"Packed {len(reader.pages)} pages, {args.n}-up ({rows} rows x {args.cols} cols) → {output_path}")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: toc  (bookmarks from a text outline)
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_toc(args):
+    input_path = _require_pdf(args.input)
+    toc_path = Path(args.toc)
+    if not toc_path.is_file():
+        print(f"Error: TOC file not found: {toc_path}", file=sys.stderr)
+        sys.exit(1)
+
+    output_path = input_path.with_name(f"{input_path.stem}_toc.pdf")
+
+    reader = PdfReader(str(input_path))
+    n_pages = len(reader.pages)
+    writer = PdfWriter()
+    writer.append(reader)
+
+    # Each TOC line: "<indent><Title>,<page>"
+    # Indent level = number of leading tabs, or groups of 4 leading spaces.
+    parents = {}  # level -> outline item, for nesting
+    line_no = 0
+    for raw_line in toc_path.read_text(encoding="utf-8").splitlines():
+        line_no += 1
+        if not raw_line.strip():
+            continue
+        stripped = raw_line.lstrip(" \t")
+        leading = raw_line[: len(raw_line) - len(stripped)]
+        level = leading.count("\t") + leading.count(" ") // 4
+
+        if "," not in stripped:
+            print(f"Error: TOC line {line_no} missing ',<page>': {raw_line!r}", file=sys.stderr)
+            sys.exit(1)
+        title, page_s = stripped.rsplit(",", 1)
+        title = title.strip()
+        try:
+            page_num = int(page_s.strip())
+        except ValueError:
+            print(f"Error: TOC line {line_no} has a non-integer page: {raw_line!r}", file=sys.stderr)
+            sys.exit(1)
+        if not (1 <= page_num <= n_pages):
+            print(f"Error: TOC line {line_no} page {page_num} out of range (1-{n_pages})", file=sys.stderr)
+            sys.exit(1)
+
+        parent = parents.get(level - 1) if level > 0 else None
+        item = writer.add_outline_item(title, page_num - 1, parent=parent)
+        parents[level] = item
+        # drop any stale deeper levels once we go back up
+        for deeper in [lv for lv in parents if lv > level]:
+            del parents[deeper]
+
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+    print(f"Added {line_no} bookmark(s) → {output_path}")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: merge
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_merge(args):
+    input_paths = [_require_pdf(p) for p in args.inputs]
+
+    if args.output:
+        output_path = Path(args.output)
+    else:
+        output_path = input_paths[0].with_name("merged.pdf")
+
+    writer = PdfWriter()
+    for p in input_paths:
+        writer.append(str(p))
+
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+    print(f"Merged {len(input_paths)} file(s) → {output_path}")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: rotate
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_rotate(args):
+    input_path = _require_pdf(args.input)
+    if args.degrees % 90 != 0:
+        print("Error: rotation must be a multiple of 90", file=sys.stderr)
+        sys.exit(1)
+
+    output_path = input_path.with_name(f"{input_path.stem}_rotated.pdf")
+
+    reader = PdfReader(str(input_path))
+    n_pages = len(reader.pages)
+    target_idxs = set(parse_page_spec(args.pages, n_pages)) if args.pages else set(range(n_pages))
+
+    writer = PdfWriter()
+    for i, page in enumerate(reader.pages):
+        if i in target_idxs:
+            page.rotate(args.degrees % 360)
+        writer.add_page(page)
+
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+    print(f"Rotated {len(target_idxs)} of {n_pages} page(s) by {args.degrees}° → {output_path}")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: compress
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_compress(args):
+    input_path = _require_pdf(args.input)
+    output_path = input_path.with_name(f"{input_path.stem}_compressed.pdf")
+
+    before_size = input_path.stat().st_size
+    print(f"Compressing ({args.level}): {input_path} → {output_path}")
+
+    try:
+        subprocess.run(
+            [
+                "gs",
+                f"-sOutputFile={output_path}",
+                "-sDEVICE=pdfwrite",
+                f"-dPDFSETTINGS=/{args.level}",
+                "-dCompatibilityLevel=1.4",
+                "-dNOPAUSE",
+                "-dBATCH",
+                "-dQUIET",
+                str(input_path),
+            ],
+            check=True,
+        )
+    except FileNotFoundError:
+        print("Error: ghostscript (gs) not found on PATH.", file=sys.stderr)
+        sys.exit(1)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: ghostscript failed (exit {e.returncode})", file=sys.stderr)
+        sys.exit(1)
+
+    after_size = output_path.stat().st_size
+    pct = (1 - after_size / before_size) * 100 if before_size else 0
+    print(f"Done: {output_path}  ({before_size/1024:.0f} KB → {after_size/1024:.0f} KB, {pct:.0f}% smaller)")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: extract  (ranges, discrete pages, odd/even)
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_extract(args):
+    input_path = _require_pdf(args.input)
+
+    if bool(args.pages) == bool(args.odd or args.even):
+        print("Error: give either a page SPEC or --odd/--even, not both/neither", file=sys.stderr)
+        sys.exit(1)
+
+    reader = PdfReader(str(input_path))
+    n_pages = len(reader.pages)
+
+    if args.odd:
+        idxs = list(range(0, n_pages, 2))
+        tag = "odd"
+    elif args.even:
+        idxs = list(range(1, n_pages, 2))
+        tag = "even"
+    else:
+        idxs = parse_page_spec(args.pages, n_pages)
+        tag = "extracted"
+
+    if args.output:
+        output_path = Path(args.output)
+    else:
+        output_path = input_path.with_name(f"{input_path.stem}_{tag}.pdf")
+
+    writer = PdfWriter()
+    for i in idxs:
+        writer.add_page(reader.pages[i])
+
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+    print(f"Extracted {len(idxs)} of {n_pages} page(s) → {output_path}")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: poster  (was poster2a4.sh — one oversized page → RxC tiles)
+# ─────────────────────────────────────────────────────────────────────────
+
+def cmd_poster(args):
+    input_path = _require_pdf(args.input)
+    if args.rows < 1 or args.cols < 1:
+        print("Error: --rows and --cols must be >= 1", file=sys.stderr)
+        sys.exit(1)
+
+    reader = PdfReader(str(input_path))
+    n_pages = len(reader.pages)
+    page_index = args.page - 1
+    if not (0 <= page_index < n_pages):
+        print(f"Error: --page {args.page} out of range (1-{n_pages})", file=sys.stderr)
+        sys.exit(1)
+
+    output_path = Path(args.output) if args.output else input_path.with_name(f"{input_path.stem}_poster.pdf")
+
+    writer, scale, tile_w, tile_h = pack_poster_tiles(
+        input_path, page_index, args.rows, args.cols, args.overlap, args.orientation
+    )
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+    n_tiles = args.rows * args.cols
+    print(f"Wrote {output_path}: {args.rows}x{args.cols} = {n_tiles} tiles, "
+          f"scaled {scale:.3f}x, tile {tile_w/MM_TO_PT:.0f}x{tile_h/MM_TO_PT:.0f}mm, "
+          f"overlap {args.overlap:.0f}mm")
+    print(f"\nPrint '{output_path.name}' at 100% scale ('actual size', NOT 'fit to page').")
+    print(f"Layout: page 1 = top-left, reading left-to-right then down to bottom-right "
+          f"({args.rows} rows x {args.cols} cols).")
+    print("Trim along the overlap strips, then tape the tiles together.")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Command: poster  (was poster2a4.sh — tile one page across an RxC grid)
+# ─────────────────────────────────────────────────────────────────────────
+
+MM_TO_PT = 72 / 25.4
+
+
+def cmd_poster(args):
+    input_path = _require_pdf(args.input)
+    if args.rows < 1 or args.cols < 1:
+        print("Error: --rows and --cols must be >= 1", file=sys.stderr)
+        sys.exit(1)
+
+    output_path = Path(args.output) if args.output else input_path.with_name(f"{input_path.stem}_poster.pdf")
+
+    reader = PdfReader(str(input_path))
+    n_pages = len(reader.pages)
+    page_num = args.page
+    if not (1 <= page_num <= n_pages):
+        print(f"Error: --page {page_num} out of range (1-{n_pages})", file=sys.stderr)
+        sys.exit(1)
+    src_idx = page_num - 1
+
+    a4_w, a4_h = 210 * MM_TO_PT, 297 * MM_TO_PT
+    if args.orientation.lower().startswith("l"):
+        tile_w, tile_h = a4_h, a4_w
+    else:
+        tile_w, tile_h = a4_w, a4_h
+
+    overlap_pt = args.overlap * MM_TO_PT
+    rows, cols = args.rows, args.cols
+
+    src_page = reader.pages[src_idx]
+    pw = float(src_page.mediabox.width)
+    ph = float(src_page.mediabox.height)
+
+    # The RxC grid of tiles overlaps by overlap_pt on shared edges, so the
+    # usable canvas is slightly smaller than rows*tile_h x cols*tile_w.
+    canvas_w = cols * tile_w - (cols - 1) * overlap_pt
+    canvas_h = rows * tile_h - (rows - 1) * overlap_pt
+
+    # Scale the source page to fit the canvas, preserving aspect ratio.
+    scale = min(canvas_w / pw, canvas_h / ph)
+    scaled_w, scaled_h = pw * scale, ph * scale
+
+    # Center the scaled page in the canvas.
+    offset_x = (canvas_w - scaled_w) / 2
+    offset_y = (canvas_h - scaled_h) / 2
+
+    writer = PdfWriter()
+
+    # row: top row first, descending; col: left to right.
+    tile_count = 0
+    for row in range(rows - 1, -1, -1):
+        for col in range(cols):
+            tile_x0 = col * (tile_w - overlap_pt)
+            tile_y0 = row * (tile_h - overlap_pt)
+
+            tx = offset_x - tile_x0
+            ty = offset_y - tile_y0
+
+            # Re-read the page fresh each iteration so the transform
+            # doesn't accumulate across tiles.
+            page = PdfReader(str(input_path)).pages[src_idx]
+            page.add_transformation(Transformation().scale(scale).translate(tx, ty))
+            page.mediabox = RectangleObject((0, 0, tile_w, tile_h))
+            page.cropbox = RectangleObject((0, 0, tile_w, tile_h))
+
+            writer.add_page(page)
+            tile_count += 1
+
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+    print(f"Wrote {output_path}: page scaled {scale:.3f}x, "
+          f"{rows}x{cols} grid = {tile_count} tiles, "
+          f"tile {tile_w/MM_TO_PT:.0f}x{tile_h/MM_TO_PT:.0f}mm, "
+          f"overlap {args.overlap:.0f}mm")
+    print(f"Print at 100% scale ('actual size', NOT 'fit to page').")
+    print(f"Layout order: row-major, top-left first, {cols} tiles per row, {rows} rows.")
+    print("Trim along the overlap strips, then tape the tiles together.")
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Argument parsing / dispatch
+# ─────────────────────────────────────────────────────────────────────────
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="pdftool",
+        description="Unified PDF toolkit: booklet, slide2a4, slide2booklet, greyscale, split.",
+    )
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    p_booklet = sub.add_parser("booklet", help="Impose a PDF into a fold-and-staple booklet (fronts/backs).")
+    p_booklet.add_argument("input", help="Input PDF")
+    p_booklet.set_defaults(func=cmd_booklet)
+
+    p_s2a4 = sub.add_parser("slide2a4", help="Pack 2 slides per A4 page (top/bottom).")
+    p_s2a4.add_argument("input", help="Input PDF")
+    p_s2a4.set_defaults(func=cmd_slide2a4)
+
+    p_s2b = sub.add_parser("slide2booklet", help="slide2a4 packing + booklet imposition in one pass.")
+    p_s2b.add_argument("input", help="Input PDF")
+    p_s2b.set_defaults(func=cmd_slide2booklet)
+
+    p_grey = sub.add_parser("greyscale", help="Convert a PDF to greyscale (requires ghostscript).")
+    p_grey.add_argument("input", help="Input PDF")
+    p_grey.set_defaults(func=cmd_greyscale)
+
+    p_split = sub.add_parser("split", help="Split into odd/even page files for manual duplex printing.")
+    p_split.add_argument("input", help="Input PDF")
+    p_split.add_argument("-r", "--reverse", action="store_true", help="Reverse the back (even) pages.")
+    p_split.set_defaults(func=cmd_split)
+
+    p_nup = sub.add_parser("nup", help="Pack N source pages per A4 page in a grid (generalizes slide2a4).")
+    p_nup.add_argument("input", help="Input PDF")
+    p_nup.add_argument("--n", type=int, default=2, help="Pages per output sheet (default: 2)")
+    p_nup.add_argument("--cols", type=int, default=1, help="Grid columns (default: 1, i.e. stacked rows)")
+    p_nup.add_argument("--margin", type=float, default=10, help="Margin between slots, in points (default: 10)")
+    p_nup.set_defaults(func=cmd_nup)
+
+    p_toc = sub.add_parser("toc", help="Add bookmarks/outline from a text file of 'Title,page' lines.")
+    p_toc.add_argument("input", help="Input PDF")
+    p_toc.add_argument("toc", help="Text file: one 'Title,page' per line (indent with tabs/spaces to nest)")
+    p_toc.set_defaults(func=cmd_toc)
+
+    p_merge = sub.add_parser("merge", help="Concatenate multiple PDFs into one, in the given order.")
+    p_merge.add_argument("inputs", nargs="+", help="Input PDFs, in the order to merge")
+    p_merge.add_argument("-o", "--output", help="Output path (default: merged.pdf next to the first input)")
+    p_merge.set_defaults(func=cmd_merge)
+
+    p_rotate = sub.add_parser("rotate", help="Rotate all or specific pages by a multiple of 90 degrees.")
+    p_rotate.add_argument("input", help="Input PDF")
+    p_rotate.add_argument("degrees", type=int, help="Clockwise rotation: 90, 180, 270, -90, ...")
+    p_rotate.add_argument("--pages", help="Page SPEC to rotate (default: all pages)")
+    p_rotate.set_defaults(func=cmd_rotate)
+
+    p_compress = sub.add_parser("compress", help="Shrink file size via ghostscript.")
+    p_compress.add_argument("input", help="Input PDF")
+    p_compress.add_argument(
+        "--level",
+        choices=["screen", "ebook", "printer", "prepress", "default"],
+        default="ebook",
+        help="Ghostscript PDFSETTINGS preset (default: ebook)",
+    )
+    p_compress.set_defaults(func=cmd_compress)
+
+    p_extract = sub.add_parser("extract", help="Pull out a page SPEC, or every odd/even page, into a new PDF.")
+    p_extract.add_argument("input", help="Input PDF")
+    p_extract.add_argument("pages", nargs="?", help="Page SPEC, e.g. '5-10' or '1,3,7-9'")
+    p_extract.add_argument("--odd", action="store_true", help="Extract every odd page instead of a SPEC")
+    p_extract.add_argument("--even", action="store_true", help="Extract every even page instead of a SPEC")
+    p_extract.add_argument("-o", "--output", help="Output path (default: <stem>_extracted.pdf)")
+    p_extract.set_defaults(func=cmd_extract)
+
+    p_poster = sub.add_parser("poster", help="Tile one page across an R x C grid of A4 sheets for poster printing.")
+    p_poster.add_argument("input", help="Input PDF")
+    p_poster.add_argument("--rows", type=int, default=2, help="Grid rows (default: 2)")
+    p_poster.add_argument("--cols", type=int, default=2, help="Grid columns (default: 2)")
+    p_poster.add_argument("--overlap", type=float, default=10, help="Overlap strip width in mm (default: 10)")
+    p_poster.add_argument("--orientation", choices=["portrait", "landscape"], default="portrait",
+                           help="Tile orientation (default: portrait)")
+    p_poster.add_argument("--page", type=int, default=1, help="Which source page to tile, 1-indexed (default: 1)")
+    p_poster.add_argument("-o", "--output", help="Output path (default: <stem>_poster.pdf)")
+    p_poster.set_defaults(func=cmd_poster)
+
+    return parser
+
+
+def main():
+    # Legacy-alias dispatch: if invoked as e.g. `mkbooklet`, `slide2a4`,
+    # `pdfgreyscale`, `splitpdf`, `slide2booklet` (via symlink to this file),
+    # insert the matching subcommand automatically so old muscle-memory
+    # invocations keep working without changing call sites.
+    LEGACY_ALIASES = {
+        "mkbooklet": "booklet",
+        "slide2a4": "slide2a4",
+        "slide2booklet": "slide2booklet",
+        "pdfgreyscale": "greyscale",
+        "splitpdf": "split",
+    }
+    prog_name = Path(sys.argv[0]).name
+    argv = sys.argv[1:]
+    if prog_name in LEGACY_ALIASES and (not argv or argv[0] not in LEGACY_ALIASES.values()):
+        argv = [LEGACY_ALIASES[prog_name]] + argv
+
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    args.func(args)
+
+
+if __name__ == "__main__":
+    main()
+
+# ─────────────────────────────────────────────────────────────────────────
+# Legacy aliases — optional
+#
+# To keep typing `mkbooklet file.pdf` etc. instead of `pdftool booklet
+# file.pdf`, symlink the old names to this file:
+#
+#   cd ~/.local/bin
+#   rm -f mkbooklet slide2a4 slide2booklet pdfgreyscale splitpdf
+#   for name in mkbooklet slide2a4 slide2booklet pdfgreyscale splitpdf; do
+#       ln -s pdftool "$name"
+#   done
+#
+# main() detects argv[0] and inserts the right subcommand automatically.
+# ─────────────────────────────────────────────────────────────────────────

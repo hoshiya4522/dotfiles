@@ -180,3 +180,8 @@ export PATH="$PATH:/home/hoshiya4522/.turso"
 
 bindkey -s '^X' 'libpick^M'
 
+
+if command -v trash &> /dev/null; then
+	compdef _files trash
+fi
+
