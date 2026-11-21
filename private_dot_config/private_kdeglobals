@@ -133,8 +133,8 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [General]
-BrowserApplication=brave-origin-beta.desktop
-ColorSchemeHash=0efb452114ece4d3338057cb89f434aff85d80d0
+BrowserApplication=helium.desktop
+ColorSchemeHash=27363f5706202c1c8261fbda7381ddaab8ad48f3
 TerminalApplication=kitty
 TerminalService=kitty.desktop
 

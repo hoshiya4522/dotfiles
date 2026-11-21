@@ -44,18 +44,27 @@ setopt hist_find_no_dups
 # setopt CORRECT
 setopt CORRECT_ALL
 
-# --- Antidote Package Manager ---
-# Must load BEFORE compinit
+# --- Antidote Package Manager --- {{{
 zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-  (
-    source '/usr/share/zsh-antidote/antidote.zsh'
-    antidote bundle <${zsh_plugins}.txt >${zsh_plugins}.zsh
-  )
-fi
-source ${zsh_plugins}.zsh
+[[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
 
+if [[ -d /usr/share/zsh-antidote/functions ]]; then
+	# Arch Linux (AUR) path
+	fpath=(/usr/share/zsh-antidote/functions $fpath)
+elif [[ -d ${ZDOTDIR:-$HOME}/.antidote/functions ]]; then
+	# Fedora (Git) path
+	fpath=(${ZDOTDIR:-$HOME}/.antidote/functions $fpath)
+fi
+
+autoload -Uz antidote
+
+if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+  antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
+fi
+
+source ${zsh_plugins}.zsh
 fpath+=~/.config/zsh/auto_comp
+# }}}
 
 # --- Autocompletion ---
 # Must load AFTER plugins

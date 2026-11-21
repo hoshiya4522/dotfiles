@@ -22,7 +22,7 @@ fi
 
 
 export EDITOR=nvim
-export TERMINAL=alacritty
+export TERMINAL=kitty
 
-# imports
-. "/home/hoshiya4522/.local/share/bob/env/env.sh"
+
+. "$HOME/.cargo/env"

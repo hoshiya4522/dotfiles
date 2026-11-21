@@ -59,4 +59,3 @@ require("plugin_config.colorizer")
 require("plugin_config.telescope")
 require("plugin_config.luasnips") -- snippet engine
 require("plugin_config.oil")
-require("plugin_config.code_runner")

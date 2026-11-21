@@ -10,6 +10,7 @@ if command -v trash &> /dev/null; then
 	alias rm="trash"
 fi
 
+alias clc="clear"
 alias ll="ls -lh"
 alias lla="ls -lAh"
 alias la="ls -A"

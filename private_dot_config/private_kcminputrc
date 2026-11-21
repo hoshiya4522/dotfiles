@@ -3,6 +3,7 @@ PointerAcceleration=0.800
 PointerAccelerationProfile=1
 
 [Libinput][1267][12869][ELAN076C:00 04F3:3245 Touchpad]
+DisableWhileTyping=false
 NaturalScroll=true
 PointerAcceleration=0.600
 PointerAccelerationProfile=2

@@ -1,8 +1,16 @@
+[DetailsMode]
+PreviewSize=80
+
+[ExtractDialog]
+1920x1080 screen: Height=540
+1920x1080 screen: Width=1256
+
 [General]
 Version=202
 ViewPropsTimestamp=2026,4,6,16,55,45.269
 
 [IconsMode]
+IconSize=128
 PreviewSize=176
 
 [KFileDialog Settings]
